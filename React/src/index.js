@@ -2,13 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './components/NavBar';
-import MainMenu from './components/MainMenu';
+import Resultado from './resultado';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar />
-    <MainMenu />
+    <Resultado />
   </React.StrictMode>,
   document.getElementById('root')
 );
