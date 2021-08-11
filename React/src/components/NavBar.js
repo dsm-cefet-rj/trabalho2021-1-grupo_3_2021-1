@@ -5,7 +5,7 @@ import '../App.css';
 
 export default function NavBar() {
     return (
-        <section className="nav-menu container">
+        <section className="nav-menu">
             <div className="collapse" id="navbarToggleExternalContent">
                 <div className="p-4">
                     <h5 className="text-white h4">Collapsed content</h5>
@@ -24,5 +24,3 @@ export default function NavBar() {
         </section>
     );
 }
-
-export default NavBar;

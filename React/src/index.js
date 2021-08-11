@@ -3,12 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './components/NavBar';
 import MainMenu from './components/MainMenu';
+import Ajude from './components/Ajude'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <NavBar />
     <MainMenu />
+    <Ajude />
   </React.StrictMode>,
   document.getElementById('root')
 );
