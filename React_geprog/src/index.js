@@ -1,12 +1,14 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import NavBar from './components/NavBar';
+import MainMenu from './components/MainMenu';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <NavBar />
+    <MainMenu />
   </React.StrictMode>,
   document.getElementById('root')
 );
