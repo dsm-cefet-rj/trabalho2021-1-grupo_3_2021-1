@@ -1,12 +1,12 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import item from './components/item.js'
+import Sev from './components/sev.js'
 
 function App() {
   return (
-    <div className="App">
-      <item name="bicicleta" desc="descrição do produto"/>
-    </div>
+    <>
+      <Sev name="bicicleta"/>
+    </>
   );
 }
 
