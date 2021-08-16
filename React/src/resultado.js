@@ -10,9 +10,9 @@ import chave from './components/img/chave-philips.jpg'
 
 const projetos = [
     { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
-    { foto: chave, name: 'chave', desc: 'filipis' },
+    { foto: chave, name: 'chave', desc: 'philips' },
     { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
-    { foto: chave, name: 'chave', desc: 'filipis' },
+    { foto: chave, name: 'chave', desc: 'philips' },
 ]
 
 export default function Resultado() {
