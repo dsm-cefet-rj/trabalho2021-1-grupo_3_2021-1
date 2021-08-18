@@ -1,55 +1,86 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 import NavBar from './components/NavBar.js'
 import ServCad from './components/ServiçosCadastro'
 import ItemCad from './components/ItensCadastro'
 
 
-export default function CadastrarItens() {
+export default function CadastraPedido() {
     return (
         <>
             <NavBar />
             <main className="container">
                 <form className="form-cadastro">
 
-                    <fieldset className="text-center">
                         <legend>
-                            <h3 className="mt-4">O que você deseja compartilhar?</h3>
+                            <h3 class="mt-4">O que você deseja compartilhar?</h3>
                         </legend>
 
-                        <div>
-                            <label className="form-check-label mx-1" for="flexRadio1">
-                                <input className="form-check-input" type="radio" name="radio-tipo" id="flexRadio1" value="coisas" />
-                                Itens
-                            </label>
 
-                            <label className="form-check-label mx-1" for="flexRadio2">
-                                <input className="form-check-input" type="radio" name="radio-tipo" id="flexRadio2" value="servicos" />
-                                Serviços
-                            </label>
-                        </div>
-                    </fieldset>
 
-                    <fieldset className="responsive-form form-coisas">
-                        <legend>
-                            Compartilhar itens
-                        </legend>
+                        <Router>
 
-                        <ItemCad />
-                    </fieldset>
+                            <div>
 
-                    <fieldset className="responsive-form form-servicos">
-                        <legend>
-                            Compartilhar serviços
-                        </legend>
+                                <Link to="/item">
+                                    <li className="form-check-label mx-1" for="flexRadio1">
+                                        Itens
+                                    </li>
 
-                        <ServCad />
-                    </fieldset>
+                                </Link>
+
+                                <Link to="/servico">
+                                    <li className="form-check-label mx-1" for="flexRadio2">
+                                        Serviços
+                                    </li>
+                                </Link>
+
+                                { }
+                                <Switch>
+                                    <Route path="/servico">
+                                        <Serviço />
+                                    </Route>
+                                    <Route path="/item">
+                                        <Item />
+                                    </Route>
+                                </Switch>
+                            </div>
+                        </Router >
+                    
                 </form>
 
 
             </main>
+        </>
+    );
+}
+
+function Item() {
+    return (
+        <>
+            <legend>
+                Cadastro de pedido - Itens
+            </legend>
+            <ItemCad />
+        </>
+    );
+}
+
+function Serviço() {
+    return (
+        <>
+            <legend>
+                Cadastro de pedido - Serviços
+            </legend>
+
+            <ServCad />
         </>
     );
 }

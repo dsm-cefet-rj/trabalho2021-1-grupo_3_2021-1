@@ -55,3 +55,13 @@ html, body {
     border: 1px aliceblue solid;
     border-radius: 5px;
 }
+
+.perfil-info {
+    margin-bottom: 2%;
+}
+
+.btn-primary {
+    width: fit-content;
+    height:fit-content;
+    margin: 5px 0;
+}

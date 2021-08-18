@@ -1,19 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavBar from './components/NavBar';
-import MainMenu from './components/MainMenu';
-import Ajude from './components/Ajude'
+import App from './App.js'
 
-import Procure from './Procure.js'
-import CadastraPedido from './cadastraPedido.js'
-import CadastrarItens from './cadastrarItens.js'
 
 
 ReactDOM.render(
-  <CadastraPedido/>
- 
-  ,
+  <App/>
+ ,
   document.getElementById('root')
 );
 
