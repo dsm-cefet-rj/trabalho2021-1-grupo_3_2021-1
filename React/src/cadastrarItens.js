@@ -16,71 +16,74 @@ export default function CadastraPedido() {
     return (
         <>
             <NavBar />
-            <main className="container">
-                <form className="form-cadastro">
+            <main class="container">
+        <form class="form-cadastro">
+            
+            <fieldset class="text-center">
+                <legend>
+                    <h3 class="mt-4">O que você deseja compartilhar?</h3>
+                </legend>
 
-                        <legend>
-                            <h3 class="mt-4">O que você deseja compartilhar?</h3>
-                        </legend>
 
 
+                    <Router>
 
-                        <Router>
+                        <div>
 
-                            <div>
-
-                                <Link to="/item">
-                                    <li className="form-check-label mx-1" for="flexRadio1">
+                            <Link to="/item">
+                                <label className="form-check-label mx-1" for="flexRadio1">
+                                    <input class="form-check-input" type="radio" name="radio-tipo" id="flexRadio1" value="coisas"/>
                                         Itens
-                                    </li>
+                                </label>
 
-                                </Link>
+                            </Link>
 
                                 <Link to="/servico">
-                                    <li className="form-check-label mx-1" for="flexRadio2">
-                                        Serviços
-                                    </li>
+                                    <label className="form-check-label mx-1" for="flexRadio2">
+                                        <input class="form-check-input" type="radio" name="radio-tipo" id="flexRadio1" value="coisas"/>
+                                            Serviços
+                                    </label>
                                 </Link>
 
-                                { }
-                                <Switch>
-                                    <Route path="/servico">
-                                        <Serviço />
-                                    </Route>
-                                    <Route path="/item">
-                                        <Item />
-                                    </Route>
-                                </Switch>
+                                    { }
+                                    <Switch>
+                                        <Route path="/servico">
+                                            <Serviço />
+                                        </Route>
+                                        <Route path="/item">
+                                            <Item />
+                                        </Route>
+                                    </Switch>
                             </div>
                         </Router >
-                    
+                    </fieldset>
                 </form>
 
 
             </main>
         </>
-    );
+                );
 }
 
-function Item() {
+                function Item() {
     return (
-        <>
-            <legend>
-                Cadastro de pedido - Itens
-            </legend>
-            <ItemCad />
-        </>
-    );
+                <>
+                    <legend>
+                        Cadastro de pedido - Itens
+                    </legend>
+                    <ItemCad />
+                </>
+                );
 }
 
-function Serviço() {
+                function Serviço() {
     return (
-        <>
-            <legend>
-                Cadastro de pedido - Serviços
-            </legend>
+                <>
+                    <legend>
+                        Cadastro de pedido - Serviços
+                    </legend>
 
-            <ServCad />
-        </>
-    );
+                    <ServCad />
+                </>
+                );
 }
