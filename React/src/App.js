@@ -1,25 +1,46 @@
-import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavBar from './components/NavBar';
+import MainMenu from './components/MainMenu';
+import Ajude from './components/Ajude';
+import CadastraPedido from './cadastraPedido';
+import Resultado from './resultado';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Link
 } from "react-router-dom";
-import NavBar from './components/NavBar';
-import MainMenu from './components/MainMenu';
-import Ajude from './components/Ajude'
-import Procure from './Procure.js'
-import CadastraPedido from './cadastraPedido.js'
-import CadastrarItens from './cadastrarItens.js'
 
-import imgProcure from './components/img/main.png';
 
 export default function App() {
   return (
-    <CadastrarItens/>
+    <>
+      <Router>
+
+        <div>
+
+          <Link to="/itens">
+            <h1>itens</h1>
+          </Link>
+
+          <Link to="/cad">
+            <h1>cad</h1>
+          </Link>
+
+          { }
+          <Switch>
+            <Route path="/itens">
+              <Resultado />
+            </Route>
+            <Route path="/cad">
+              <CadastraPedido />
+            </Route>
+          </Switch>
+        </div>
+      </Router >
+
+    </>
   );
 }
-
-
