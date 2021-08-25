@@ -23,9 +23,4 @@ export default function NavBar() {
             </nav>
         </section>
     );
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> 3ca3d0da22978c6a28bcac0f1afd4a02926d208b
