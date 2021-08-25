@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useReducer } from 'react';
 
 import NavBar from './components/NavBar';
 import Home from './paginas/Home';
@@ -24,21 +25,31 @@ class Pedido {
 }
 
 
-function App() {
+const App = (props) => {
+ 
+  function projetosReducer(arrayPedidos, action){
+      switch(action.type){
 
-  const [arrayPedidos, setArrayPedidos] = useState("")
-  function criaPedido(tipo, categoria, nome, descricao) {
-    var novoPedido = new Pedido(tipo, categoria, nome, descricao)
-    setArrayPedidos([...this.state, novoPedido])
+        case 'projetos_add':
+          let proxId = 1+ arrayPedidos.map.reduce((x,y)=>Math.max(x,y));
+          return arrayPedidos.concat([{...action.payload, id: proxId}]);
+        case 'projetos_update':
+          let index = arrayPedidos.map.indexOf(action.payload.id);
+          let projetosUpdated = arrayPedidos.slice();
+          return projetosUpdated;
+
+        default:
+          throw new Error();
+      }
   }
-  const [projetos, setValue] = useState(
-    [
+      const initialProjects = [
+        
       { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
       { foto: chave, name: 'chave', desc: 'filipis' },
       { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
-      { foto: chave, name: 'chave', desc: 'filipis' },
-    ]
-  );
+      { foto: chave, name: 'chave', desc: 'filipis' },];
+
+      const [progetos, dispatch] = useReducer(projetosReducer, initialProjects);
 
 
   return (
@@ -52,20 +63,20 @@ function App() {
           <Perfil />
         </Route>
         <Route path="/procure">
-          <Procure />
+          <Procure/>
         </Route>
         <Route path="/compartilhe">
-          <CadastrarProduto />
+          <CadastrarProduto progetos={progetos} dispatch={dispatch}/>
         </Route>
         <Route path="/resultado">
-          <Resultado projetos={projetos}/>
+          <Resultado progetos={progetos} dispatch={dispatch}/>
         </Route>
         <Route path="/CadastrarPedido">
-          <CadastrarPedido projeto={projetos} setValue={setValue} />
+          <CadastrarPedido progetos={progetos} dispatch={dispatch}/>
         </Route>
         <Route path="/Emprestimo">
           <Emprestimo />
-        </Route>
+      </Route>
 
       </Switch>
     </Router>

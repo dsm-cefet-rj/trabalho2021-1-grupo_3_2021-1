@@ -26,3 +26,5 @@ function Resultado (props) {
 }
 
 export default Resultado;
+
+

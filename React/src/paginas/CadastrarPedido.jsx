@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 function CadastrarPedido(props) {
   const [itensHidden, setItensHidden] = useState(true);
   const [servicosHidden, setServicosHidden] = useState(true);
-  
+  const [projeto, setProjeto] = useState({});
+  const history = useHistory();
+
+
   const handleImputChange = (e) => {
-    props.setValue({ ...props.projeto, [e.target.name]: e.target.value })
+    setProjeto({ ...props.projeto, [e.target.name]: e.target.value })
+  }
+  function handleSubmit(e){
+    e.preventDefault();
+    props.dispatch({ type: 'add', payload: projeto})
+    history.push("/projeto")
   }
   function handleRadioSelect(evento) {
     if (evento.target.value === "servicos") {
@@ -19,15 +28,6 @@ function CadastrarPedido(props) {
     }
   }
 
-  function submitServico(evento) {
-    evento.preventDefault();
-    console.log("Mandei servico")
-  }
-
-  function submitItem(evento) {
-    evento.preventDefault();
-    console.log("Mandei item")
-  }
 
   return (
     <>
@@ -65,7 +65,7 @@ function CadastrarPedido(props) {
         </div>
       </Container>
 
-      <form onSubmit={submitItem}>
+      <form>
         <Container hidden={itensHidden}>
           <legend className="text-center">Cadastro de pedido - Servicos</legend>
           <div className="mb-3 col-sm-4">
@@ -128,7 +128,7 @@ function CadastrarPedido(props) {
           </button>
         </Container>
       </form>
-<form>
+      <form onSubmit={handleSubmit}>
         <Container hidden={servicosHidden}>
           <legend className="text-center">Cadastro de pedido - Itens</legend>
 
@@ -148,11 +148,18 @@ function CadastrarPedido(props) {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="servico-img" className="form-label">
+            <label htmlFor="item-img" className="form-label">
               Imagem ilustrativa
             </label>
-            
-            <div className="form-text">
+            <input
+              className="form-control form-control-sm"
+              type="file"
+              id="item-img"
+              aria-describedby="imageHelp"
+              name="foto" value={props.projeto.foto} 
+              onChange={handleImputChange} 
+            />
+            <div id="imageHelp" className="form-text">
               A imagem será usada apenas como referência para os outros usuários
             </div>
           </div>
