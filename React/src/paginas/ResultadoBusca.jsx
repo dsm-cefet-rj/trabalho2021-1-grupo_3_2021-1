@@ -13,12 +13,12 @@ const projetos = [
     { foto: chave, name: 'chave', desc: 'filipis' },
 ]
 
-function Resultado () {
+function Resultado (props) {
     return (
             <main className="text-center container first-element">
                 <h2 className="my-3">Resultados</h2>
 
-                <TabelaItens projetos={projetos} />
+                <TabelaItens projetos={props.projeto} />
                 <p className="mb-2">Não achou o que procurava?</p>
                 <button type="button" className="btn btn-primary">Faça um Pedido</button>
             </main>

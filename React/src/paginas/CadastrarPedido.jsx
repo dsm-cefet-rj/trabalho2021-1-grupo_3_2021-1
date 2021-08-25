@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
-function CadastrarPedido() {
+function CadastrarPedido(props) {
   const [itensHidden, setItensHidden] = useState(true);
   const [servicosHidden, setServicosHidden] = useState(true);
-
+  
+  const handleImputChange = (e) => {
+    props.setValue({ ...props.projeto, [e.target.name]: e.target.value })
+  }
   function handleRadioSelect(evento) {
     if (evento.target.value === "servicos") {
       setServicosHidden(false);
@@ -16,14 +19,14 @@ function CadastrarPedido() {
     }
   }
 
-  function submitServico (evento) {
-      evento.preventDefault();
-      console.log("Mandei servico")
+  function submitServico(evento) {
+    evento.preventDefault();
+    console.log("Mandei servico")
   }
 
-  function submitItem (evento) {
-      evento.preventDefault();
-      console.log("Mandei item")
+  function submitItem(evento) {
+    evento.preventDefault();
+    console.log("Mandei item")
   }
 
   return (
@@ -90,6 +93,7 @@ function CadastrarPedido() {
               className="form-control"
               id="item-nome"
               placeholder="martelo, chave de fenda, furadeira..."
+              
             />
           </div>
 
@@ -124,8 +128,7 @@ function CadastrarPedido() {
           </button>
         </Container>
       </form>
-
-      <form onSubmit={submitServico}>
+<form>
         <Container hidden={servicosHidden}>
           <legend className="text-center">Cadastro de pedido - Itens</legend>
 
@@ -138,6 +141,9 @@ function CadastrarPedido() {
               type="text"
               className="form-control"
               placeholder="Encanador, pedreiro, téc de informática..."
+              name="email" 
+              value={props.projeto.name} 
+              onChange={handleImputChange} 
             />
           </div>
 
@@ -145,12 +151,7 @@ function CadastrarPedido() {
             <label htmlFor="servico-img" className="form-label">
               Imagem ilustrativa
             </label>
-            <input
-              id="servico-img"
-              className="form-control form-control-sm"
-              type="file"
-              aria-describedby="imageHelp"
-            />
+            
             <div className="form-text">
               A imagem será usada apenas como referência para os outros usuários
             </div>
@@ -165,6 +166,8 @@ function CadastrarPedido() {
               id="servico-descricao"
               rows="3"
               placeholder="Adicione uma descrição"
+              name="desc" value={props.projeto.desc} 
+              onChange={handleImputChange} 
             ></textarea>
           </div>
           <button type="submit" className="btn btn-primary">

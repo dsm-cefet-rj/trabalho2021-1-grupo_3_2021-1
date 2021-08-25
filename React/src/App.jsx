@@ -10,6 +10,9 @@ import CadastrarProduto from './paginas/CadastrarProduto';
 import Resultado from './paginas/ResultadoBusca';
 import CadastrarPedido from './paginas/CadastrarPedido';
 import Emprestimo from './paginas/Emprestimo';
+import Bike from './components/img/bicicleta.jpg'
+import chave from './components/img/chave-philips.jpg'
+
 
 class Pedido {
   constructor(tipo, categoria, nome, descricao) {
@@ -28,6 +31,16 @@ function App() {
     var novoPedido = new Pedido(tipo, categoria, nome, descricao)
     setArrayPedidos([...this.state, novoPedido])
   }
+  const [projetos, setValue] = useState(
+    [
+      { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
+      { foto: chave, name: 'chave', desc: 'filipis' },
+      { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
+      { foto: chave, name: 'chave', desc: 'filipis' },
+    ]
+  );
+
+
   return (
     <Router>
       <NavBar />
@@ -45,10 +58,10 @@ function App() {
           <CadastrarProduto />
         </Route>
         <Route path="/resultado">
-          <Resultado />
+          <Resultado projetos={projetos}/>
         </Route>
         <Route path="/CadastrarPedido">
-          <CadastrarPedido />
+          <CadastrarPedido projeto={projetos} setValue={setValue} />
         </Route>
         <Route path="/Emprestimo">
           <Emprestimo />
