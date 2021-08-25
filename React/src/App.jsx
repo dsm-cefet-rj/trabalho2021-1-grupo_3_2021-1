@@ -12,23 +12,22 @@ import CadastrarPedido from './paginas/CadastrarPedido';
 import Emprestimo from './paginas/Emprestimo';
 
 class Pedido {
-  constructor (tipo, categoria, nome, descricao) {
+  constructor(tipo, categoria, nome, descricao) {
     this.tipo = tipo;
     this.categoria = categoria;
     this.nome = nome;
-    this. descricao = descricao;
+    this.descricao = descricao;
   }
 }
 
-function criaPedido (tipo, categoria, nome, descricao) {
-  var novoPedido = new Pedido (tipo, categoria, nome, descricao)
-  setArrayPedidos([...this.state, novoPedido])
-}
 
 function App() {
 
   const [arrayPedidos, setArrayPedidos] = useState("")
-
+  function criaPedido(tipo, categoria, nome, descricao) {
+    var novoPedido = new Pedido(tipo, categoria, nome, descricao)
+    setArrayPedidos([...this.state, novoPedido])
+  }
   return (
     <Router>
       <NavBar />
