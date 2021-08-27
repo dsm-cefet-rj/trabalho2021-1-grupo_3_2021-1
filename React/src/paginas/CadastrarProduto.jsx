@@ -1,108 +1,129 @@
-import React from 'react';
-import { useState } from 'react';
+
+
+
+
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../app/App.css';
+import React, {useEffect, useState} from 'react';
+import { useParams, useHistory } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux'
+import Produto from './Produto';
 
-function CadastrarProduto() {
-    return (
-        <main className="container first-element">
-            <form className="form-cadastro">
-                <fieldset className="text-center">
-                    <legend>
-                        <h3 className="">O que você deseja compartilhar?</h3>
-                    </legend>
-                    <div>
-                        <label className="form-check-label mx-1">
-                            <input className="form-check-input mx-1" type="radio" name="radioCadastro" value="coisas" />
-                            Itens
-                        </label>
-                        <label className="form-check-label mx-1">
-                            <input className="form-check-input mx-1" type="radio" name="radioCadastro" value="servicos" />
-                            Serviços
-                        </label>
-                    </div>
-                </fieldset>
+function CadProduto(props) {
+  
+  const produtos = useSelector(state => state.produtos)
+  const dispatch = useDispatch()
+  let { id } = useParams();
+  id = parseInt(id);
 
-                <fieldset className="form-coisas">
-                    <legend>
-                        Compartilhar itens
-                    </legend>
-                    <CadastraItem />
-                </fieldset>
+  const [produto, setProduto] = useState(
+    id ? 
+        produtos.filter((p) => p.id === id)[0] ?? new Produto({})
+       : new Produto({}));
+  
+  const [actionType, ] = useState(
+    id ? 
+      produtos.filter((p) => p.id === id)[0] 
+            ? 'produtos/updateProduto'
+            : 'produtos/addProduto'
+         : 'produtos/addProduto');
+  const history = useHistory();
 
-                <fieldset className="form-servicos">
-                    <legend>
-                        Compartilhar serviços
-                    </legend>
-                    <CadastraServico />
-                </fieldset>
-            </form>
-        </main>
-    );
+  
+  function handleInputChange(e) {
+    setProduto(new Produto({...produto, [e.target.name]: e.target.value}));
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    dispatch({type: actionType, payload: produto})
+    history.push('/produtos');
+  }
+
+  useEffect(() =>  {
+    document.title = `Produto: ${produto.nome}`;
+    return () => {document.title = 'PragmaPM'}
+  }, [produto.nome]);
+
+  return (
+    <>
+    <form onSubmit={handleSubmit} >
+      
+
+        <legend>
+          <h3 className="">Oque deseja compartilhar?</h3>
+        </legend>
+
+        
+         
+      <legend className="text-center">Cadastro de pedido - Servicos</legend>
+      <div className="mb-3 col-sm-4">
+        <select
+          name="item-categoria"
+          className="form-select"
+          form="form-cadastro"
+        >
+          <option defaultValue hidden>
+            Escolha uma categoria
+            name="categoria" value={produto.categoria} onChange={handleInputChange}
+          </option>
+          <option value="ferramenta">Ferramenta</option>
+          <option value="eletro">Eletrodoméstico</option>
+          <option value="veiculo">Veículo</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="nome-item" className="form-label">
+          Item
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="item-nome"
+          placeholder="martelo, chave de fenda, furadeira..."
+          name="nome" value={produto.nome} onChange={handleInputChange}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="item-img" className="form-label">
+          Imagem ilustrativa
+        </label>
+        <input
+          className="form-control form-control-sm"
+          type="file"
+          id="item-img"
+          aria-describedby="imageHelp"
+        />
+        <div id="imageHelp" className="form-text">
+          A imagem será usada apenas como referência para os outros usuários
+        </div>
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="item-descricao" className="form-label">
+          Descrição
+        </label>
+        <textarea
+          className="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          placeholder="Adicione uma descrição"
+          name="desc" value={produto.desc} onChange={handleInputChange}
+        ></textarea>
+      </div>
+      <input type="submit" value="Enviar" />
+      <input type="button" value="Cancelar" onClick={()=>history.goBack()}/>
+    
+  </form>
+  </>
+  );
+    
 }
 
+export {CadProduto};
 
-function CadastraServico() {
-    const [projeto, setValue] = useState({});
-    const handleImputChange = (e) => {
-
-        //setta o e.target.value do input no state do React
-        setValue({ ...projeto, [e.target.name]: e.target.value })
-    }
-    return (
-        <>
-            <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Serviço</label>
-                <input type="email" className="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Marceneiro(a), pedreiro(a), téc de informática..." name="email" value={projeto.email} onChange={handleImputChange} />
-            </div>
-
-            <div className="mb-3">
-                <label for="formFile" className="form-label">Imagem ilustrativa</label>
-                <input className="form-control form-control-sm" type="file" id="formFile" aria-describedby="imageHelp" value={projeto.image} onChange={handleImputChange} />
-                <div id="imageHelp" className="form-text">A imagem será usada apenas como referência para os outros usuários</div>
-            </div>
-
-            <div className="mb-3">
-                <label for="exampleFormControlTextarea1" className="form-label">Descrição</label>
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Adicione uma descrição"  name="desc" value={projeto.desc} onChange={handleImputChange}></textarea>
-            </div>
-
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </>
-    );
-}
-
-function CadastraItem() {
-    return (
-        <>
-            <div className="mb-3 col-sm-4">
-                <select id="select-categoria" name="item-categoria" className="form-select" form="form-cadastro">
-                    <option defaultValue hidden>Escolha uma categoria</option>
-                    <option value="ferramenta">Ferramenta</option>
-                    <option value="eletro">Eletrodoméstico</option>
-                    <option value="veiculo">Veículo</option>
-                    <option value="outro">Outro</option>
-                </select>
-            </div>
-
-            <div className="mb-3">
-                <label className="form-label">Item</label>
-                <input type="text" className="form-control" placeholder="martelo, chave de fenda, furadeira..." />
-            </div>
-
-            <div className="mb-3">
-                <label className="form-label">Imagem ilustrativa</label>
-                <input className="form-control form-control-sm" type="file" aria-describedby="imageHelp" />
-                <div id="imageHelp" className="form-text">A imagem será usada apenas como referência para os outros usuários</div>
-            </div>
-
-            <div className="mb-3">
-                <label className="form-label">Descrição</label>
-                <textarea className="form-control" rows="3" placeholder="Adicione uma descrição"></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </>
-    );
-}
-
-export default CadastrarProduto;

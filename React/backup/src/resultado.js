@@ -8,7 +8,7 @@ import Bike from './components/img/bicicleta.jpg'
 import chave from './components/img/chave-philips.jpg'
 
 
-const projetos = [
+const produtos = [
     { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
     { foto: chave, name: 'chave', desc: 'filipis' },
     { foto: Bike, name: 'Bicicleta', desc: 'Bicicleta ruim' },
@@ -22,7 +22,7 @@ export default function Resultado() {
             <main className="text-center container">
                 <h2 className="my-3">Resultados</h2>
 
-                <Tabelaitens projetos={projetos} />
+                <Tabelaitens produtos={produtos} />
 
             </main>
 

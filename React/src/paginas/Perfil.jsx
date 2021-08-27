@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../app/App.css';
 
 import imgPerfil from '../components/img/img-perfil.jpg'
 

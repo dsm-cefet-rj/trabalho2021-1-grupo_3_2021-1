@@ -6,7 +6,7 @@ import TabelaItens from "../components/TabelaItens";
 import Bike from "../components/img/bicicleta.jpg";
 import chave from "../components/img/chave-philips.jpg";
 
-const projetos = [
+const produtos = [
   { foto: Bike, name: "Bicicleta", desc: "Bicicleta ruim" },
   { foto: chave, name: "chave", desc: "filipis" },
 ];
@@ -29,7 +29,7 @@ function Emprestimo() {
         </Col>
       </Row>
       <h3 className="text-center my-3">Lista de Itens</h3>
-      <TabelaItens projetos={projetos} />
+      <TabelaItens produtos={produtos} />
     </Container>
   );
 }

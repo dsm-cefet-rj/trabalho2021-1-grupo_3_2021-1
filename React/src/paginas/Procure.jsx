@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../app/App.css';
 import { Link } from 'react-router-dom' 
 
 function Procure () {

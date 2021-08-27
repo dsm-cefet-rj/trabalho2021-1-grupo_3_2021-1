@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import '../app/App.css';
 
 import imgProcure from '../components/img/pngwing.com.png';
 import imgExemplo from '../components/img/bicicleta.jpg';
@@ -29,7 +29,7 @@ function Home () {
                         </Link>
                     </figure>
                     <figure className="col index-menu blue-card shadow">
-                        <Link className="reset-link" to="/CadastrarPedido">
+                        <Link className="reset-link" to="/compartilhe">
                             <h3 className="link-title">Faça um pedido</h3>
                             <img className="img-fluid" src={imgProcure} alt="" />
                         </Link>

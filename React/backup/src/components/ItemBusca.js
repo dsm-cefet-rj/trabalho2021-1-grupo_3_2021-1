@@ -27,8 +27,8 @@ export default function Tabelaitens(props) {
         <>
 
             <section className="pb-2">
-                {props.projetos.map((projeto) =>
-                    <ItemBusca foto={projeto.foto} name={projeto.name} desc={projeto.desc} />)}
+                {props.produtos.map((produto) =>
+                    <ItemBusca foto={produto.foto} name={produto.name} desc={produto.desc} />)}
                 <p class="mb-2">Não achou o que procurava?</p>
                 <a href="cadastrar-pedido.html"><button type="button" class="btn btn-primary">Faça um Pedido</button></a>
 

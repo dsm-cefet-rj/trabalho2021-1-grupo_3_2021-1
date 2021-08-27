@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import "../app/App";
 
 import { Collapse } from "react-bootstrap";
 import { Link } from "react-router-dom";

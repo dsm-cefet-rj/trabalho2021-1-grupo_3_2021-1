@@ -7,23 +7,23 @@ import { render } from 'react-dom';
 
 
 export default function ItemCad() {
-    const [projeto, setValue] = useState({});
+    const [produto, setValue] = useState({});
 	const handleImputChange = (e) =>{
 	
 	//setta o e.target.value do input no state do React
-  	setValue({...projeto, [e.target.name]: e.target.value})
+  	setValue({...produto, [e.target.name]: e.target.value})
 }
 
     return (
         <>
             <div className="mb-3">
                 <label for="exampleFormControlInput1" className="form-label">Serviço</label>
-                <input type="email" className="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Marceneiro(a), pedreiro(a), téc de informática..." name="email" value={projeto.email} onChange={handleImputChange} />
+                <input type="email" className="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Marceneiro(a), pedreiro(a), téc de informática..." name="email" value={produto.email} onChange={handleImputChange} />
             </div>
 
             <div className="mb-3">
                 <label for="formFile" className="form-label">Imagem ilustrativa</label>
-                <input className="form-control form-control-sm" type="file" id="formFile" aria-describedby="imageHelp" value={projeto.image} onChange={handleImputChange} />
+                <input className="form-control form-control-sm" type="file" id="formFile" aria-describedby="imageHelp" value={produto.image} onChange={handleImputChange} />
                 <div id="imageHelp" className="form-text">A imagem será usada apenas como referência para os outros usuários</div>
             </div>
 
