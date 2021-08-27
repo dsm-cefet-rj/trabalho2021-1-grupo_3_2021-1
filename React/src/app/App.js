@@ -3,10 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
-import {store} from '../store'
-import { Provider } from 'react-redux'
 import './App.css';
 import NavBar from '../components/NavBar';
 import Home from '../paginas/Home';
@@ -20,7 +17,6 @@ import { CadProduto } from '../paginas/CadastrarProduto';
 function App() {
 
   return (
-    <Provider store={store}>
      <Router>
         <NavBar />
         <Switch>
@@ -49,7 +45,6 @@ function App() {
 
         </Switch>
       </Router>
-    </Provider>
   );
 }
 

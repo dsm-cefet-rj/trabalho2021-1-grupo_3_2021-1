@@ -11,9 +11,10 @@ import { useParams, useHistory } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux'
 import Produto from './Produto';
 
+import {addProdutoServer, updateProdutoServer} from './ProdutosSlice';
+
 function CadProduto(props) {
-  
-  const produtos = useSelector(state => state.produtos)
+  const produtos = useSelector(state => state.produtos.produtos)
   const dispatch = useDispatch()
   let { id } = useParams();
   id = parseInt(id);
@@ -26,9 +27,9 @@ function CadProduto(props) {
   const [actionType, ] = useState(
     id ? 
       produtos.filter((p) => p.id === id)[0] 
-            ? 'produtos/updateProduto'
-            : 'produtos/addProduto'
-         : 'produtos/addProduto');
+      ? 'produtos/updateProdutoServer'
+      : 'produtos/addProdutoServer'
+   : 'produtos/addProdutoServer');
   const history = useHistory();
 
   
@@ -38,7 +39,11 @@ function CadProduto(props) {
 
   function handleSubmit(event){
     event.preventDefault();
-    dispatch({type: actionType, payload: produto})
+    if(actionType === 'produtos/addProdutoServer'){
+      dispatch(addProdutoServer(produto));
+    }else if(actionType === 'produtos/updateProdutoServer'){
+      dispatch(updateProdutoServer(produto))
+    }
     history.push('/produtos');
   }
 

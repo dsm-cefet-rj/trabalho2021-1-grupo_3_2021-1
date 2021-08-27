@@ -1,0 +1,16 @@
+{
+  "produtos": [
+   
+    {
+      "id": 1,
+      
+      "name": "Bicicleta",
+      "desc": "Bicicleta ruim"
+    },
+    {"id": 2,
+     
+      "name": "chave",
+      "desc": "filipis"
+    }
+  ]
+}

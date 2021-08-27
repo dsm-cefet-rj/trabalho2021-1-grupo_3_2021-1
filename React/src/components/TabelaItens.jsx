@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from "react-router-dom";
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteProduto } from '../paginas/ProdutosSlice'
 
 function TabelaItens(props) {
@@ -17,7 +17,6 @@ function TabelaItens(props) {
 }
 
 function ItemBusca(props) {
-    const produtos = useSelector(state => state.produtos)
     const dispatch = useDispatch()
     function handleClickExcluirProduto(id) {
         dispatch(deleteProduto(id))
