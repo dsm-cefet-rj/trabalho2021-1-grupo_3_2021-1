@@ -78,7 +78,7 @@ function CadProduto(props) {
 
       <div className="mb-3">
         <label htmlFor="nome-item" className="form-label">
-          Item
+        Nome:&nbsp;
         </label>
         <input
           type="text"
@@ -91,7 +91,7 @@ function CadProduto(props) {
 
       <div className="mb-3">
         <label htmlFor="item-img" className="form-label">
-          Imagem ilustrativa
+          Imagem ilustrativa:&nbsp;
         </label>
         <input
           className="form-control form-control-sm"
@@ -106,7 +106,7 @@ function CadProduto(props) {
 
       <div className="mb-3">
         <label htmlFor="item-descricao" className="form-label">
-          Descrição
+          Descrição:&nbsp;
         </label>
         <textarea
           className="form-control"

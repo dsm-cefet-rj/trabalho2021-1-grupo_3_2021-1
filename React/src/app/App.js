@@ -36,6 +36,9 @@ function App() {
           <Route path="/compartilhe">
             <CadProduto />
           </Route>
+          <Route path="/produtos/:id">
+            <CadProduto />
+            </Route>
           <Route path="/produtos">
             <Resultado />
           </Route>
