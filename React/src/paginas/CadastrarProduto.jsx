@@ -66,13 +66,17 @@ function CadProduto(props) {
       <legend className="text-center">Cadastro de pedido - Servicos</legend>
       <div className="mb-3 col-sm-4">
         <select
-          name="item-categoria"
+         
           className="form-select"
           form="form-cadastro"
+          name="categoria" 
+          value={produto.categoria} 
+          onChange={handleInputChange}
+          
         >
           <option defaultValue hidden>
             Escolha uma categoria
-            name="categoria" value={produto.categoria} onChange={handleInputChange}
+            
           </option>
           <option value="ferramenta">Ferramenta</option>
           <option value="eletro">Eletrodoméstico</option>
