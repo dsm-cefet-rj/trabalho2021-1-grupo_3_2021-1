@@ -82,7 +82,7 @@ function Resultado(props) {
                 <h2 className="my-3">Resultados</h2>
 
                 <TabelaProdutos />
-                <p className="mb-2">Quer ajudar seus visinhos?</p>
+                <p className="mb-2">Quer ajudar seus vizinhos?</p>
                 <Link to='/compartilhe'>
                     <button type="button" className="btn btn-primary">Compartilhe</button>
                 </Link>
