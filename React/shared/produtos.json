@@ -1,0 +1,16 @@
+{
+  "produtos": [
+    {
+      "id": 2,
+      "name": "chave",
+      "desc": "filipis"
+    },
+    {
+      "id": 3,
+      "nome": "dsfsd",
+      "desc": "dsfds",
+      "foto": "",
+      "categoria": ""
+    }
+  ]
+}
