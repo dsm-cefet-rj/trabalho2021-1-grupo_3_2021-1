@@ -4,14 +4,13 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-
-import { fetchProdutos, deleteProdutoServer, setStatus } from './ProdutosSlice'
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './ProdutosSlice'
 
 
 
 
 function TabelaProdutos(props) {
-    const produtos = useSelector(state => state.produtos.produtos)
+    const produtos = useSelector(selectAllProdutos)
     const status = useSelector(state => state.produtos.status)
     const error = useSelector(state => state.produtos.error)
     const dispatch = useDispatch()

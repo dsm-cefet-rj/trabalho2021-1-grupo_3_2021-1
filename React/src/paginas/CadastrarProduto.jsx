@@ -10,25 +10,21 @@ import React, {useEffect, useState} from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux'
 import Produto from './Produto';
-
-import {addProdutoServer, updateProdutoServer} from './ProdutosSlice';
+import {addProdutoServer, updateProdutoServer, selectProdutosById} from './ProdutosSlice';
 
 function CadProduto(props) {
-  const produtos = useSelector(state => state.produtos.produtos)
   const status = useSelector(state => state.produtos.status)
   const error = useSelector(state => state.produtos.error)
   const dispatch = useDispatch()
   let { id } = useParams();
+  const produtoFound = useSelector(state => selectProdutosById(state, id))
   id = parseInt(id);
 
   const [produto, setProduto] = useState(
-    id ? 
-        produtos.filter((p) => p.id === id)[0] ?? new Produto({})
-       : new Produto({}));
+    id ? produtoFound ?? new Produto({}): new Produto({}));
   
   const [actionType, ] = useState(
-    id ? 
-      produtos.filter((p) => p.id === id)[0] 
+    id ? produtoFound 
       ? 'produtos/updateProdutoServer'
       : 'produtos/addProdutoServer'
    : 'produtos/addProdutoServer');

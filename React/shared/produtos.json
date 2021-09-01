@@ -1,3 +1,11 @@
 {
-  "produtos": []
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "cvzcvz",
+      "desc": "cxzcv",
+      "foto": "",
+      "categoria": ""
+    }
+  ]
 }

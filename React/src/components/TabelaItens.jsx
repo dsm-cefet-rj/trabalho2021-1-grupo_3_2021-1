@@ -4,7 +4,7 @@ import '../app/App.css';
 import { Link } from "react-router-dom";
 
 import { useDispatch } from 'react-redux'
-import { deleteProduto } from '../paginas/ProdutosSlice'
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from '../paginas/ProdutosSlice'
 
 function TabelaItens(props) {
     return (
@@ -19,7 +19,7 @@ function TabelaItens(props) {
 function ItemBusca(props) {
     const dispatch = useDispatch()
     function handleClickExcluirProduto(id) {
-        dispatch(deleteProduto(id))
+        dispatch(deleteProdutoServer(id))
     }
     return (<>
         <Link to={`/produtos/${props.id}`}>
