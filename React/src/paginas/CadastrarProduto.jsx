@@ -15,6 +15,8 @@ import {addProdutoServer, updateProdutoServer} from './ProdutosSlice';
 
 function CadProduto(props) {
   const produtos = useSelector(state => state.produtos.produtos)
+  const status = useSelector(state => state.produtos.status)
+  const error = useSelector(state => state.produtos.error)
   const dispatch = useDispatch()
   let { id } = useParams();
   id = parseInt(id);
@@ -46,6 +48,11 @@ function CadProduto(props) {
     }
     history.push('/produtos');
   }
+  useEffect(() =>  {
+    if(status === 'saved'){
+      history.push('/produtos');
+    }
+  }, [produto, history, status]);
 
   useEffect(() =>  {
     document.title = `Produto: ${produto.nome}`;
@@ -54,6 +61,7 @@ function CadProduto(props) {
 
   return (
     <>
+    <div>{error}</div>
     <form onSubmit={handleSubmit} >
       
 

@@ -2,10 +2,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
-import { fetchProdutos, deleteProdutoServer } from './ProdutosSlice'
+import { fetchProdutos, deleteProdutoServer, setStatus } from './ProdutosSlice'
 
 
 
@@ -27,7 +27,7 @@ function TabelaProdutos(props) {
     }, [status, dispatch])
 
     switch (status) {
-        case 'loaded':
+        case 'loaded': case 'saved':
             return (
                 <section className="pb-2">
                     {produtos.map((produto) => <LinhaProduto key={produto.id} produto={produto} onClickExcluirProduto={handleClickExcluirProduto} />)}
@@ -43,8 +43,21 @@ function TabelaProdutos(props) {
 }
 
 function LinhaProduto(props) {
-    return (<>
+    const status = useSelector(state => state.produtos.status)
+    const dispatch = useDispatch()
+    var [msg, setMsg] = useState('');
 
+    useEffect(() => {
+        if (status === 'saved') {
+            setMsg('Produto salvo com sucesso');
+            dispatch(setStatus('loaded'));
+        } else if (status === 'deleted') {
+            setMsg('Produto excluído com sucesso');
+            dispatch(setStatus('loaded'));
+        }
+    }, [status]);
+    return (<>
+        <div>{msg}</div>
 
         <div className="row resultado-busca">
 
