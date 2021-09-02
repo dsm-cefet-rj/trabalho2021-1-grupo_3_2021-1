@@ -8,7 +8,7 @@ const numMsg = "Números por favor."
 
 const strMsg = "Limite atingido"
 
-export let projetoSchema = object().shape(
+export let produtoSchema = object().shape(
     {
         id: number(),
         name: string().required().max(30),

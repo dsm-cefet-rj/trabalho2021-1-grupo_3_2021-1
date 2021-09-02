@@ -1,15 +1,11 @@
-
-
-
-
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import React, {useEffect, useState} from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux'
-import Produto from './Produto';
+import {produtoSchema} from './ProdutoSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
 import {addProdutoServer, updateProdutoServer, selectProdutosById} from './ProdutosSlice';
 
 function CadProduto(props) {
@@ -18,10 +14,13 @@ function CadProduto(props) {
   const dispatch = useDispatch()
   let { id } = useParams();
   const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(produtoSchema)
+  });
   id = parseInt(id);
 
-  const [produto, setProduto] = useState(
-    id ? produtoFound ?? new Produto({}): new Produto({}));
+  const [produtoOnLoad] = useState(
+    id ? produtoFound ?? produtoSchema.cast({}): produtoSchema.cast({}));
   
   const [actionType, ] = useState(
     id ? produtoFound 
@@ -31,16 +30,11 @@ function CadProduto(props) {
   const history = useHistory();
 
   
-  function handleInputChange(e) {
-    setProduto(new Produto({...produto, [e.target.name]: e.target.value}));
-  }
-
-  function handleSubmit(event){
-    event.preventDefault();
+  function onSubmit(produto){
     if(actionType === 'produtos/addProdutoServer'){
       dispatch(addProdutoServer(produto));
     }else if(actionType === 'produtos/updateProdutoServer'){
-      dispatch(updateProdutoServer(produto))
+      dispatch(updateProdutoServer({...produto, id: produtoFound.id}))
     }
     history.push('/produtos');
   }
@@ -48,17 +42,17 @@ function CadProduto(props) {
     if(status === 'saved'){
       history.push('/produtos');
     }
-  }, [produto, history, status]);
-
+  }, [history, status]);
+/*
   useEffect(() =>  {
     document.title = `Produto: ${produto.nome}`;
     return () => {document.title = 'PragmaPM'}
-  }, [produto.nome]);
+  }, [produto.nome]);*/
 
   return (
     <>
     <div>{error}</div>
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit(onSubmit)} >
       
 
         <legend>
@@ -74,10 +68,11 @@ function CadProduto(props) {
           className="form-select"
           form="form-cadastro"
           name="categoria" 
-          value={produto.categoria} 
-          onChange={handleInputChange}
+          defaultValue={produtoOnLoad.categoria} ref={register}
+        
           
         >
+          
           <option defaultValue hidden>
             Escolha uma categoria
             
@@ -87,6 +82,7 @@ function CadProduto(props) {
           <option value="veiculo">Veículo</option>
           <option value="outro">Outro</option>
         </select>
+        <span>{errors.categoria?.message}</span>
       </div>
 
       <div className="mb-3">
@@ -98,8 +94,8 @@ function CadProduto(props) {
           className="form-control"
           id="item-nome"
           placeholder="martelo, chave de fenda, furadeira..."
-          name="nome" value={produto.nome} onChange={handleInputChange}
-        />
+          name="name" defaultValue={produtoOnLoad.name} ref={...produto(name)}  />
+        <p style={{ color: "red" }}>{errors.name?.message}</p>
       </div>
 
       <div className="mb-3">
@@ -126,8 +122,10 @@ function CadProduto(props) {
           id="exampleFormControlTextarea1"
           rows="3"
           placeholder="Adicione uma descrição"
-          name="desc" value={produto.desc} onChange={handleInputChange}
+          name="desc" defaultValue={produtoOnLoad.desc} ref={...produto(desc)}
+          
         ></textarea>
+        <span>{errors.desc?.message}</span>
       </div>
       <input type="submit" value="Enviar" />
       <input type="button" value="Cancelar" onClick={()=>history.goBack()}/>

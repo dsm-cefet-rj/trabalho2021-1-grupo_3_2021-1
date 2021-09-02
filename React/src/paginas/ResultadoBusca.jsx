@@ -54,7 +54,7 @@ function LinhaProduto(props) {
             setMsg('Produto excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
-    }, [status]);
+    }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
 

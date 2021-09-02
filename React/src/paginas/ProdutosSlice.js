@@ -54,3 +54,4 @@ export const {
     selectById: selectProdutosById,
     selectIds: selectProdutosIds
 } = produtosAdapter.getSelectors(state => state.produtos)
+    

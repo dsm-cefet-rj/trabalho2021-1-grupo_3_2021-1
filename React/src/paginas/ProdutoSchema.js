@@ -9,11 +9,9 @@ export let produtoSchema = object().shape(
     {
         id: number(),
         nome: string().required(),
-        unidade: string().required(),
-        unidadeAtual: number().typeError(numericMsg).integer().min(0).required().default(0),
-        unidadesTotais: number().typeError(numericMsg).integer().min(0).required().default(0),
-        idc: number().typeError(numericMsg).min(0).default(0),
-        idp: number().typeError(numericMsg).min(0).default(0)
+        foto: string(),
+        desc: string().required(),
+        categoria: string(),
+     
     }
 )
-

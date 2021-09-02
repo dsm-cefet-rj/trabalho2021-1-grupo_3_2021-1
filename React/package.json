@@ -1,35 +1,39 @@
 {
-  "name": "geprog",
-  "version": "0.1.0",
+  "name": "pragmapm",
+  "version": "0.0.1",
   "private": true,
+  "author": "Diogo S. Mendonça",
+  "license": "LGPL-3.0-or-later",
+  "description": "Um software para o gestor de produtos pragmático",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.6.1",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^5.0.2",
-    "hooks": "^0.3.2",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.0.0-beta.4",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.4",
+    "@hookform/resolvers": "^2.8.0",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^7.14.2",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "redux": "^4.1.1",
-    "web-vitals": "^1.1.2"
+    "react-scripts": "3.4.3",
+    "yup": "^0.32.9",
+    "yup-locale-pt": "^0.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diogosmendonca/pragmapm.git"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json-server": "json-server --watch shared/produtos.json --port 3004 --delay 2000"
+    "acc_test_it": "npx cypress open",
+    "acc_test_run": "npx cypress run"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -42,5 +46,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cucumber": "^6.0.5",
+    "cypress": "^5.1.0",
+    "cypress-cucumber-preprocessor": "^2.5.5"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
