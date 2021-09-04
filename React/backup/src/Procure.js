@@ -36,7 +36,7 @@ class Toggle extends React.Component {
 
                     <label className="form-check-label mx-1" for="flexRadioDefault2">
                         <input className="form-check-input" type="radio" name="radio-tipo" id="flexRadioDefault2" value="servicos" />
-                        Serviços
+                        Servicos
                     </label>
                 </div>
 

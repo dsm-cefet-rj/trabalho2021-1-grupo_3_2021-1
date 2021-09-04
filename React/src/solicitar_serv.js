@@ -16,7 +16,7 @@ export default function Solicitar_serv() {
 
             <fieldset class="text-center">
             <legend>
-                <h3 class="mt-4">Solicite o serviço</h3>
+                <h3 class="mt-4">Solicite o servico</h3>
             </legend>
         </fieldset>
         

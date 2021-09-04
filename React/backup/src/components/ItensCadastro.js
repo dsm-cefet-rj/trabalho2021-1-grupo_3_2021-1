@@ -17,7 +17,7 @@ export default function ItemCad() {
     return (
         <>
             <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Serviço</label>
+                <label for="exampleFormControlInput1" className="form-label">Servico</label>
                 <input type="email" className="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Marceneiro(a), pedreiro(a), téc de informática..." name="email" value={produto.email} onChange={handleImputChange} />
             </div>
 

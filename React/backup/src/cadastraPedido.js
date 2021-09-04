@@ -8,7 +8,7 @@ import {
     Link
 } from "react-router-dom";
 import NavBar from './components/NavBar.js'
-import ServCad from './components/ServiçosCadastro'
+import ServCad from './components/ServicosCadastro'
 import ItemCad from './components/ItensCadastro'
 
 
@@ -40,14 +40,14 @@ export default function CadastraPedido() {
                             <Link to="/servico">
                                 <label className="form-check-label mx-1" for="flexRadio2">
                                     <input className="form-check-input" type="radio" name="radio-tipo" id="flexRadio2" value="servicos" />
-                                    Serviços
+                                    Servicos
                                 </label>
                             </Link>
 
                             { }
                             <Switch>
                                 <Route path="/servico">
-                                    <Serviço />
+                                    <Servico />
                                 </Route>
                                 <Route path="/item">
                                     <Item />
@@ -74,11 +74,11 @@ function Item() {
     );
 }
 
-function Serviço() {
+function Servico() {
     return (
         <>
             <legend>
-                Cadastro de pedido - Serviços
+                Cadastro de pedido - Servicos
             </legend>
 
             <ServCad />

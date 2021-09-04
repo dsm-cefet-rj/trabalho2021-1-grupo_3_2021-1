@@ -18,7 +18,7 @@ function CadastrarProduto() {
                         </label>
                         <label className="form-check-label mx-1">
                             <input className="form-check-input mx-1" type="radio" name="radioCadastro" value="servicos" />
-                            Serviços
+                            Servicos
                         </label>
                     </div>
                 </fieldset>
@@ -32,7 +32,7 @@ function CadastrarProduto() {
 
                 <fieldset className="form-servicos">
                     <legend>
-                        Compartilhar serviços
+                        Compartilhar servicos
                     </legend>
                     <CadastraServico />
                 </fieldset>
@@ -52,7 +52,7 @@ function CadastraServico() {
     return (
         <>
             <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Serviço</label>
+                <label for="exampleFormControlInput1" className="form-label">Servico</label>
                 <input type="email" className="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Marceneiro(a), pedreiro(a), téc de informática..." name="email" value={produto.email} onChange={handleImputChange} />
             </div>
 

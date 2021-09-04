@@ -18,7 +18,7 @@ function Procure () {
 
                         <label className="form-check-label">
                             <input className="form-check-input mx-1" type="radio" name="radio-tipo" id="flexRadioDefault2" value="servicos"/>
-                            Serviços
+                            Servicos
                         </label>
                     </div>
 

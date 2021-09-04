@@ -15,6 +15,7 @@ import { ListaPedido } from '../paginas/listaPedido';
 import Emprestimo from '../paginas/Emprestimo';
 import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
+import { CadServico } from '../paginas/CadastrarServico';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/Perfil/:id">
+        <Route path="/Perfil">
           <Perfil />
         </Route>
         <Route path="/procure">
@@ -39,6 +40,12 @@ function App() {
         </Route>
         <Route path="/produtos/:id">
           <CadProduto />
+        </Route>
+        <Route path="/servicos/:id">
+          <CadServico />
+        </Route>
+        <Route path="/CadServico">
+          <CadServico />
         </Route>
         <Route path="/peça">
           <CadPedido />

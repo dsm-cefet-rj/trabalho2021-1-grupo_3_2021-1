@@ -2,8 +2,8 @@
   "produtos": [
     {
       "categoria": "veiculo",
-      "name": "dfsgdf",
-      "desc": "dsfdg",
+      "name": "dsafdsf",
+      "desc": "dagsgd",
       "id": 3
     },
     {
@@ -13,11 +13,5 @@
       "id": 4
     }
   ],
-  "pedidos": [
-    {
-      "name": "fdgfshs",
-      "desc": "fgsfd",
-      "id": 2
-    }
-  ]
+  "pedidos": []
 }

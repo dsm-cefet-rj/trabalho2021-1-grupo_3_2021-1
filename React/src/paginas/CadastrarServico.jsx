@@ -3,51 +3,51 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { produtoSchema } from './ProdutoSchema';
+import { servicoSchema } from './servicoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addProdutoServer, updateProdutoServer, selectProdutosById } from './ProdutosSlice';
+import { addServicoServer, updateServicoServer, selectServicosById } from './servicosSlice';
 
-function CadProduto(props) {
-  const status = useSelector(state => state.produtos.status)
-  const error = useSelector(state => state.produtos.error)
+function CadServico(props) {
+  const status = useSelector(state => state.servicos.status)
+  const error = useSelector(state => state.servicos.error)
   const dispatch = useDispatch()
   let { id } = useParams();
-  const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const servicoFound = useSelector(state => selectServicosById(state, id))
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(produtoSchema)
+    resolver: yupResolver(servicoSchema)
   });
   id = parseInt(id);
 
-  const [produtoOnLoad] = useState(
-    id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
+  const [servicoOnLoad] = useState(
+    id ? servicoFound ?? servicoSchema.cast({}) : servicoSchema.cast({}));
 
   const [actionType,] = useState(
-    id ? produtoFound
-      ? 'produtos/updateProdutoServer'
-      : 'produtos/addProdutoServer'
-      : 'produtos/addProdutoServer');
+    id ? servicoFound
+      ? 'servicos/updateServicoServer'
+      : 'servicos/addServicoServer'
+      : 'servicos/addServicoServer');
   const history = useHistory();
 
 
-  function onSubmit(produto) {
-    if (actionType === 'produtos/addProdutoServer') {
-      dispatch(addProdutoServer(produto));
-    } else if (actionType === 'produtos/updateProdutoServer') {
-      dispatch(updateProdutoServer({ ...produto, id: produtoFound.id }))
+  function onSubmit(servico) {
+    if (actionType === 'servicos/addServicoServer') {
+      dispatch(addServicoServer(servico));
+    } else if (actionType === 'servicos/updateServicoServer') {
+      dispatch(updateServicoServer({ ...servico, id: servicoFound.id }))
     }
-    history.push('/produtos');
+    history.push('/servicos');
   }
   useEffect(() => {
     if (status === 'saved') {
-      history.push('/produtos');
+      history.push('/servicos');
     }
   }, [history, status]);
   /*
     useEffect(() =>  {
-      document.title = `Produto: ${produto.nome}`;
+      document.title = `Servico: ${servico.nome}`;
       return () => {document.title = 'PragmaPM'}
-    }, [produto.nome]);*/
+    }, [servico.nome]);*/
 
   return (
     <>
@@ -61,28 +61,8 @@ function CadProduto(props) {
 
 
 
-        <legend className="text-center">Cadastro de Produto</legend>
-        <div className="mb-3 col-sm-4">
-          <select
-
-            className="form-select"
-            form="form-cadastro"
-            name="categoria"
-            defaultValue={produtoOnLoad.categoria}
-            {...register("categoria")}
-
-          >
-<p style={{ color: "red" }}>{errors.name?.message}</p>
-            <option defaultValue hidden>
-              Escolha uma categoria
-
-            </option>
-            <option value="ferramenta">Ferramenta</option>
-            <option value="eletro">Eletrodoméstico</option>
-            <option value="veiculo">Veículo</option>
-            <option value="outro">Outro</option>
-          </select>
-        </div>
+        <legend className="text-center">Cadastro de Servicos</legend>
+        
 
         <div className="mb-3">
           <label htmlFor="nome-item" className="form-label">
@@ -94,7 +74,7 @@ function CadProduto(props) {
             id="item-nome"
             placeholder="martelo, chave de fenda, furadeira..."
             name="name"
-            defaultValue={produtoOnLoad.name}
+            defaultValue={servicoOnLoad.name}
             {...register("name")}
           />
           <p style={{ color: "red" }}>{errors.name?.message}</p>
@@ -125,7 +105,7 @@ function CadProduto(props) {
             rows="3"
             placeholder="Adicione uma descrição"
             name="desc"
-            defaultValue={produtoOnLoad.name}
+            defaultValue={servicoOnLoad.name}
             {...register("desc")}
 
 
@@ -142,5 +122,5 @@ function CadProduto(props) {
 
 }
 
-export { CadProduto };
+export { CadServico };
 

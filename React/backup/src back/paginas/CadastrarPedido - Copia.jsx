@@ -60,7 +60,7 @@ function CadastrarPedido(props) {
               name="radio-pedido"
               value="servicos"
             />
-            Serviços
+            Servicos
           </label>
         </div>
       </Container>
@@ -134,7 +134,7 @@ function CadastrarPedido(props) {
 
           <div className="mb-3">
             <label htmlFor="servico-nome" className="form-label">
-              Serviço
+              Servico
             </label>
             <input
               id="servico-nome"
