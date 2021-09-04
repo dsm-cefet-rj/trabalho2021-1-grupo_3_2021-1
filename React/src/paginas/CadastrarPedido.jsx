@@ -3,51 +3,51 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { produtoSchema } from './ProdutoSchema';
+import { pedidoSchema } from './PedidoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addProdutoServer, updateProdutoServer, selectProdutosById } from './ProdutosSlice';
+import { addPedidoServer, updatePedidoServer, selectPedidosById } from './PedidosSlice';
 
-function CadProduto(props) {
-  const status = useSelector(state => state.produtos.status)
-  const error = useSelector(state => state.produtos.error)
+function CadPedido(props) {
+  const status = useSelector(state => state.pedidos.status)
+  const error = useSelector(state => state.pedidos.error)
   const dispatch = useDispatch()
   let { id } = useParams();
-  const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const pedidoFound = useSelector(state => selectPedidosById(state, id))
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(produtoSchema)
+    resolver: yupResolver(pedidoSchema)
   });
   id = parseInt(id);
 
-  const [produtoOnLoad] = useState(
-    id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
+  const [pedidoOnLoad] = useState(
+    id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
 
   const [actionType,] = useState(
-    id ? produtoFound
-      ? 'produtos/updateProdutoServer'
-      : 'produtos/addProdutoServer'
-      : 'produtos/addProdutoServer');
+    id ? pedidoFound
+      ? 'pedidos/updatePedidoServer'
+      : 'pedidos/addPedidoServer'
+      : 'pedidos/addPedidoServer');
   const history = useHistory();
 
 
-  function onSubmit(produto) {
-    if (actionType === 'produtos/addProdutoServer') {
-      dispatch(addProdutoServer(produto));
-    } else if (actionType === 'produtos/updateProdutoServer') {
-      dispatch(updateProdutoServer({ ...produto, id: produtoFound.id }))
+  function onSubmit(pedido) {
+    if (actionType === 'pedidos/addPedidoServer') {
+      dispatch(addPedidoServer(pedido));
+    } else if (actionType === 'pedidos/updatePedidoServer') {
+      dispatch(updatePedidoServer({ ...pedido, id: pedidoFound.id }))
     }
-    history.push('/produtos');
+    history.push('/pedidos');
   }
   useEffect(() => {
     if (status === 'saved') {
-      history.push('/produtos');
+      history.push('/pedidos');
     }
   }, [history, status]);
   /*
     useEffect(() =>  {
-      document.title = `Produto: ${produto.nome}`;
+      document.title = `Pedido: ${pedido.nome}`;
       return () => {document.title = 'PragmaPM'}
-    }, [produto.nome]);*/
+    }, [pedido.nome]);*/
 
   return (
     <>
@@ -62,27 +62,6 @@ function CadProduto(props) {
 
 
         <legend className="text-center">Cadastro de pedido - Servicos</legend>
-        <div className="mb-3 col-sm-4">
-          <select
-
-            className="form-select"
-            form="form-cadastro"
-            name="categoria"
-            defaultValue={produtoOnLoad.categoria}
-            {...register("categoria")}
-
-          >
-<p style={{ color: "red" }}>{errors.name?.message}</p>
-            <option defaultValue hidden>
-              Escolha uma categoria
-
-            </option>
-            <option value="ferramenta">Ferramenta</option>
-            <option value="eletro">Eletrodoméstico</option>
-            <option value="veiculo">Veículo</option>
-            <option value="outro">Outro</option>
-          </select>
-        </div>
 
         <div className="mb-3">
           <label htmlFor="nome-item" className="form-label">
@@ -94,7 +73,7 @@ function CadProduto(props) {
             id="item-nome"
             placeholder="martelo, chave de fenda, furadeira..."
             name="name"
-            defaultValue={produtoOnLoad.name}
+            defaultValue={pedidoOnLoad.name}
             {...register("name")}
           />
           <p style={{ color: "red" }}>{errors.name?.message}</p>
@@ -125,7 +104,7 @@ function CadProduto(props) {
             rows="3"
             placeholder="Adicione uma descrição"
             name="desc"
-            defaultValue={produtoOnLoad.name}
+            defaultValue={pedidoOnLoad.name}
             {...register("desc")}
 
 
@@ -142,5 +121,5 @@ function CadProduto(props) {
 
 }
 
-export { CadProduto };
+export { CadPedido };
 

@@ -9,42 +9,54 @@ import NavBar from '../components/NavBar';
 import Home from '../paginas/Home';
 import Perfil from '../paginas/Perfil'
 import Procure from '../paginas/Procure';
-import {Resultado} from '../paginas/ResultadoBusca';
+import { Resultado } from '../paginas/listaProduto';
+
+import { ListaPedido } from '../paginas/listaPedido';
 import Emprestimo from '../paginas/Emprestimo';
 import { CadProduto } from '../paginas/CadastrarProduto';
-
+import { CadPedido } from '../paginas/CadastrarPedido';
 
 function App() {
 
   return (
-     <Router>
-        <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/Perfil/:id">
-            <Perfil />
-          </Route>
-          <Route path="/procure">
-            <Procure />
-          </Route>
-          <Route path="/compartilhe">
-            <CadProduto />
-          </Route>
-          <Route path="/produtos/:id">
-            <CadProduto />
-            </Route>
-          <Route path="/produtos">
-            <Resultado />
-          </Route>
-          
-          <Route path="/Emprestimo">
-            <Emprestimo />
-          </Route>
+    <Router>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/Perfil/:id">
+          <Perfil />
+        </Route>
+        <Route path="/procure">
+          <Procure />
+        </Route>
+        <Route path="/compartilhe">
+          <CadProduto />
+        </Route>
+        <Route path="/pedidos/:id">
+          <ListaPedido />
+        </Route>
+        <Route path="/produtos/:id">
+          <CadProduto />
+        </Route>
+        <Route path="/peça">
+          <CadPedido />
+        </Route>
+        <Route path="/pedidos">
+          <ListaPedido />
+        </Route>
 
-        </Switch>
-      </Router>
+        <Route path="/produtos">
+          <Resultado />
+        </Route>
+
+        <Route path="/Emprestimo">
+          <Emprestimo />
+        </Route>
+
+      </Switch>
+    </Router>
   );
 }
 
@@ -92,7 +104,7 @@ function App() {
           <Route path="/resultado">
             <Resultado />
           </Route>
-          
+
           <Route path="/Emprestimo">
             <Emprestimo />
           </Route>

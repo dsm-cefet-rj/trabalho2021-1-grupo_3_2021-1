@@ -5,12 +5,11 @@ setLocale(ptForm)
 
 const numericMsg = "O campo deve ser um número."
 
-export let produtoSchema = object().shape(
+export let pedidoSchema = object().shape(
     {
         id: number(),
         name: string().required(),
         desc: string().required(),
-        categoria: string(),
      
     }
 )

@@ -1,19 +1,23 @@
 {
   "produtos": [
     {
-      "id": 1,
-      "nome": "cvzcvz",
-      "desc": "cxzcv",
-      "foto": "",
-      "categoria": ""
+      "categoria": "veiculo",
+      "name": "dfsgdf",
+      "desc": "dsfdg",
+      "id": 3
+    },
+    {
+      "categoria": "eletro",
+      "name": "gfsgf",
+      "desc": "gsfdgdfs",
+      "id": 4
     }
   ],
-  "pedido": [
+  "pedidos": [
     {
-      "id": 1,
-      "nome": "cvzcvz",
-      "desc": "cxzcv",
-      "foto": ""
+      "name": "fdgfshs",
+      "desc": "fgsfd",
+      "id": 2
     }
   ]
 }
