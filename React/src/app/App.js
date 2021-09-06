@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar';
 import Home from '../paginas/Home';
 import Perfil from '../paginas/Perfil'
 import Procure from '../paginas/Procure';
+import Escolha from '../paginas/Escolha';
 import { Resultado } from '../paginas/listaProduto';
 import { ListaPedido } from '../paginas/listaPedido';
 import { CadProduto } from '../paginas/CadastrarProduto';
@@ -62,6 +63,9 @@ function App() {
           <Resultado />
         </Route>
 
+        <Route path="/escolha">
+          <Escolha />
+        </Route>
 
       </Switch>
     </Router>
