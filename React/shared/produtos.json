@@ -1,13 +1,33 @@
 {
-  "produtos": [],
+  "produtos": [
+    {
+      "num": 22997840095,
+      "preco": 17,
+      "local": "TIJUCA, rua dos assaltos, num 13",
+      "categoria": "eletro",
+      "desc": "furadeira martelete com brocas de 3 a 10 mm",
+      "name": "FURADEIRA",
+      "id": 1
+    },
+    {
+      "num": 4325354254,
+      "preco": 45,
+      "local": "gdhgfh",
+      "categoria": "veiculo",
+      "desc": "dfhgfhshfsg",
+      "name": "gfhfh",
+      "id": 2
+    }
+  ],
   "pedidos": [],
   "servicos": [
     {
-      "preco": 50,
-      "local": "fdsgdfg",
-      "desc": "fdsgf",
-      "name": "fdsgdf",
-      "id": 1
+      "num": 22997840095,
+      "preco": 23,
+      "local": "tijuca, rua do celular perdido nº 13",
+      "desc": "podo arvores de todos os tipos\n",
+      "name": "Poda arvores",
+      "id": 2
     }
   ]
 }

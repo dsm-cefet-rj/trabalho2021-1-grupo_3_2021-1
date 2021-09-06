@@ -66,28 +66,24 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
-        <div className="green-card pedido-index">
-
-            <Link to={`/produto/${props.produto.id}`}>
+    
+            
                 <div className="green-card pedido-index">
+                <Link to={`/produto/${props.produto.id}`}>
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
                         <h5>{props.produto.name}</h5>
-                        <p>{props.produto.desc}</p>
+                        <p>{props.produto.preco} Reais</p>
 
 
                     </div>
+                    </Link>
                 </div>
-            </Link>
-           
-
-
-
-
-        </div>
+            
+         
     </>
     );
 }
