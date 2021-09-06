@@ -36,6 +36,16 @@ function NavBar() {
               Perfil
             </Link>
           </li>
+          <li className="nav-link">
+            <Link className="reset-link" to="/produtos/:id">
+              Cadastrar Pedidos
+            </Link>
+          </li>
+          <li className="nav-link">
+            <Link className="reset-link" to="/servicos/:id">
+              Cadastrar Serviços
+            </Link>
+          </li>
           <li className="reset-link nav-link">Configurações</li>
           <li className="reset-link nav-link">Logoff</li>
         </div>
