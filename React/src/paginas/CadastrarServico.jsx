@@ -3,10 +3,10 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { servicoSchema } from './ServicoSchema';
+import { servicoSchema } from './utilitarios/ServicoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addServicoServer, updateServicoServer, selectServicosById } from './ServicosSlice';
+import { addServicoServer, updateServicoServer, selectServicosById } from './utilitarios/ServicosSlice';
 
 function CadServico(props) {
   const status = useSelector(state => state.servicos.status)

@@ -4,7 +4,7 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './PedidosSlice'
+import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './utilitarios/PedidosSlice'
 import foto from '../components/img/bicicleta.jpg'
 
 

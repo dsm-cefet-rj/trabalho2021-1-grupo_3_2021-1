@@ -3,10 +3,10 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { pedidoSchema } from './PedidoSchema';
+import { pedidoSchema } from './utilitarios/PedidoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addPedidoServer, updatePedidoServer, selectPedidosById } from './PedidosSlice';
+import { addPedidoServer, updatePedidoServer, selectPedidosById } from './utilitarios/PedidosSlice';
 
 function CadPedido(props) {
   const status = useSelector(state => state.pedidos.status)

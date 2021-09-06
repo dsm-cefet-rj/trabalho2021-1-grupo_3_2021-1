@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import produtosReducer from './paginas/ProdutosSlice'
-import pedidosReducer from './paginas/PedidosSlice'
-import servicosReducer from './paginas/ServicosSlice'
+import produtosReducer from './paginas/utilitarios/ProdutosSlice'
+import pedidosReducer from './paginas/utilitarios/PedidosSlice'
+import servicosReducer from './paginas/utilitarios/ServicosSlice'
 
 export const store = configureStore({
     reducer: {

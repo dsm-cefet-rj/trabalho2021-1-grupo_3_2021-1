@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
-import { Link } from "react-router-dom";
 import imgPerfil from '../components/img/img-perfil.jpg'
 import { ListaPedido } from "./listaPedido";
 import { Resultado } from "./listaProduto";

@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
-import {httpDelete, httpGet, httpPut, httpPost} from '../utils'
+import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
 
 
 const produtosAdapter = createEntityAdapter();

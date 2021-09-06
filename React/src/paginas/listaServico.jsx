@@ -4,7 +4,7 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './ServicosSlice'
+import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './utilitarios/ServicosSlice'
 import foto from '../components/img/furadeira.jpg'
 
 

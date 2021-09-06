@@ -4,7 +4,7 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './ProdutosSlice'
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
 import foto from '../components/img/secador.jpeg'
 
 

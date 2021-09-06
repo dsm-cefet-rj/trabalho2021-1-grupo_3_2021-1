@@ -3,10 +3,10 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { produtoSchema } from './ProdutoSchema';
+import { produtoSchema } from './utilitarios/ProdutoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addProdutoServer, updateProdutoServer, selectProdutosById } from './ProdutosSlice';
+import { addProdutoServer, updateProdutoServer, selectProdutosById } from './utilitarios/ProdutosSlice';
 
 function CadProduto(props) {
   const status = useSelector(state => state.produtos.status)

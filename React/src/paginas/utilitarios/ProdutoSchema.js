@@ -1,9 +1,7 @@
-import {string, object, number, setLocale, bool} from 'yup';
+import {string, object, number, setLocale} from 'yup';
 import { ptForm } from 'yup-locale-pt';
 
 setLocale(ptForm)
-
-const numericMsg = "O campo deve ser um número."
 
 export let produtoSchema = object().shape(
     {

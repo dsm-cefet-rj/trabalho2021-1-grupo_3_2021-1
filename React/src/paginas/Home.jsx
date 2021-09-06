@@ -3,7 +3,7 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './ProdutosSlice'
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
 import imgProcure from "../components/img/main.png"
 import foto from '../components/img/furadeira.jpg'
 
@@ -36,7 +36,6 @@ function TabelaProdutos(props) {
 
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
-            
                     {produtos.map((produto) => <LinhaProduto key={produto.id} produto={produto} onClickExcluirProduto={handleClickExcluirProduto} />)}
                 </div>
                 </section>
