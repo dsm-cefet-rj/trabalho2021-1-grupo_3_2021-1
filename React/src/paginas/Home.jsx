@@ -3,8 +3,9 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './ProdutosSlice'
 import imgProcure from "../components/img/main.png"
+import imgRegistre from "../components/img/share.png"
 import foto from '../components/img/furadeira.jpg'
 
 
@@ -36,6 +37,7 @@ function TabelaProdutos(props) {
 
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
+            
                     {produtos.map((produto) => <LinhaProduto key={produto.id} produto={produto} onClickExcluirProduto={handleClickExcluirProduto} />)}
                 </div>
                 </section>
@@ -104,17 +106,22 @@ function Home () {
             <section className="first-element container text-center flex-column">
                 <h2 className="my-3">Bem-vindo, seu_nome.</h2>
                 <div className="row d-flex justify-content-evenly">
-                    <figure hidden className="col index-menu blue-card shadow">
+                    <figure className="col index-menu blue-card border margin">
                         <Link className="reset-link" to='/procure'>
                             <h3 className="link-title">Procure</h3>
                             <img className="img-fluid" src={imgProcure} alt="" />
                         </Link>
                     </figure>
-                    <figure className="col index-menu blue-card shadow">
-                        <Link className="reset-link" to="/compartilhe">
-                            <h3 className="link-title">Faça um pedido</h3>
-                            <img className="img-fluid" src={imgProcure} alt="" />
-                        </Link>
+                    
+                    <figure className="col index-menu blue-card border margin">
+                        <Link className="reset-link" to="/escolha">
+                            <h3 className="link-title">Registre Produtos ou serviços!</h3>
+                            <img className="img-fluid" src={imgRegistre} alt="" />
+                            </Link>
+                            
+                            
+                            
+                        
                     </figure>
                 </div>
             </section>
