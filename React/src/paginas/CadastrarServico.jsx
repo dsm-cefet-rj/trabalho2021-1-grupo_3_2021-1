@@ -3,10 +3,10 @@ import '../app/App.css';
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { servicoSchema } from './servicoSchema';
+import { servicoSchema } from './ServicoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { addServicoServer, updateServicoServer, selectServicosById } from './servicosSlice';
+import { addServicoServer, updateServicoServer, selectServicosById } from './ServicosSlice';
 
 function CadServico(props) {
   const status = useSelector(state => state.servicos.status)
@@ -61,7 +61,7 @@ function CadServico(props) {
 
 
 
-        <legend className="text-center">Cadastro de Servicos</legend>
+        <legend className="text-center">Cadastro de Servico</legend>
         
 
         <div className="mb-3">
@@ -78,6 +78,54 @@ function CadServico(props) {
             {...register("name")}
           />
           <p style={{ color: "red" }}>{errors.name?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            Endereço:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="endereço"
+            placeholder="petropolis, rua das gaivotas"
+            name="local"
+            defaultValue={servicoOnLoad.local}
+            {...register("local")}
+          />
+          <p style={{ color: "red" }}>{errors.local?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            Preço:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="item-preco"
+            placeholder="500"
+            name="preco"
+            defaultValue={servicoOnLoad.preco}
+            {...register("preco")}
+          />
+          <p style={{ color: "red" }}>{errors.preco?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            telefone:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="telefone"
+            placeholder="22997859632"
+            name="num"
+            defaultValue={servicoOnLoad.preco}
+            {...register("num")}
+          />
+          <p style={{ color: "red" }}>{errors.num?.message}</p>
         </div>
 
         <div className="mb-3">
@@ -105,7 +153,7 @@ function CadServico(props) {
             rows="3"
             placeholder="Adicione uma descrição"
             name="desc"
-            defaultValue={servicoOnLoad.name}
+            defaultValue={servicoOnLoad.desc}
             {...register("desc")}
 
 

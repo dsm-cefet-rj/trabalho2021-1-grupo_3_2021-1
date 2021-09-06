@@ -4,25 +4,24 @@ import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './PedidosSlice'
-import foto from '../components/img/bicicleta.jpg'
+import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './ServicosSlice'
+import foto from '../components/img/furadeira.jpg'
 
 
 
-
-function TabelaPedidos(props) {
-    const pedidos = useSelector(selectAllPedidos)
-    const status = useSelector(state => state.pedidos.status)
-    const error = useSelector(state => state.pedidos.error)
+function TabelaServicos(props) {
+    const servicos = useSelector(selectAllServicos)
+    const status = useSelector(state => state.servicos.status)
+    const error = useSelector(state => state.servicos.error)
     const dispatch = useDispatch()
 
-    function handleClickExcluirPedido(id) {
-        dispatch(deletePedidoServer(id))
+    function handleClickExcluirServico(id) {
+        dispatch(deleteServicoServer(id))
     }
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchPedidos())
+            dispatch(fetchServicos())
         }
     }, [status, dispatch])
 
@@ -30,7 +29,7 @@ function TabelaPedidos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="pb-2">
-                    {pedidos.map((pedido) => <LinhaPedido key={pedido.id} pedido={pedido} onClickExcluirPedido={handleClickExcluirPedido} />)}
+                    {servicos.map((servico) => <LinhaServico key={servico.id} servico={servico} onClickExcluirServico={handleClickExcluirServico} />)}
                 </section>
 
             );
@@ -42,17 +41,17 @@ function TabelaPedidos(props) {
     }
 }
 
-function LinhaPedido(props) {
-    const status = useSelector(state => state.pedidos.status)
+function LinhaServico(props) {
+    const status = useSelector(state => state.servicos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
+            setMsg('Servico salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
+            setMsg('Servico excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
@@ -61,21 +60,21 @@ function LinhaPedido(props) {
 
         <div className="row resultado-busca">
 
-            <Link to={`/pedidos/${props.pedido.id}`}>
+            <Link to={`/servicos/${props.servico.id}`}>
                 <div className="row resultado-busca">
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.pedido.name}</h5>
-                        <p>{props.pedido.desc}</p>
+                        <h5>{props.servico.name}</h5>
+                        <p>{props.servico.desc}</p>
 
 
                     </div>
                 </div>
             </Link>
-            <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirPedido(props.pedido.id)}>X</button>
+            <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirServico(props.servico.id)}>X</button>
 
 
 
@@ -86,18 +85,18 @@ function LinhaPedido(props) {
     );
 }
 
-function ListaPedido(props) {
+function ListaServico(props) {
 
 
     return (
         <>
             <main className="text-center container first-element">
-                <h2 className="my-3">Meus Pedidos</h2>
+                <h2 className="my-3">Meus servicos</h2>
 
-                <TabelaPedidos />
-                <p className="mb-2">Está precisando de algo?</p>
-                <Link to='/compartilhe'>
-                    <button type="button" className="btn btn-primary">Solicite</button>
+                <TabelaServicos />
+                <p className="mb-2">Quer ajudar seus vizinhos?</p>
+                <Link to='/CadServico'>
+                    <button type="button" className="btn btn-primary">Compartilhe</button>
                 </Link>
 
             </main>
@@ -107,4 +106,4 @@ function ListaPedido(props) {
     );
 }
 
-export { ListaPedido };
+export { ListaServico };

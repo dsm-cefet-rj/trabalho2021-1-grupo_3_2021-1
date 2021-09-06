@@ -80,6 +80,39 @@ function CadPedido(props) {
         </div>
 
         <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            Endereço:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="endereço"
+            placeholder="rio, rua dos coquinhos 16"
+            name="local"
+            defaultValue={pedidoOnLoad.local}
+            {...register("local")}
+          />
+          <p style={{ color: "red" }}>{errors.local?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            telefone:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="telefone"
+            placeholder="22997859632"
+            name="num"
+            defaultValue={pedidoOnLoad.preco}
+            {...register("num")}
+          />
+          <p style={{ color: "red" }}>{errors.num?.message}</p>
+        </div>
+
+
+        <div className="mb-3">
           <label htmlFor="item-img" className="form-label">
             Imagem ilustrativa:&nbsp;
           </label>
@@ -104,7 +137,7 @@ function CadPedido(props) {
             rows="3"
             placeholder="Adicione uma descrição"
             name="desc"
-            defaultValue={pedidoOnLoad.name}
+            defaultValue={pedidoOnLoad.desc}
             {...register("desc")}
 
 

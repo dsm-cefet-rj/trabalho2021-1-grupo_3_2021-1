@@ -1,17 +1,13 @@
 {
-  "produtos": [
+  "produtos": [],
+  "pedidos": [],
+  "servicos": [
     {
-      "categoria": "veiculo",
-      "name": "dsafdsf",
-      "desc": "dagsgd",
-      "id": 3
-    },
-    {
-      "categoria": "eletro",
-      "name": "gfsgf",
-      "desc": "gsfdgdfs",
-      "id": 4
+      "preco": 50,
+      "local": "fdsgdfg",
+      "desc": "fdsgf",
+      "name": "fdsgdf",
+      "id": 1
     }
-  ],
-  "pedidos": []
+  ]
 }

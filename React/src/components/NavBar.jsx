@@ -36,11 +36,6 @@ function NavBar() {
               Perfil
             </Link>
           </li>
-          <li className="reset-link nav-link">
-            <Link className="reset-link" to="/Emprestimo">
-              Meus Empréstimos
-            </Link>
-          </li>
           <li className="reset-link nav-link">Configurações</li>
           <li className="reset-link nav-link">Logoff</li>
         </div>

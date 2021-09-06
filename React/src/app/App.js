@@ -10,12 +10,13 @@ import Home from '../paginas/Home';
 import Perfil from '../paginas/Perfil'
 import Procure from '../paginas/Procure';
 import { Resultado } from '../paginas/listaProduto';
-
 import { ListaPedido } from '../paginas/listaPedido';
-import Emprestimo from '../paginas/Emprestimo';
 import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
+
+import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
+
 
 function App() {
 
@@ -35,19 +36,22 @@ function App() {
         <Route path="/compartilhe">
           <CadProduto />
         </Route>
-        <Route path="/pedidos/:id">
-          <ListaPedido />
-        </Route>
         <Route path="/produtos/:id">
           <CadProduto />
         </Route>
         <Route path="/servicos/:id">
           <CadServico />
         </Route>
+        <Route path="/pedidos/:id">
+          <CadPedido />
+        </Route>
+        <Route path="/servicos">
+          <ListaServico />
+        </Route>
         <Route path="/CadServico">
           <CadServico />
         </Route>
-        <Route path="/peça">
+        <Route path="/CadPedido">
           <CadPedido />
         </Route>
         <Route path="/pedidos">
@@ -58,9 +62,6 @@ function App() {
           <Resultado />
         </Route>
 
-        <Route path="/Emprestimo">
-          <Emprestimo />
-        </Route>
 
       </Switch>
     </Router>

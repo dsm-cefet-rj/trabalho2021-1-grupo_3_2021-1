@@ -101,6 +101,54 @@ function CadProduto(props) {
         </div>
 
         <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            Endereço:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="endereço"
+            placeholder="macaé, rua das tartarugas...."
+            name="local"
+            defaultValue={produtoOnLoad.local}
+            {...register("local")}
+          />
+          <p style={{ color: "red" }}>{errors.local?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            Preço:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="item-preco"
+            placeholder="500"
+            name="preco"
+            defaultValue={produtoOnLoad.preco}
+            {...register("preco")}
+          />
+          <p style={{ color: "red" }}>{errors.preco?.message}</p>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="nome-item" className="form-label">
+            telefone:&nbsp;
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="telefone"
+            placeholder="22997859632"
+            name="num"
+            defaultValue={produtoOnLoad.preco}
+            {...register("num")}
+          />
+          <p style={{ color: "red" }}>{errors.num?.message}</p>
+        </div>
+
+        <div className="mb-3">
           <label htmlFor="item-img" className="form-label">
             Imagem ilustrativa:&nbsp;
           </label>
@@ -125,7 +173,7 @@ function CadProduto(props) {
             rows="3"
             placeholder="Adicione uma descrição"
             name="desc"
-            defaultValue={produtoOnLoad.name}
+            defaultValue={produtoOnLoad.desc}
             {...register("desc")}
 
 

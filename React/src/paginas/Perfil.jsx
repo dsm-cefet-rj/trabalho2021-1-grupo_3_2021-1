@@ -2,15 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from "react-router-dom";
-import TabelaItens from "../components/TabelaItens";
 import imgPerfil from '../components/img/img-perfil.jpg'
-import imgof from '../components/img/secador.jpeg'
-import imgbike from '../components/img/bicicleta.jpg';
+import { ListaPedido } from "./listaPedido";
+import { Resultado } from "./listaProduto";
+import { ListaServico } from "./listaServico";
 
-const resultados = [
-  { foto: imgof, name: "Secador", desc: "Secador de cabelo" },
-  { foto: imgbike, name: "Bicecleta", desc: "Bicicleta" },
-]
 
 function Perfil () {
     return (
@@ -44,16 +40,12 @@ function Perfil () {
                     <span className=""><strong>Estado: </strong>RJ</span>
                     
                 </div>
-                <br/>
-                <TabelaItens produtos={resultados} />
-                <div className="text-center">
-                <br/>
-                <h5 className="text-center"><strong>Tem algo que queira compartilhar?</strong></h5>
-                
-                <Link to='/compartilhe'>
-                    <button type="button" className="btn btn-primary">Compartilhe</button>
-                </Link>
-                </div>
+                <h3 className="text-center my-3">Lista cadastros</h3>
+            
+            <ListaPedido/>
+            <ListaServico/>
+            
+            <Resultado/>
             </div>
             
         </section>

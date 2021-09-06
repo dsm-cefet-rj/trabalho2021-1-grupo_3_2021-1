@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './ProdutosSlice'
-
+import foto from '../components/img/secador.jpeg'
 
 
 
@@ -63,7 +63,7 @@ function LinhaProduto(props) {
             <Link to={`/produtos/${props.produto.id}`}>
                 <div className="row resultado-busca">
                     <div className="col-4">
-                        <img className="img-fluid" src={props.produto.foto} alt="" />
+                        <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
@@ -91,7 +91,7 @@ function Resultado(props) {
     return (
         <>
             <main className="text-center container first-element">
-                <h2 className="my-3">Resultados</h2>
+                <h2 className="my-3">Meus produtos</h2>
 
                 <TabelaProdutos />
                 <p className="mb-2">Quer ajudar seus vizinhos?</p>

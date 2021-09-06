@@ -10,6 +10,8 @@ export let pedidoSchema = object().shape(
         id: number(),
         name: string().required(),
         desc: string().required(),
+        local: string().required(),
+        num: number().required(),
      
     }
 )
