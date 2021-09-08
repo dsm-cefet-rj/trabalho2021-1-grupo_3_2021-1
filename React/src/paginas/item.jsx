@@ -4,19 +4,27 @@ import '../app/App.css';
 import { Link } from 'react-router-dom' 
 import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
-
+import { produtoSchema } from './utilitarios/ProdutoSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from "react-hook-form";
+import { fetchProdutos, setStatus, selectAllProdutos, selectProdutosById } from './utilitarios/ProdutosSlice';
 
 function TabelaProdutos(props) {
     const produtos = useSelector(selectAllProdutos)
     const status = useSelector(state => state.produtos.status)
     const error = useSelector(state => state.produtos.error)
     const dispatch = useDispatch()
+    let { id } = useParams();
+  const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(produtoSchema)
+  });
+  id = parseInt(id);
 
-    function handleClickExcluirProduto(id) {
-        dispatch(deleteProdutoServer(id))
-    }
+  const [produtoOnLoad] = useState(
+    id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
 
     useEffect(() => {
         if (status === 'not_loaded') {
@@ -33,7 +41,7 @@ function TabelaProdutos(props) {
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                    {produtos.map((produto) => <LinhaProduto key={produto.id} produto={produto} onClickExcluirProduto={handleClickExcluirProduto} />)}
+                   <LinhaProduto key={produtoOnLoad.id} produto={produtoOnLoad}/>)
                 </div>
                 </section>
 
@@ -85,10 +93,21 @@ function LinhaProduto(props) {
     );
 }
 
+
+
+
+
+
+
+
+
+
 function Procure () {
     return (
         <>
-           <TabelaProdutos/>
+            <main className="container text-center">
+            <TabelaProdutos/>
+            </main>
         </>
     );
 }
