@@ -6,25 +6,26 @@ import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { produtoSchema } from './utilitarios/ProdutoSchema';
+import { servicoSchema } from './utilitarios/ServicoSchema';
 
-import { fetchProdutos, setStatus, selectAllProdutos, selectProdutosById } from './utilitarios/ProdutosSlice';
+import { fetchServicos, setStatus, selectAllServicos, selectServicosById } from './utilitarios/ServicosSlice';
 
-function TabelaProdutos(props) {
-    const produtos = useSelector(selectAllProdutos)
-    const status = useSelector(state => state.produtos.status)
-    const error = useSelector(state => state.produtos.error)
+function TabelaServicos(props) {
+    const servicos = useSelector(selectAllServicos)
+    const status = useSelector(state => state.servicos.status)
+    const error = useSelector(state => state.servicos.error)
     const dispatch = useDispatch()
     let { id } = useParams();
-  const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const servicoFound = useSelector(state => selectServicosById(state, id))
+  
   id = parseInt(id);
 
-  const [produtoOnLoad] = useState(
-    id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
+  const [servicoOnLoad] = useState(
+    id ? servicoFound ?? servicoSchema.cast({}) : servicoSchema.cast({}));
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchProdutos())
+            dispatch(fetchServicos())
         }
     }, [status, dispatch])
 
@@ -37,7 +38,7 @@ function TabelaProdutos(props) {
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                   <LinhaProduto key={produtoOnLoad.id} produto={produtoOnLoad}/>)
+                   <LinhaServico key={servicoOnLoad.id} servico={servicoOnLoad}/>)
                 </div>
                 </section>
 
@@ -50,36 +51,38 @@ function TabelaProdutos(props) {
     }
 }
 
-function LinhaProduto(props) {
-    const status = useSelector(state => state.produtos.status)
+function LinhaServico(props) {
+    const status = useSelector(state => state.servicos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Produto salvo com sucesso');
+            setMsg('Servico salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Produto excluído com sucesso');
+            setMsg('Servico excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
 
+    
+            
                 <div className="green-card pedido-index">
-                
+               
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.preco} Reais</p>
+                        <h5>{props.servico.name}</h5>
+                        <p>{props.servico.preco} Reais</p>
 
 
                     </div>
-                    
+                 
                 </div>
             
          
@@ -100,7 +103,7 @@ function Procure () {
     return (
         <>
             <main className="container text-center">
-            <TabelaProdutos/>
+            <TabelaServicos/>
             </main>
         </>
     );

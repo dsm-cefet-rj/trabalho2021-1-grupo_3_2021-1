@@ -14,7 +14,8 @@ import { Resultado } from '../paginas/listaProduto';
 import { ListaPedido } from '../paginas/listaPedido';
 import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
-
+import Servico from '../paginas/Servico';
+import Pedido from '../paginas/Pedido';
 import Item from '../paginas/item';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
@@ -46,6 +47,12 @@ function App() {
         </Route>
         <Route path="/pedidos/:id">
           <CadPedido />
+        </Route>
+        <Route path="/servico/:id">
+          <Servico />
+        </Route>
+        <Route path="/pedido/:id">
+          <Pedido />
         </Route>
         <Route path="/produto/:id">
           <Item />
