@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
@@ -65,18 +66,39 @@ function LinhaProduto(props) {
 
     
             
-                <div className="green-card pedido-index">
-                <Link to={`/produto/${props.produto.id}`}>
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
+
+                <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.preco} Reais</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.produto.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          <p><strong>Valor:</strong> {props.produto.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.produto.desc}</p>  
+                        </div>
+                        
 
 
                     </div>
+                    <Link to={`/produto/${props.produto.id}`}>
+                    <button type="button" className="btn btn-primary">Produto</button>
                     </Link>
                 </div>
             
@@ -89,10 +111,14 @@ function Item () {
     return (
         <>
            <TabelaProdutos/>
-           <p className="mb-2">Está precisando de algo que não encontrou?</p>
+           <div style={{textAlign:"center",
+                fontSize:"20px"}}>
+               <p className="mb-2">Está precisando de algo que não encontrou?</p>
                 <Link to='/CadPedido'>
                     <button type="button" className="btn btn-primary">Solicite</button>
                 </Link>
+           </div>
+           
 
         </>
     );
