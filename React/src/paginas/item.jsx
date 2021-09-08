@@ -67,7 +67,7 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
-                <div className="green-card pedido-index">
+                <div>
                 
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />

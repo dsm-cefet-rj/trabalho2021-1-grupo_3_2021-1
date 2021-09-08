@@ -89,6 +89,11 @@ function Procure () {
     return (
         <>
            <TabelaProdutos/>
+           <p className="mb-2">Está precisando de algo que não encontrou?</p>
+                <Link to='/CadPedido'>
+                    <button type="button" className="btn btn-primary">Solicite</button>
+                </Link>
+
         </>
     );
 }
