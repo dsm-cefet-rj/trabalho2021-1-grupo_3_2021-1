@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
@@ -67,18 +68,37 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
-                <div>
-                
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div style={
+                        {
+                            backgroundColor:"white",
+                            padding:"40px"
+                        }
+                    }>
+                    
+                    <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px"
+                }}>
+                       <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.preco} Reais</p>
+                        <h5 style={{
+                            fontSize:"40px"
+                        }}><strong>{props.produto.name}</strong></h5>
+                        <br/>
+                        <p>Valor: {props.produto.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.produto.desc}</p>
 
 
+                    </div> 
                     </div>
+                    
                     
                 </div>
             
