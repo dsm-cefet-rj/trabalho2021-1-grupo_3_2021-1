@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
@@ -9,6 +10,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { servicoSchema } from './utilitarios/ServicoSchema';
 
 import { fetchServicos, setStatus, selectAllServicos, selectServicosById } from './utilitarios/ServicosSlice';
+
+
+
+
+
 
 function TabelaServicos(props) {
     const servicos = useSelector(selectAllServicos)
@@ -68,21 +74,39 @@ function LinhaServico(props) {
     return (<>
         <div>{msg}</div>
 
-    
+            <div style={{
+                backgroundColor:"white",
+                padding:"40px"
+            }}>
             
-                <div>
+                <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px"
+                }}>
                
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                    <div className="col-4"
+                    >                                            
+
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.servico.name}</h5>
-                        <p>{props.servico.preco} Reais</p>
+                        <h5  style={{
+                            fontSize:"40px"
+                        }}><strong>{props.servico.name}</strong></h5>
+                        <br/>
+                        <p>Valor: {props.servico.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.servico.desc}</p>
 
 
                     </div>
                  
+                </div>
+
                 </div>
             
          
