@@ -27,7 +27,7 @@ function TabelaServicos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="text-center">
-            <h3 className="mt-4 mb-3">Pegue emprestado</h3>
+            <h3 className="mt-4 mb-3">Pegue Emprestado</h3>
 
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
@@ -62,20 +62,40 @@ function LinhaServico(props) {
     return (<>
         <div>{msg}</div>
 
-    
             
-                <div className="green-card servico-index">
-                <Link to={`/servico/${props.servico.id}`}>
+            
+                <div className="row resultado-busca" style={{
+                    backgroundColor:"dogerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
                     <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.servico.name}</h5>
-                        <p>{props.servico.preco} Reais</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.servico.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          <p><strong>Valor:</strong> {props.servico.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.servico.desc}</p>  
+                        </div>
+                        
 
 
                     </div>
+                    <Link to={`/servico/${props.servico.id}`}>
+                    <button type="button" className="btn btn-primary">Produto</button>
                     </Link>
                 </div>
             
@@ -88,11 +108,16 @@ function Servico () {
     return (
         <>
            <TabelaServicos/>
-           <p className="mb-2">cadastre um servico?</p>
+           <p style={
+               {textAlign:"center",
+                fontSize:"20px"
+        }
+           }>Cadastre um servico?
+           <br/>
                 <Link to='/CadServico'>
                     <button type="button" className="btn btn-primary">Cadastre</button>
                 </Link>
-
+</p>
         </>
     );
 }
