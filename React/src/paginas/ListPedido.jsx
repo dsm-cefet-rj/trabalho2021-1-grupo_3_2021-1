@@ -88,10 +88,14 @@ function Pedido () {
     return (
         <>
            <TabelaPedidos/>
-           <p className="mb-2">COmprtilhe algo?</p>
+           <div style={{textAlign:"center",
+                fontSize:"20px"}}>
+              <p className="mb-2">Comprtilhe algo?</p>
                 <Link to='/CadProduto'>
                     <button type="button" className="btn btn-primary">Compartilhe</button>
-                </Link>
+                </Link> 
+           </div>
+           
 
         </>
     );
