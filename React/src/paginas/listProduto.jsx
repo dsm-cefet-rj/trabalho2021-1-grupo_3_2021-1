@@ -1,30 +1,26 @@
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
-import foto from '../components/img/furadeira.jpg'
+import foto from '../components/img/secador.jpeg'
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { pedidoSchema } from './utilitarios/PedidoSchema';
+import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
 
-import { fetchPedidos, setStatus, selectAllPedidos, selectPedidosById } from './utilitarios/PedidosSlice';
 
-function TabelaPedidos(props) {
-    const pedidos = useSelector(selectAllPedidos)
-    const status = useSelector(state => state.pedidos.status)
-    const error = useSelector(state => state.pedidos.error)
+function TabelaProdutos(props) {
+    const produtos = useSelector(selectAllProdutos)
+    const status = useSelector(state => state.produtos.status)
+    const error = useSelector(state => state.produtos.error)
     const dispatch = useDispatch()
-    let { id } = useParams();
-  const pedidoFound = useSelector(state => selectPedidosById(state, id))
-  
-  id = parseInt(id);
 
-  const [pedidoOnLoad] = useState(
-    id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
+    function handleClickExcluirProduto(id) {
+        dispatch(deleteProdutoServer(id))
+    }
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchPedidos())
+            dispatch(fetchProdutos())
         }
     }, [status, dispatch])
 
@@ -37,7 +33,7 @@ function TabelaPedidos(props) {
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                   <LinhaPedido key={pedidoOnLoad.id} pedido={pedidoOnLoad}/>)
+                    {produtos.map((produto) => <LinhaProduto key={produto.id} produto={produto} onClickExcluirProduto={handleClickExcluirProduto} />)}
                 </div>
                 </section>
 
@@ -50,17 +46,17 @@ function TabelaPedidos(props) {
     }
 }
 
-function LinhaPedido(props) {
-    const status = useSelector(state => state.pedidos.status)
+function LinhaProduto(props) {
+    const status = useSelector(state => state.produtos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
+            setMsg('Produto salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
+            setMsg('Produto excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
@@ -69,19 +65,19 @@ function LinhaPedido(props) {
 
     
             
-                <div>
-            
+                <div className="green-card pedido-index">
+                <Link to={`/produto/${props.produto.id}`}>
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.pedido.name}</h5>
-                        <p>{props.pedido.preco} Reais</p>
+                        <h5>{props.produto.name}</h5>
+                        <p>{props.produto.preco} Reais</p>
 
 
                     </div>
-                   
+                    </Link>
                 </div>
             
          
@@ -89,23 +85,17 @@ function LinhaPedido(props) {
     );
 }
 
-
-
-
-
-
-
-
-
-
-function Pedido () {
+function Item () {
     return (
         <>
-            <main className="container text-center">
-            <TabelaPedidos/>
-            </main>
+           <TabelaProdutos/>
+           <p className="mb-2">Está precisando de algo que não encontrou?</p>
+                <Link to='/CadPedido'>
+                    <button type="button" className="btn btn-primary">Solicite</button>
+                </Link>
+
         </>
     );
 }
 
-export default Pedido;
+export default Item;

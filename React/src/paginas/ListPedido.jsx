@@ -3,24 +3,19 @@ import '../app/App.css';
 import { Link } from 'react-router-dom' 
 import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { pedidoSchema } from './utilitarios/PedidoSchema';
+import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './utilitarios/PedidosSlice'
 
-import { fetchPedidos, setStatus, selectAllPedidos, selectPedidosById } from './utilitarios/PedidosSlice';
 
 function TabelaPedidos(props) {
     const pedidos = useSelector(selectAllPedidos)
     const status = useSelector(state => state.pedidos.status)
     const error = useSelector(state => state.pedidos.error)
     const dispatch = useDispatch()
-    let { id } = useParams();
-  const pedidoFound = useSelector(state => selectPedidosById(state, id))
-  
-  id = parseInt(id);
 
-  const [pedidoOnLoad] = useState(
-    id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
+    function handleClickExcluirPedido(id) {
+        dispatch(deletePedidoServer(id))
+    }
 
     useEffect(() => {
         if (status === 'not_loaded') {
@@ -37,7 +32,7 @@ function TabelaPedidos(props) {
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                   <LinhaPedido key={pedidoOnLoad.id} pedido={pedidoOnLoad}/>)
+                    {pedidos.map((pedido) => <LinhaPedido key={pedido.id} pedido={pedido} onClickExcluirPedido={handleClickExcluirPedido} />)}
                 </div>
                 </section>
 
@@ -69,8 +64,8 @@ function LinhaPedido(props) {
 
     
             
-                <div>
-            
+                <div className="green-card pedido-index">
+                <Link to={`/pedido/${props.pedido.id}`}>
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
@@ -81,7 +76,7 @@ function LinhaPedido(props) {
 
 
                     </div>
-                   
+                    </Link>
                 </div>
             
          
@@ -89,21 +84,15 @@ function LinhaPedido(props) {
     );
 }
 
-
-
-
-
-
-
-
-
-
 function Pedido () {
     return (
         <>
-            <main className="container text-center">
-            <TabelaPedidos/>
-            </main>
+           <TabelaPedidos/>
+           <p className="mb-2">COmprtilhe algo?</p>
+                <Link to='/CadProduto'>
+                    <button type="button" className="btn btn-primary">Compartilhe</button>
+                </Link>
+
         </>
     );
 }

@@ -1,30 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
-import foto from '../components/img/furadeira.jpg'
+import foto from '../components/img/bicicleta.jpg'
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { pedidoSchema } from './utilitarios/PedidoSchema';
+import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './utilitarios/ServicosSlice'
 
-import { fetchPedidos, setStatus, selectAllPedidos, selectPedidosById } from './utilitarios/PedidosSlice';
 
-function TabelaPedidos(props) {
-    const pedidos = useSelector(selectAllPedidos)
-    const status = useSelector(state => state.pedidos.status)
-    const error = useSelector(state => state.pedidos.error)
+function TabelaServicos(props) {
+    const servicos = useSelector(selectAllServicos)
+    const status = useSelector(state => state.servicos.status)
+    const error = useSelector(state => state.servicos.error)
     const dispatch = useDispatch()
-    let { id } = useParams();
-  const pedidoFound = useSelector(state => selectPedidosById(state, id))
-  
-  id = parseInt(id);
 
-  const [pedidoOnLoad] = useState(
-    id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
+    function handleClickExcluirServico(id) {
+        dispatch(deleteServicoServer(id))
+    }
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchPedidos())
+            dispatch(fetchServicos())
         }
     }, [status, dispatch])
 
@@ -37,7 +32,7 @@ function TabelaPedidos(props) {
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                   <LinhaPedido key={pedidoOnLoad.id} pedido={pedidoOnLoad}/>)
+                    {servicos.map((servico) => <LinhaServico key={servico.id} servico={servico} onClickExcluirServico={handleClickExcluirServico} />)}
                 </div>
                 </section>
 
@@ -50,17 +45,17 @@ function TabelaPedidos(props) {
     }
 }
 
-function LinhaPedido(props) {
-    const status = useSelector(state => state.pedidos.status)
+function LinhaServico(props) {
+    const status = useSelector(state => state.servicos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
+            setMsg('Servico salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
+            setMsg('Servico excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
@@ -69,19 +64,19 @@ function LinhaPedido(props) {
 
     
             
-                <div>
-            
+                <div className="green-card servico-index">
+                <Link to={`/servico/${props.servico.id}`}>
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.pedido.name}</h5>
-                        <p>{props.pedido.preco} Reais</p>
+                        <h5>{props.servico.name}</h5>
+                        <p>{props.servico.preco} Reais</p>
 
 
                     </div>
-                   
+                    </Link>
                 </div>
             
          
@@ -89,23 +84,17 @@ function LinhaPedido(props) {
     );
 }
 
-
-
-
-
-
-
-
-
-
-function Pedido () {
+function Servico () {
     return (
         <>
-            <main className="container text-center">
-            <TabelaPedidos/>
-            </main>
+           <TabelaServicos/>
+           <p className="mb-2">cadastre um servico?</p>
+                <Link to='/CadServico'>
+                    <button type="button" className="btn btn-primary">Cadastre</button>
+                </Link>
+
         </>
     );
 }
 
-export default Pedido;
+export default Servico;
