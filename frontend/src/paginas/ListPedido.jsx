@@ -111,20 +111,12 @@ function Pedido () {
            <TabelaPedidos/>
            <div style={{textAlign:"center",
                 fontSize:"20px"}}>
-<<<<<<< HEAD:frontend/src/paginas/ListPedido.jsx
-               <p className="mb-2">compartilhe algo?</p>
-                <Link to='/CadProduto'>
-                    <button type="button" className="btn btn-primary">compatilhe</button>
-                </Link>
-           </div>
-=======
               <p className="mb-2">Comprtilhe algo?</p>
                 <Link to='/CadProduto'>
                     <button type="button" className="btn btn-primary">Compartilhe</button>
                 </Link> 
            </div>
            
->>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/ListPedido.jsx
 
         </>
     );

@@ -65,21 +65,6 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
-<<<<<<< HEAD:frontend/src/paginas/item.jsx
-        <div className="row resultado-busca">
-                
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
-                    </div>
-
-                    <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.preco} Reais</p>
-                        
-                        <p>endereço: {props.produto.local} </p>
-                        <p>Numero de telefone: {props.produto.num} </p>
-                        <p>Descrição:<br></br>{props.produto.desc} </p>
-=======
                 <div style={
                         {
                             backgroundColor:"white",
@@ -106,7 +91,6 @@ function LinhaProduto(props) {
                         <p>Valor: {props.produto.preco} Reais</p>
                         <br/>
                         <p>Descrição: {props.produto.desc}</p>
->>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/item.jsx
 
 
                     </div> 

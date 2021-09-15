@@ -76,9 +76,6 @@ function LinhaServico(props) {
                 padding:"40px"
             }}>
             
-<<<<<<< HEAD:frontend/src/paginas/Servico.jsx
-        <div className="row resultado-busca">
-=======
                 <div className="row resultado-busca" style={{
                     backgroundColor:"dodgerblue",
                     padding:"40px",
@@ -86,7 +83,6 @@ function LinhaServico(props) {
                     fontFamily:"inherit",
                     borderRadius:"10px"
                 }}>
->>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/Servico.jsx
                
                     <div className="col-4"
                     >                                            
@@ -95,14 +91,6 @@ function LinhaServico(props) {
                     </div>
 
                     <div className="col text-center">
-<<<<<<< HEAD:frontend/src/paginas/Servico.jsx
-                        <h5>{props.servico.name}</h5>
-                        <p>{props.servico.preco} Reais</p>
-                        
-                        <p>endereço: {props.servico.local} </p>
-                        <p>Numero de telefone: {props.servico.num} </p>
-                        <p>Descrição:<br></br>{props.servico.desc} </p>
-=======
                         <h5  style={{
                             fontSize:"40px"
                         }}><strong>{props.servico.name}</strong></h5>
@@ -110,7 +98,6 @@ function LinhaServico(props) {
                         <p>Valor: {props.servico.preco} Reais</p>
                         <br/>
                         <p>Descrição: {props.servico.desc}</p>
->>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/Servico.jsx
 
 
                     </div>
