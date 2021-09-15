@@ -1,30 +1,28 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
-import { Link } from 'react-router-dom' 
 import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { produtoSchema } from './utilitarios/ProdutoSchema';
+import { pedidoSchema } from './utilitarios/PedidoSchema';
 
-import { fetchProdutos, setStatus, selectAllProdutos, selectProdutosById } from './utilitarios/ProdutosSlice';
+import { fetchPedidos, setStatus, selectPedidosById } from './utilitarios/PedidosSlice';
 
-function TabelaProdutos(props) {
-    const produtos = useSelector(selectAllProdutos)
-    const status = useSelector(state => state.produtos.status)
-    const error = useSelector(state => state.produtos.error)
+function TabelaPedidos(props) {
+    const status = useSelector(state => state.pedidos.status)
+    const error = useSelector(state => state.pedidos.error)
     const dispatch = useDispatch()
     let { id } = useParams();
-  const produtoFound = useSelector(state => selectProdutosById(state, id))
+  const pedidoFound = useSelector(state => selectPedidosById(state, id))
+  
   id = parseInt(id);
 
-  const [produtoOnLoad] = useState(
-    id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
+  const [pedidoOnLoad] = useState(
+    id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchProdutos())
+            dispatch(fetchPedidos())
         }
     }, [status, dispatch])
 
@@ -32,12 +30,11 @@ function TabelaProdutos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="text-center">
-            <h3 className="mt-4 mb-3">Pegue emprestado</h3>
-
+            
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                   <LinhaProduto key={produtoOnLoad.id} produto={produtoOnLoad}/>)
+                   <LinhaPedido key={pedidoOnLoad.id} pedido={pedidoOnLoad}/>)
                 </div>
                 </section>
 
@@ -50,36 +47,42 @@ function TabelaProdutos(props) {
     }
 }
 
-function LinhaProduto(props) {
-    const status = useSelector(state => state.produtos.status)
+function LinhaPedido(props) {
+    const status = useSelector(state => state.pedidos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Produto salvo com sucesso');
+            setMsg('Pedido salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Produto excluído com sucesso');
+            setMsg('Pedido excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
 
-                <div>
-                
+    
+            
+        <div className="row resultado-busca">
+            
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
                     </div>
 
                     <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.preco} Reais</p>
+                        <h5>{props.pedido.name}</h5>
+                        <p>{props.pedido.preco} Reais</p>
+                        
+                        <p>endereço: {props.pedido.local} </p>
+                        <p>Numero de telefone: {props.pedido.num} </p>
+                        <p>Descrição:<br></br>{props.pedido.desc} </p>
 
 
                     </div>
-                    
+                   
                 </div>
             
          
@@ -96,14 +99,14 @@ function LinhaProduto(props) {
 
 
 
-function Procure () {
+function Pedido () {
     return (
         <>
             <main className="container text-center">
-            <TabelaProdutos/>
+            <TabelaPedidos/>
             </main>
         </>
     );
 }
 
-export default Procure;
+export default Pedido;

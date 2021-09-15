@@ -1,25 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
-import foto from '../components/img/bicicleta.jpg'
+import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './utilitarios/ServicosSlice'
+import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './utilitarios/PedidosSlice'
 
 
-function TabelaServicos(props) {
-    const servicos = useSelector(selectAllServicos)
-    const status = useSelector(state => state.servicos.status)
-    const error = useSelector(state => state.servicos.error)
+function TabelaPedidos(props) {
+    const pedidos = useSelector(selectAllPedidos)
+    const status = useSelector(state => state.pedidos.status)
+    const error = useSelector(state => state.pedidos.error)
     const dispatch = useDispatch()
 
-    function handleClickExcluirServico(id) {
-        dispatch(deleteServicoServer(id))
+    function handleClickExcluirPedido(id) {
+        dispatch(deletePedidoServer(id))
     }
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchServicos())
+            dispatch(fetchPedidos())
         }
     }, [status, dispatch])
 
@@ -27,12 +27,11 @@ function TabelaServicos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="text-center">
-            <h3 className="mt-4 mb-3">Pegue Emprestado</h3>
-
+         <br></br><br></br>
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
-                    {servicos.map((servico) => <LinhaServico key={servico.id} servico={servico} onClickExcluirServico={handleClickExcluirServico} />)}
+                    {pedidos.map((pedido) => <LinhaPedido key={pedido.id} pedido={pedido} onClickExcluirPedido={handleClickExcluirPedido} />)}
                 </div>
                 </section>
 
@@ -45,27 +44,28 @@ function TabelaServicos(props) {
     }
 }
 
-function LinhaServico(props) {
-    const status = useSelector(state => state.servicos.status)
+
+function LinhaPedido(props) {
+    const status = useSelector(state => state.pedidos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
     useEffect(() => {
         if (status === 'saved') {
-            setMsg('Servico salvo com sucesso');
+            setMsg('Pedido salvo com sucesso');
             dispatch(setStatus('loaded'));
         } else if (status === 'deleted') {
-            setMsg('Servico excluído com sucesso');
+            setMsg('Pedido excluído com sucesso');
             dispatch(setStatus('loaded'));
         }
     }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
 
-            
+    
             
                 <div className="row resultado-busca" style={{
-                    backgroundColor:"dogerblue",
+                    backgroundColor:"dodgerblue",
                     padding:"40px",
                     color:"white",
                     fontFamily:"inherit",
@@ -74,7 +74,8 @@ function LinhaServico(props) {
                     widht:"540px"
                 }}>
                 
-                    <div className="col-4">
+
+                <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
@@ -82,20 +83,20 @@ function LinhaServico(props) {
                     <h5  style={{
                             textAlign:"Center",
                             fontSize:"60px"
-                        }}><strong>{props.servico.name}</strong></h5>
+                        }}><strong>{props.pedido.name}</strong></h5>
                         <br/>
                         <br/>
                         <div style={{fontSize:"20px"}}>
-                          <p><strong>Valor:</strong> {props.servico.preco} Reais</p>
+                          <p><strong>Valor:</strong> {props.pedido.preco} Reais</p>
                         <br/>
-                        <p>Descrição: {props.servico.desc}</p>  
+                        <p>Descrição: {props.pedido.desc}</p>  
                         </div>
                         
 
 
                     </div>
-                    <Link to={`/servico/${props.servico.id}`}>
-                    <button type="button" className="btn btn-primary">Produto</button>
+                    <Link to={`/pedido/${props.pedido.id}`}>
+                    <button type="button" className="btn btn-primary">Pedido</button>
                     </Link>
                 </div>
             
@@ -104,22 +105,20 @@ function LinhaServico(props) {
     );
 }
 
-function Servico () {
+function Pedido () {
     return (
         <>
-           <TabelaServicos/>
-           <p style={
-               {textAlign:"center",
-                fontSize:"20px"
-        }
-           }>Cadastre um servico?
-           <br/>
-                <Link to='/CadServico'>
-                    <button type="button" className="btn btn-primary">Cadastre</button>
+           <TabelaPedidos/>
+           <div style={{textAlign:"center",
+                fontSize:"20px"}}>
+               <p className="mb-2">compartilhe algo?</p>
+                <Link to='/CadProduto'>
+                    <button type="button" className="btn btn-primary">compatilhe</button>
                 </Link>
-</p>
+           </div>
+
         </>
     );
 }
 
-export default Servico;
+export default Pedido;

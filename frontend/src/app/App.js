@@ -19,6 +19,9 @@ import Pedido from '../paginas/Pedido';
 import Item from '../paginas/item';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
+import Items from '../paginas/listProduto'
+import Servicos from '../paginas/ListServico'
+import Pedidos from '../paginas/ListPedido'
 
 
 function App() {
@@ -26,6 +29,7 @@ function App() {
   return (
     <Router>
       <NavBar />
+      <br></br><br></br>
       <Switch>
         <Route exact path="/">
           <Home />
@@ -35,6 +39,15 @@ function App() {
         </Route>
         <Route path="/procure">
           <Procure />
+        </Route>
+        <Route path="/procureProd">
+          <Items />
+        </Route>
+        <Route path="/procurePed">
+          <Pedidos />
+        </Route>
+        <Route path="/procureServ">
+          <Servicos />
         </Route>
         <Route path="/compartilhe">
           <CadProduto />

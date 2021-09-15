@@ -29,8 +29,7 @@ function TabelaProdutos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="text-center">
-            <h3 className="mt-4 mb-3">Pegue emprestado</h3>
-
+       <br></br><br></br>
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             

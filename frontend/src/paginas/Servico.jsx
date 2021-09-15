@@ -1,17 +1,15 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
-import { Link } from 'react-router-dom' 
 import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { servicoSchema } from './utilitarios/ServicoSchema';
 
-import { fetchServicos, setStatus, selectAllServicos, selectServicosById } from './utilitarios/ServicosSlice';
+import { fetchServicos, setStatus, selectServicosById } from './utilitarios/ServicosSlice';
 
 function TabelaServicos(props) {
-    const servicos = useSelector(selectAllServicos)
     const status = useSelector(state => state.servicos.status)
     const error = useSelector(state => state.servicos.error)
     const dispatch = useDispatch()
@@ -33,8 +31,7 @@ function TabelaServicos(props) {
         case 'loaded': case 'saved':
             return (
                 <section className="text-center">
-            <h3 className="mt-4 mb-3">Pegue emprestado</h3>
-
+            
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
@@ -70,7 +67,7 @@ function LinhaServico(props) {
 
     
             
-                <div>
+        <div className="row resultado-busca">
                
                     <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" />
@@ -79,6 +76,10 @@ function LinhaServico(props) {
                     <div className="col text-center">
                         <h5>{props.servico.name}</h5>
                         <p>{props.servico.preco} Reais</p>
+                        
+                        <p>endereço: {props.servico.local} </p>
+                        <p>Numero de telefone: {props.servico.num} </p>
+                        <p>Descrição:<br></br>{props.servico.desc} </p>
 
 
                     </div>

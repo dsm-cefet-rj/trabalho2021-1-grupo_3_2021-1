@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
 import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
+import {baseUrl} from '../../baseUrl'
 
 
 const produtosAdapter = createEntityAdapter();
@@ -10,20 +11,20 @@ const initialState = produtosAdapter.getInitialState({
 });
 
 export const fetchProdutos = createAsyncThunk('produtos/fetchProdutos', async () => {
-    return await httpGet('http://localhost:3004/produtos');
+    return await httpGet(`${baseUrl}/produtos`);
 });
 
 export const deleteProdutoServer = createAsyncThunk('produtos/deleteProdutoServer', async (idProduto) => {
-    await httpDelete(`http://localhost:3004/produtos/${idProduto}`);
+    await httpDelete(`${baseUrl}/produtos/${idProduto}`);
     return idProduto;
 });
 
 export const addProdutoServer = createAsyncThunk('produtos/addProdutoServer', async (produto) => {
-    return await httpPost('http://localhost:3004/produtos', produto);
+    return await httpPost(`${baseUrl}/produtos`, produto);
 });
 
 export const updateProdutoServer = createAsyncThunk('produtos/updateProdutoServer', async (produto) => {
-    return await httpPut(`http://localhost:3004/produtos/${produto.id}`, produto);
+    return await httpPut(`${baseUrl}/produtos/${produto.id}`, produto);
 });
 
 export const produtosSlice = createSlice({
