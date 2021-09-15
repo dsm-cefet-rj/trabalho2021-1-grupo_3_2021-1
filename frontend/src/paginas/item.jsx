@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import foto from '../components/img/furadeira.jpg'
@@ -64,6 +65,7 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
+<<<<<<< HEAD:frontend/src/paginas/item.jsx
         <div className="row resultado-busca">
                 
                     <div className="col-4">
@@ -77,9 +79,39 @@ function LinhaProduto(props) {
                         <p>endereço: {props.produto.local} </p>
                         <p>Numero de telefone: {props.produto.num} </p>
                         <p>Descrição:<br></br>{props.produto.desc} </p>
-
-
+=======
+                <div style={
+                        {
+                            backgroundColor:"white",
+                            padding:"40px"
+                        }
+                    }>
+                    
+                    <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px"
+                }}>
+                       <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
+
+                    <div className="col text-center">
+                        <h5 style={{
+                            fontSize:"40px"
+                        }}><strong>{props.produto.name}</strong></h5>
+                        <br/>
+                        <p>Valor: {props.produto.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.produto.desc}</p>
+>>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/item.jsx
+
+
+                    </div> 
+                    </div>
+                    
                     
                 </div>
             

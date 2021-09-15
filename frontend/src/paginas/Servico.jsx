@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import foto from '../components/img/furadeira.jpg'
@@ -8,6 +9,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { servicoSchema } from './utilitarios/ServicoSchema';
 
 import { fetchServicos, setStatus, selectServicosById } from './utilitarios/ServicosSlice';
+
+
+
+
+
 
 function TabelaServicos(props) {
     const status = useSelector(state => state.servicos.status)
@@ -65,25 +71,52 @@ function LinhaServico(props) {
     return (<>
         <div>{msg}</div>
 
-    
+            <div style={{
+                backgroundColor:"white",
+                padding:"40px"
+            }}>
             
+<<<<<<< HEAD:frontend/src/paginas/Servico.jsx
         <div className="row resultado-busca">
+=======
+                <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px"
+                }}>
+>>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/Servico.jsx
                
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                    <div className="col-4"
+                    >                                            
+
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
                     <div className="col text-center">
+<<<<<<< HEAD:frontend/src/paginas/Servico.jsx
                         <h5>{props.servico.name}</h5>
                         <p>{props.servico.preco} Reais</p>
                         
                         <p>endereço: {props.servico.local} </p>
                         <p>Numero de telefone: {props.servico.num} </p>
                         <p>Descrição:<br></br>{props.servico.desc} </p>
+=======
+                        <h5  style={{
+                            fontSize:"40px"
+                        }}><strong>{props.servico.name}</strong></h5>
+                        <br/>
+                        <p>Valor: {props.servico.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.servico.desc}</p>
+>>>>>>> 55d26820fe7270a84c12c45341cae1de77c38db5:React/src/paginas/Servico.jsx
 
 
                     </div>
                  
+                </div>
+
                 </div>
             
          
