@@ -1,55 +1,75 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
+const Pedidos = require('../models/pedidos');
 
-let pedidos = [
-  {
-    "num": 4325354254,
-    "local": "gdhgfh",
-    "desc": "dfhgfhshfsg",
-    "name": "gfhfh",
-    "id": 2
-  }
-];
+router.use(bodyParser.json());
 
 
 /* GET users listing. */
 router.route('/')
-.get((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(pedidos);
+.get(async (req, res, next) => {
+
+  try{
+    const pedidosBanco = await Pedidos.find({}).maxTime(5000);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(pedidosBanco);
+  }catch(err){
+    next(err);
+  }
+    
 })
 .post((req, res, next) => {
+  
+  Pedidos.create(req.body)
+  .then((pedido) => {
+      console.log('Pedido criado ', pedido);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(pedido);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 
-  let proxId = 1 + pedidos.map(p => p.id).reduce((x, y) => Math.max(x,y));
-  let pedido = {...req.body, id: proxId};
-  pedidos.push(pedido);
-
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(pedido);
 })
 
 router.route('/:id')
+.get((req, res, next) => {
+  
+  Pedidos.findById(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+
+
+})
 .delete((req, res, next) => {
   
-  pedidos = pedidos.filter(function(value, index, arr){ 
-    return value.id != req.params.id;
-  });
+  Pedidos.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp.id);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.params.id);
+
 })
 .put((req, res, next) => {
   
-  let index = pedidos.map(p => p.id).indexOf(req.params.id);
-  pedidos.splice(index, 1, req.body);
+  Pedidos.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  .then((pedido) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(pedido);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.body);
 })
 
 
