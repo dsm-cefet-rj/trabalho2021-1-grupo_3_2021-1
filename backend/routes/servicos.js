@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
-
+const Servicos = require('../models/servicos');
+/*
 let servicos = [
   {
     "num": 4325354254,
@@ -12,46 +13,70 @@ let servicos = [
     "id": 2
   }
 ];
+*/
 
-
-/* GET users listing. */
+/* GET serviços listing. */
 router.route('/')
-.get((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(servicos);
+.get(async (req, res, next) => {
+
+  try{
+    const servicos = await Servicos.find({}).maxTime(5000);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(servicos);
+  }catch(err){
+    next(err);
+  }
+
 })
 .post((req, res, next) => {
 
-  let proxId = 1 + servicos.map(p => p.id).reduce((x, y) => Math.max(x,y));
-  let servico = {...req.body, id: proxId};
-  servicos.push(servico);
-
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(servico);
+  Servicos.create(req.body)
+  .then((servico) => {
+    console.log('Serviço criado ', servico);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(servico);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 })
 
 router.route('/:id')
+.get((req, res, next) => {
+
+  Servicos.findById(req.params.id)
+    .then((resp) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+
+
+})
 .delete((req, res, next) => {
   
-  servicos = servicos.filter(function(value, index, arr){ 
-    return value.id != req.params.id;
-  });
+  Servicos.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(resp.id);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.params.id);
 })
 .put((req, res, next) => {
   
-  let index = servicos.map(p => p.id).indexOf(req.params.id);
-  servicos.splice(index, 1, req.body);
+  Servicos.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  .then((servico) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(servico);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.body);
 })
-
 
 module.exports = router;
