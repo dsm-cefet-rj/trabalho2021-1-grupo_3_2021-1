@@ -1,66 +1,75 @@
 var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
+const Produtos = require('../models/produtos');
 
-let produtos = [
-  {
-    "num": 4325354254,
-    "preco": 45,
-    "local": "gdhgfh",
-    "categoria": "veiculo",
-    "desc": "dfhgfhshfsg",
-    "name": "gfhfh",
-    "id": 2
-  },
-  {
-    "num": 4325354254,
-    "preco": 45,
-    "local": "gdhgfh",
-    "categoria": "veiculo",
-    "desc": "dfhgfhshfsg",
-    "name": "gfhfh",
-    "id": 6
-  }
-];
+router.use(bodyParser.json());
 
 
 /* GET users listing. */
 router.route('/')
-.get((req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(produtos);
+.get(async (req, res, next) => {
+
+  try{
+    const produtosBanco = await Produtos.find({}).maxTime(5000);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(produtosBanco);
+  }catch(err){
+    next(err);
+  }
+    
 })
 .post((req, res, next) => {
+  
+  Produtos.create(req.body)
+  .then((produto) => {
+      console.log('Produto criado ', produto);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(produto);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 
-  let proxId = 1 + produtos.map(p => p.id).reduce((x, y) => Math.max(x,y));
-  let produto = {...req.body, id: proxId};
-  produtos.push(produto);
-
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(produto);
 })
 
 router.route('/:id')
+.get((req, res, next) => {
+  
+  Produtos.findById(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+
+
+})
 .delete((req, res, next) => {
   
-  produtos = produtos.filter(function(value, index, arr){ 
-    return value.id != req.params.id;
-  });
+  Produtos.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp.id);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.params.id);
+
 })
 .put((req, res, next) => {
   
-  let index = produtos.map(p => p.id).indexOf(req.params.id);
-  produtos.splice(index, 1, req.body);
+  Produtos.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  .then((produto) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(produto);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.json(req.body);
 })
 
 
