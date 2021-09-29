@@ -11,18 +11,26 @@ const servicoSchema = new Schema({
         type: String,
         required: true,
     },
+
+    categoria: {
+        type: String,
+        required: true,
+    },
     local: {
         type: String,
         required: true,
     },
     preco: {
-        type: Number,
+        type: String,
         required: true,
     },
     num: {
-        type: Number,
+        type: String,
         required: true,
     }
+
+
+
 })
 
 servicoSchema.plugin(normalize);
