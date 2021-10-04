@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Produtos = require('../models/produtos');
+var authenticate = require('../authenticate');
 
 router.use(bodyParser.json());
 
 
-/* GET users listing. */
 router.route('/')
-.get(async (req, res, next) => {
-
+.get(authenticate.verifyUser, async (req, res, next) => {
+  console.log(req.user);
   try{
     const produtosBanco = await Produtos.find({});
     res.statusCode = 200;
@@ -22,7 +22,7 @@ router.route('/')
   }
     
 })
-.post((req, res, next) => {
+.post(authenticate.verifyUser, (req, res, next) => {
   
   Produtos.create(req.body)
   .then((produto) => {
@@ -36,14 +36,15 @@ router.route('/')
 })
 
 router.route('/:id')
-.get(async (req, res, next) => {
+.get(authenticate.verifyUser, async (req, res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
-    const resp = await Produtos.findById(req.params.id);
-    if(resp != null){
+    //populate preenche o array de atividades com os documentos do collection actividades.
+    const produtos = await Produtos.findById(req.params.id).populate('atividades');
+    if(produtos != null){
       res.statusCode = 200;
-      res.json(resp);
+      res.json(produtos);
     }else{
       err = {};
       res.statusCode = 404;
@@ -56,9 +57,8 @@ router.route('/:id')
     res.json({});
   }  
 
-
 })
-.delete((req, res, next) => {
+.delete(authenticate.verifyUser, (req, res, next) => {
   
   Produtos.findByIdAndRemove(req.params.id)
     .then((resp) => {
@@ -70,7 +70,7 @@ router.route('/:id')
 
 
 })
-.put((req, res, next) => {
+.put(authenticate.verifyUser, (req, res, next) => {
   
   Produtos.findByIdAndUpdate(req.params.id, {
     $set: req.body
