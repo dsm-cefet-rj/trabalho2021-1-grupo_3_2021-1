@@ -17,7 +17,6 @@ function CadProduto(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(produtoSchema)
   });
-  id = parseInt(id);
 
   const [produtoOnLoad] = useState(
     id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));

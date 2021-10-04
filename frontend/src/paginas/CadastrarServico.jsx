@@ -17,7 +17,6 @@ function CadServico(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(servicoSchema)
   });
-  id = parseInt(id);
 
   const [servicoOnLoad] = useState(
     id ? servicoFound ?? servicoSchema.cast({}) : servicoSchema.cast({}));

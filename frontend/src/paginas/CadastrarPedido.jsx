@@ -17,7 +17,6 @@ function CadPedido(props) {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(pedidoSchema)
   });
-  id = parseInt(id);
 
   const [pedidoOnLoad] = useState(
     id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));

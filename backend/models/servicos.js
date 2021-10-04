@@ -12,10 +12,6 @@ const servicoSchema = new Schema({
         required: true,
     },
 
-    categoria: {
-        type: String,
-        required: true,
-    },
     local: {
         type: String,
         required: true,

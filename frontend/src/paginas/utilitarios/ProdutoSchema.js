@@ -5,7 +5,7 @@ setLocale(ptForm)
 
 export let produtoSchema = object().shape(
     {
-        id: number(),
+        id: string(),
         name: string().required(),
         desc: string().required(),
         categoria: string(),
