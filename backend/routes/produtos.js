@@ -3,12 +3,14 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const Produtos = require('../models/produtos');
 var authenticate = require('../authenticate');
+const cors = require('./cors');
 
 router.use(bodyParser.json());
 
 
 router.route('/')
-.get(authenticate.verifyUser, async (req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   console.log(req.user);
   try{
     const produtosBanco = await Produtos.find({});
@@ -22,7 +24,7 @@ router.route('/')
   }
     
 })
-.post(authenticate.verifyUser, (req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Produtos.create(req.body)
   .then((produto) => {
@@ -36,7 +38,8 @@ router.route('/')
 })
 
 router.route('/:id')
-.get(authenticate.verifyUser, async (req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
@@ -58,7 +61,7 @@ router.route('/:id')
   }  
 
 })
-.delete(authenticate.verifyUser, (req, res, next) => {
+.delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Produtos.findByIdAndRemove(req.params.id)
     .then((resp) => {
@@ -70,7 +73,7 @@ router.route('/:id')
 
 
 })
-.put(authenticate.verifyUser, (req, res, next) => {
+.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Produtos.findByIdAndUpdate(req.params.id, {
     $set: req.body

@@ -17,11 +17,13 @@ import { CadPedido } from '../paginas/CadastrarPedido';
 import Servico from '../paginas/Servico';
 import Pedido from '../paginas/Pedido';
 import Item from '../paginas/item';
+import LoginForm from '../paginas/LoginForm';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
-import Items from '../paginas/listProduto'
+import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
 import Pedidos from '../paginas/ListPedido'
+import { CadUsuario } from '../paginas/CadastrarUsuario';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/login">
+          <LoginForm />
         </Route>
         <Route path="/Perfil">
           <Perfil />
@@ -75,6 +80,9 @@ function App() {
         </Route>
         <Route path="/CadServico">
           <CadServico />
+        </Route>
+        <Route path="/CadUsuario">
+          <CadUsuario />
         </Route>
         <Route path="/CadPedido">
           <CadPedido />
