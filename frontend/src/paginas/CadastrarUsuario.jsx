@@ -35,11 +35,11 @@ function CadUsuario(props) {
     } else if (actionType === 'usuarios/updateUsuarioServer') {
       dispatch(updateUsuarioServer({ ...usuario, id: usuarioFound.id }))
     }
-    history.push('/usuarios');
+    history.push('/perfil');
   }
   useEffect(() => {
     if (status === 'saved') {
-      history.push('/usuarios');
+      history.push('/perfil');
     }
   }, [history, status]);
   /*
@@ -71,15 +71,15 @@ function CadUsuario(props) {
             className="form-control"
             id="item-nome"
             placeholder="martelo, chave de fenda, furadeira..."
-            name="name"
-            defaultValue={usuarioOnLoad.name}
-            {...register("name")}
+            name="username"
+            defaultValue={usuarioOnLoad.username}
+            {...register("username")}
           />
-          <p style={{ color: "red" }}>{errors.name?.message}</p>
+          <p style={{ color: "red" }}>{errors.username?.message}</p>
         </div>
         <div className="mb-3">
           <label htmlFor="nome-item" className="form-label">
-            Nome:&nbsp;
+            senha:&nbsp;
           </label>
           <input
             type="text"

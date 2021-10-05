@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolk
 import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
 import {baseUrl} from '../../baseUrl'
 
+
 const servicosAdapter = createEntityAdapter();
 
 const initialState = servicosAdapter.getInitialState({
@@ -9,21 +10,22 @@ const initialState = servicosAdapter.getInitialState({
     error: null
 });
 
-export const fetchServicos = createAsyncThunk('servicos/fetchServicos', async () => {
-    return await httpGet(`${baseUrl}/servicos`);
+export const fetchServicos = createAsyncThunk('servicos/fetchServicos', async (_, {getState}) => {
+    console.log(getState());
+    return await httpGet(`${baseUrl}/servicos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const deleteServicoServer = createAsyncThunk('servicos/deleteServicoServer', async (idServico) => {
-    await httpDelete(`${baseUrl}/servicos/${idServico}`);
+export const deleteServicoServer = createAsyncThunk('servicos/deleteServicoServer', async (idServico, {getState}) => {
+    await httpDelete(`${baseUrl}/servicos/${idServico}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idServico;
 });
 
-export const addServicoServer = createAsyncThunk('servicos/addServicoServer', async (servico) => {
-    return await httpPost(`${baseUrl}/servicos`, servico);
+export const addServicoServer = createAsyncThunk('servicos/addServicoServer', async (servico, {getState}) => {
+    return await httpPost(`${baseUrl}/servicos`, servico, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const updateServicoServer = createAsyncThunk('servicos/updateServicoServer', async (servico) => {
-    return await httpPut(`${baseUrl}/servicos/${servico.id}`, servico);
+export const updateServicoServer = createAsyncThunk('servicos/updateServicoServer', async (servico, {getState}) => {
+    return await httpPut(`${baseUrl}/servicos/${servico.id}`, servico, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const servicosSlice = createSlice({

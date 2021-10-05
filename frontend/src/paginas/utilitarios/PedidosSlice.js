@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolk
 import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
 import {baseUrl} from '../../baseUrl'
 
+
 const pedidosAdapter = createEntityAdapter();
 
 const initialState = pedidosAdapter.getInitialState({
@@ -9,21 +10,22 @@ const initialState = pedidosAdapter.getInitialState({
     error: null
 });
 
-export const fetchPedidos = createAsyncThunk('pedidos/fetchPedidos', async () => {
-    return await httpGet(`${baseUrl}/pedidos`);
+export const fetchPedidos = createAsyncThunk('pedidos/fetchPedidos', async (_, {getState}) => {
+    console.log(getState());
+    return await httpGet(`${baseUrl}/pedidos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const deletePedidoServer = createAsyncThunk('pedidos/deletePedidoServer', async (idPedido) => {
-    await httpDelete(`${baseUrl}/pedidos/${idPedido}`);
+export const deletePedidoServer = createAsyncThunk('pedidos/deletePedidoServer', async (idPedido, {getState}) => {
+    await httpDelete(`${baseUrl}/pedidos/${idPedido}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
     return idPedido;
 });
 
-export const addPedidoServer = createAsyncThunk('pedidos/addPedidoServer', async (pedido) => {
-    return await httpPost(`${baseUrl}/pedidos`, pedido);
+export const addPedidoServer = createAsyncThunk('pedidos/addPedidoServer', async (pedido, {getState}) => {
+    return await httpPost(`${baseUrl}/pedidos`, pedido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
-export const updatePedidoServer = createAsyncThunk('pedidos/updatePedidoServer', async (pedido) => {
-    return await httpPut(`${baseUrl}/pedidos/${pedido.id}`, pedido);
+export const updatePedidoServer = createAsyncThunk('pedidos/updatePedidoServer', async (pedido, {getState}) => {
+    return await httpPut(`${baseUrl}/pedidos/${pedido.id}`, pedido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
 });
 
 export const pedidosSlice = createSlice({

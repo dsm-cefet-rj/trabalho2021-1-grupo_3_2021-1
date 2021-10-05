@@ -6,7 +6,7 @@ setLocale(ptForm)
 export let usuarioSchema = object().shape(
     {
         id: string(),
-        name: string().required(),
+        username: string().required(),
         password: string().required(),
      
     }

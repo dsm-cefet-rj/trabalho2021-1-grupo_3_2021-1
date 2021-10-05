@@ -2,14 +2,16 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Servicos = require('../models/servicos');
+var authenticate = require('../authenticate');
+const cors = require('./cors');
 
 router.use(bodyParser.json());
 
 
-/* GET users listing. */
 router.route('/')
-.get(async (req, res, next) => {
-
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+  console.log(req.user);
   try{
     const servicosBanco = await Servicos.find({});
     res.statusCode = 200;
@@ -22,7 +24,7 @@ router.route('/')
   }
     
 })
-.post((req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Servicos.create(req.body)
   .then((servico) => {
@@ -36,14 +38,16 @@ router.route('/')
 })
 
 router.route('/:id')
-.get(async (req, res, next) => {
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
-    const resp = await Servicos.findById(req.params.id);
-    if(resp != null){
+    //populate preenche o array de atividades com os documentos do collection actividades.
+    const servicos = await Servicos.findById(req.params.id).populate('atividades');
+    if(servicos != null){
       res.statusCode = 200;
-      res.json(resp);
+      res.json(servicos);
     }else{
       err = {};
       res.statusCode = 404;
@@ -56,9 +60,8 @@ router.route('/:id')
     res.json({});
   }  
 
-
 })
-.delete((req, res, next) => {
+.delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Servicos.findByIdAndRemove(req.params.id)
     .then((resp) => {
@@ -70,7 +73,7 @@ router.route('/:id')
 
 
 })
-.put((req, res, next) => {
+.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
   
   Servicos.findByIdAndUpdate(req.params.id, {
     $set: req.body
