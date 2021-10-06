@@ -3,7 +3,7 @@ import { ptForm } from 'yup-locale-pt';
 
 setLocale(ptForm)
 
-export let usuarioSchema = object().shape(
+export let singupSchema = object().shape(
     {
         id: string(),
         username: string().required(),

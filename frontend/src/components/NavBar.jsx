@@ -37,6 +37,11 @@ function NavBar() {
             </Link>
           </li>
           <li className="nav-link">
+            <Link className="reset-link" to="/login">
+              login
+            </Link>
+          </li>
+          <li className="nav-link">
             <Link className="reset-link" to="/produtos/:id">
               Cadastrar Pedidos
             </Link>
