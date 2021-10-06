@@ -96,7 +96,7 @@ function ListaPedido(props) {
 
                 <TabelaPedidos />
                 <p className="mb-2">Está precisando de algo?</p>
-                <Link to='/compartilhe'>
+                <Link to='/CadPedido'>
                     <button type="button" className="btn btn-primary">Solicite</button>
                 </Link>
 
