@@ -58,29 +58,44 @@ function LinhaProduto(props) {
     return (<>
         <div>{msg}</div>
 
-        <div className="row resultado-busca">
+        <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
 
-            <Link to={`/produtos/${props.produto.id}`}>
-                <div className="row resultado-busca">
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.produto.name}</h5>
-                        <p>{props.produto.desc}</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.produto.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          <p><strong>Valor:</strong> {props.produto.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.produto.desc}</p>  
+                        </div>
+                        
 
 
                     </div>
+                    <Link to={`/produto/${props.produto.id}`}>
+                    <button type="button" className="btn btn-primary">Produto</button>
+                    </Link>
+
+                    <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirProduto(props.produto.id)}>X</button>
+                
                 </div>
-            </Link>
-            <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirProduto(props.produto.id)}>X</button>
-
-
-
-
-
-        </div>
     </>
     );
 }
