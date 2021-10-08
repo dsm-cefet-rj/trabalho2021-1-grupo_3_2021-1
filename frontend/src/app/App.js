@@ -20,6 +20,8 @@ import Item from '../paginas/item';
 import LoginForm from '../paginas/LoginForm';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
+
+import UserRegister  from '../paginas/signupForm';
 import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
 import Pedidos from '../paginas/ListPedido'
@@ -79,6 +81,9 @@ function App() {
         </Route>
         <Route path="/CadServico">
           <CadServico />
+        </Route>
+        <Route path="/CadUser">
+          <UserRegister />
         </Route>
         <Route path="/CadPedido">
           <CadPedido />
