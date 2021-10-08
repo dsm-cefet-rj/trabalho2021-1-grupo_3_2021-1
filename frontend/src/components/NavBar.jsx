@@ -42,8 +42,8 @@ function NavBar() {
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="reset-link" to="/users/logout">
-              logout
+            <Link className="reset-link" to="/users/CadUser">
+              cadastre-se
             </Link>
           </li>
           <li className="nav-link">
