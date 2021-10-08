@@ -28,25 +28,51 @@ export default function LoginForm(props){
 
 
     return(<>
-            <h1>Login</h1>
+
+<section className="container first-element">
+            <div
+            className="blue-card shadow"
+            class="container-sm"
+            style={{
+
+                backgroundColor:'dodgerblue',
+                borderRadius:'20px',
+                padding:'10px',
+                color:'white',
+
+            }}
+            
+            >
+                <div
+                
+                style={{
+                    textAlign:'center',
+                    padding:'10px'
+                }}
+                
+                >
+
+            <h1><strong>Faça seu login!</strong></h1>
+            <br/>
             <form onSubmit={handleSubmit(onSubmit)}>
             <label>
-                Login:
-                <input type="text" name="username" id="username" {...register("username")}
+                Username:<input type="text" name="username" id="username" className="form-control"{...register("username")}
               required/>
                 &nbsp;<span id="username_err_msg">{errors.login?.message}</span>
             </label>
             <br/>
             <label>
-                Senha:
-                <input type="password" name="password" id="password" {...register("password")}
+                Senha:<input type="password" name="password" id="password" className="form-control"{...register("password")}
               required />
                 &nbsp;<span id="password_err_msg">{errors.password?.message}</span>
             </label>
             <br/>
             <br/>   
-            <button type="submit" id="Login" name="btn_login" variant="contained" color="primary">Login</button>
+            <button type="submit" id="Login" name="btn_login" variant="contained" className="btn btn-primary">Login</button>
             </form>
+            </div>
+            </div>
+        </section>
           </>
     );
 }
