@@ -1,4 +1,5 @@
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { useSelector, useDispatch } from 'react-redux'
@@ -59,29 +60,50 @@ function LinhaPedido(props) {
     return (<>
         <div>{msg}</div>
 
-        <div className="row resultado-busca">
+        <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
 
-            <Link to={`/pedidos/${props.pedido.id}`}>
-                <div className="row resultado-busca">
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.pedido.name}</h5>
-                        <p>{props.pedido.desc}</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.pedido.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          
+                        <br/>
+                        <p>Descrição: {props.pedido.desc}</p>  
+                        </div>
+                        
 
 
                     </div>
+                    <Link to={`/pedido/${props.pedido.id}`}>
+                    <button type="button" className="btn btn-primary">Pedido</button>
+                    </Link>
+                    
+                    <br/>
+                    <p style={{textAlign:"center",
+                                fontSize:"20px"
+                    }}><strong>Deletar Produto?</strong></p>
+                    <br/>
+
+                    <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirPedido(props.pedido.id)}>X</button>
+                
                 </div>
-            </Link>
-            <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirPedido(props.pedido.id)}>X</button>
-
-
-
-
-
-        </div>
     </>
     );
 }
