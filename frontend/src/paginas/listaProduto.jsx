@@ -93,6 +93,12 @@ function LinhaProduto(props) {
                     <button type="button" className="btn btn-primary">Produto</button>
                     </Link>
 
+                    <br/>
+                    <p style={{textAlign:"center",
+                                fontSize:"20px"
+                    }}><strong>Deletar Produto?</strong></p>
+                    <br/>
+                    
                     <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirProduto(props.produto.id)}>X</button>
                 
                 </div>
@@ -122,3 +128,4 @@ function Resultado(props) {
 }
 
 export { Resultado };
+
