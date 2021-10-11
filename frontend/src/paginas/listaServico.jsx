@@ -58,29 +58,50 @@ function LinhaServico(props) {
     return (<>
         <div>{msg}</div>
 
-        <div className="row resultado-busca">
+        <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
 
-            <Link to={`/servicos/${props.servico.id}`}>
-                <div className="row resultado-busca">
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.servico.name}</h5>
-                        <p>{props.servico.desc}</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.servico.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          <p><strong>Valor:</strong> {props.servico.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.servico.desc}</p>  
+                        </div>
+                        
 
 
                     </div>
+                    <Link to={`/servico/${props.servico.id}`}>
+                    <button type="button" className="btn btn-primary">Serviço</button>
+                    </Link>
+
+                    <br/>
+                    <p style={{textAlign:"center",
+                                fontSize:"20px"
+                    }}><strong>Deletar Serviço?</strong></p>
+                    <br/>
+
+                    <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirServico(props.servico.id)}>X</button>
+                
                 </div>
-            </Link>
-            <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirServico(props.servico.id)}>X</button>
-
-
-
-
-
-        </div>
     </>
     );
 }
