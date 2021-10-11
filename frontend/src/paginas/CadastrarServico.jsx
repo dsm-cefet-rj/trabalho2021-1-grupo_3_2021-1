@@ -52,7 +52,19 @@ function CadServico(props) {
     <>
       <div>{error}</div>
       <form onSubmit={handleSubmit(onSubmit)} >
+      <section className="container first-element">
+      <div  
+      
+      class="container-md"
+      style={{
 
+        backgroundColor:'white',
+        borderRadius:'20px',
+        padding:'50px',
+        color:'black',
+
+
+      }}>
 
         <legend>
           <h3 className="">Oque deseja compartilhar?</h3>
@@ -160,9 +172,14 @@ function CadServico(props) {
 
           <p style={{ color: "red" }}>{errors.desc?.message}</p>
         </div>
-        <input type="submit" value="Enviar" />
-        <input type="button" value="Cancelar" onClick={() => history.goBack()} />
-
+        
+        <input type="submit" value="Enviar" className="btn btn-primary"/>
+        
+        
+        <input type="button" value="Cancelar" className="btn btn-primary" onClick={() => history.goBack()} />
+        
+        </div>
+        </section>
       </form>
     </>
   );
