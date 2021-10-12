@@ -40,28 +40,42 @@ export default function UserRegister() {
 
   return (
     <>
-      <title>Cadastro Usuário</title>
+    
+<br/>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <section className="container first-element">
+        <div className="blue-card shadow"
+              class="container-sm"
 
-      <link rel="stylesheet" type="text/css" href={`../styles.css`} />
+          style={{
 
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous"
-      />
+            backgroundColor:'dodgerblue',
+            borderRadius:'20px',
+            padding:'10px',
+            color:'white'
+    
+    
+          }}
+        
+        >
 
-      <div className="container">
-        <div className="card card-container">
+<div
+                
+                style={{
+                    textAlign:'center',
+                    padding:'10px'
+                }}
+                
+                >
           <img
             id="profile-img"
             className="profile-img-card"
             alt=""
           />
-          <p id="profile-name" className="profile-name-card">
-            Cadastre-se
+          <p id="profile-name" className="profile-name-card" style={{fontSize:"30px"}}>
+            <strong>Cadastre-se</strong>
           </p>
-          <form class="form-signin" onSubmit={handleSubmit(onSubmit)}>
+          
             <span id="reauth-email" className="reauth-email"></span>
             <input
               type="text"
@@ -100,8 +114,9 @@ export default function UserRegister() {
                 : ""}
             </p>
             <a>
-              <Link to="/login">Já possuo login.</Link>
+              <Link to="/Login">Já possuo login.</Link>
             </a>
+            <br/>
             <button className="btn  btn-primary btn-signin" type="submit">
               Cadastrar
             </button>
@@ -112,9 +127,11 @@ export default function UserRegister() {
             >
               Cancelar
             </button>
-          </form>
+          
         </div>
       </div>
+      </section>
+      </form>
     </>
   );
 }
