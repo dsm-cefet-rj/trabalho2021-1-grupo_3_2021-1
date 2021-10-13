@@ -24,7 +24,7 @@ function NavBar() {
     width: 500,
     height: 100,
     }}></img>
-          <Link to="/" className=" ">
+          <Link to="/Home" className=" ">
             <span className="reset-link nav-btn nav-link">Home</span>
           </Link>
         </div>
@@ -41,7 +41,7 @@ function NavBar() {
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="reset-link" to="/Login">
+            <Link className="reset-link" to="/">
               Login
             </Link>
           </li>
