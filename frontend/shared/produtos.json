@@ -1,15 +1,5 @@
 {
-  "produtos": [
-    {
-      "num": 4325354254,
-      "preco": 45,
-      "local": "gdhgfh",
-      "categoria": "veiculo",
-      "desc": "dfhgfhshfsg",
-      "name": "gfhfh",
-      "id": 2
-    }
-  ],
+  "produtos": [],
   "pedidos": [
     {
       "num": 2299852464,

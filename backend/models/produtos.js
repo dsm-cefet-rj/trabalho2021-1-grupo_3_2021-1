@@ -3,28 +3,11 @@ const Schema = mongoose.Schema;
 const normalize = require('normalize-mongoose');
 
 const produtoSchema = new Schema({
-    name: {
+    nome: {
         type: String,
         required: true,
     },
-    desc: {
-        type: String,
-        required: true,
-    },
-
-    categoria: {
-        type: String,
-        required: true,
-    },
-    local: {
-        type: String,
-        required: true,
-    },
-    preco: {
-        type: String,
-        required: true,
-    },
-    num: {
+    sigla: {
         type: String,
         required: true,
     }

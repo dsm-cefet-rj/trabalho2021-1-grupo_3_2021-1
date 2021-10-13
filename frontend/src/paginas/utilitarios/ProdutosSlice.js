@@ -1,59 +1,142 @@
-import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
-import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
-import {baseUrl} from '../../baseUrl'
+import {
+    getProdutos,
+    deleteProduto,
+    registerProduto,
+    updateProduto,
+} from '../../services/produto_service';
 
+import {
+    createSlice,
+    createAsyncThunk,
+    createEntityAdapter,
+} from '@reduxjs/toolkit';
 
-const produtosAdapter = createEntityAdapter();
-
-const initialState = produtosAdapter.getInitialState({
-    status: 'not_loaded',
-    error: null
+export const fetchProduto = createAsyncThunk('auth/fetchProduto', async () => {
+    try {
+        const response = await getProdutos();
+        return response;
+    } catch (error) {
+        throw error;
+    }
 });
 
-export const fetchProdutos = createAsyncThunk('produtos/fetchProdutos', async (_, {getState}) => {
-    console.log(getState());
-    return await httpGet(`${baseUrl}/produtos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+export const createProduto = createAsyncThunk(
+    'auth/CreateProduto',
+    async ({ name, type, company, quantity, date, price, description }) => {
+        try {
+            const response = await registerProduto(
+                name,
+                type,
+                company,
+                quantity,
+                date,
+                price,
+                description
+            );
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+);
+
+export const upProduto = createAsyncThunk(
+    'auth/updateProduto',
+    async ({ id, slug, name, type, quantity, date, price, description }) => {
+        try {
+            const response = await updateProduto(
+                slug,
+                name,
+                type,
+                quantity,
+                date,
+                price,
+                description
+            );
+
+            const obj = {
+                slug: response.updatedProduto.slug,
+                name: response.updatedProduto.name,
+                type: response.updatedProduto.type,
+                quantity: response.updatedProduto.quantity,
+                date: response.updatedProduto.date,
+                price: response.updatedProduto.date,
+                description: response.updatedProduto.description,
+            };
+            return { id, changes: obj };
+        } catch (error) {
+            throw error;
+        }
+    }
+);
+
+export const delProduto = createAsyncThunk(
+    'auth/delProduto',
+    async ({ slug, id }) => {
+        try {
+            await deleteProduto(slug);
+            return id;
+        } catch (error) {
+            throw error;
+        }
+    }
+);
+
+export const produtoAdapter = createEntityAdapter({
+    selectId: (entity) => entity._id,
 });
 
-export const deleteProdutoServer = createAsyncThunk('produtos/deleteProdutoServer', async (idProduto, {getState}) => {
-    await httpDelete(`${baseUrl}/produtos/${idProduto}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
-    return idProduto;
-});
+const initialState = { produto: [], error: null, status: null };
 
-export const addProdutoServer = createAsyncThunk('produtos/addProdutoServer', async (produto, {getState}) => {
-    return await httpPost(`${baseUrl}/produtos`, produto, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
-});
-
-export const updateProdutoServer = createAsyncThunk('produtos/updateProdutoServer', async (produto, {getState}) => {
-    return await httpPut(`${baseUrl}/produtos/${produto.id}`, produto, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
-});
-
-export const produtosSlice = createSlice({
-    name: 'produtos',
-    initialState: initialState,
+const produtoSlice = createSlice({
+    name: 'produto',
+    initialState,
     reducers: {
-        setStatus: (state, action) => {state.status = action.payload}
+        // setAllProdutos: produtoAdapter.setAll,
+        removeProduto: produtoAdapter.removeOne,
+        setManyProduto: produtoAdapter.addMany,
+        updateProdutos: produtoAdapter.updateMany,
     },
     extraReducers: {
-        [fetchProdutos.pending]: (state, action) => {state.status = 'loading'},
-        [fetchProdutos.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},
-        [fetchProdutos.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao buscar produtos: ' + action.error.message},        
-        [deleteProdutoServer.fulfilled]: (state, action) => {state.status = 'deleted'; produtosAdapter.removeOne(state, action.payload);},
-        [deleteProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao excluir produto: ' + action.error.message},
-        [addProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.addOne(state, action.payload);},
-        [addProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao adicionar produto: ' + action.error.message},        
-        [updateProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.upsertOne(state, action.payload);},
-        [updateProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao atualizar produto: ' + action.error.message},
-    }
-})
+        [fetchProduto.pending]: (state, action) => {
+            state.status = 'loading';
+            state.error = null;
+        },
+        [fetchProduto.fulfilled]: (state, action) => {
+            state.status = 'loaded';
+            produtoAdapter.setAll(state, action.payload.produtos);
+        },
+        [fetchProduto.rejected]: (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+        },
+        [createProduto.pending]: (state, action) => {
+            state.status = 'loading';
+        },
+        [createProduto.fulfilled]: (state, action) => {
+            state.status = 'loaded';
+            produtoAdapter.addOne(state, action.payload.produto);
+        },
+        [upProduto.pending]: (state, action) => {
+            state.status = 'loading';
+        },
+        [upProduto.fulfilled]: (state, action) => {
+            state.status = 'loaded';
+            produtoAdapter.updateOne(state, {
+                id: action.payload.id,
+                changes: action.payload.changes,
+            });
+        },
+        [delProduto.pending]: (state, action) => {
+            state.status = 'loading';
+        },
+        [delProduto.fulfilled]: (state, action) => {
+            state.status = 'loaded';
+            produtoAdapter.removeOne(state, action.payload);
+        },
+    },
+});
 
-export const { setStatus } = produtosSlice.actions
+export const { removeProduto, setManyProduto, updateProdutos } = produtoSlice.actions;
 
-export default produtosSlice.reducer
-
-export const {
-    selectAll: selectAllProdutos,
-    selectById: selectProdutosById,
-    selectIds: selectProdutosIds
-} = produtosAdapter.getSelectors(state => state.produtos)
-    
+export default produtoSlice.reducer;

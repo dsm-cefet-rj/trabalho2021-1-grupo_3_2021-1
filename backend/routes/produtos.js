@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const Produtos = require('../models/produtos');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
+const multer = require('multer')
+const multerConfig = require('../middlewares/multer')
 
 router.use(bodyParser.json());
 
