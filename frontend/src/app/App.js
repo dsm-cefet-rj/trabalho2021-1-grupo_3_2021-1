@@ -35,10 +35,10 @@ function App() {
       <br></br><br></br>
       <Switch>
         <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/Login">
           <LoginForm />
+        </Route>
+        <Route path="/Home">
+          <Home />
         </Route>
         <Route path="/Perfil">
           <Perfil />
@@ -107,7 +107,6 @@ function App() {
 
 export default App;
 /*
-
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -125,10 +124,7 @@ import Procure from '../paginas/Procure';
 import {Resultado} from '../paginas/ResultadoBusca';
 import Emprestimo from '../paginas/Emprestimo';
 import { CadProduto } from '../paginas/CadastrarProduto';
-
-
 function App() {
-
   return (
     <Provider store={store}>
       <Router>
@@ -149,20 +145,15 @@ function App() {
           <Route path="/resultado">
             <Resultado />
           </Route>
-
           <Route path="/Emprestimo">
             <Emprestimo />
           </Route>
-
         </Switch>
       </Router>
     </Provider >
   );
 }
-
 export default App;
-
-
 /*<Router>
       <NavBar />
       <Switch>
@@ -187,6 +178,5 @@ export default App;
         <Route path="/Emprestimo">
           <Emprestimo />
         </Route>
-
       </Switch>
     </Router>*/
