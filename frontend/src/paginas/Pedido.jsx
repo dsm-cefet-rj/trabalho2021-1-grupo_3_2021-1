@@ -63,29 +63,46 @@ function LinhaPedido(props) {
     }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
+        <section className="container first-element">
+        <div className="row resultado-busca" style={{
+                    backgroundColor:"dodgerblue",
+                    padding:"40px",
+                    color:"white",
+                    fontFamily:"inherit",
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
+                }}>
+                
 
-    
-            
-        <div className="row resultado-busca">
-            
-                    <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" />
+                <div className="col-4">
+                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5>{props.pedido.name}</h5>
-                        <p>{props.pedido.preco} Reais</p>
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
+                        }}><strong>{props.pedido.name}</strong></h5>
+                        <br/>
+                        <br/>
+                        <div style={{fontSize:"20px"}}>
+                          
+                        <br/>
+                        <p>Descrição: {props.pedido.desc}</p>  
+                        <br/>
+                        <p>Número para contato:{props.pedido.num}</p>
+                        <br/>
+                        <p>Local: {props.pedido.local}</p>
+                        </div>
                         
-                        <p>endereço: {props.pedido.local} </p>
-                        <p>Numero de telefone: {props.pedido.num} </p>
-                        <p>Descrição:<br></br>{props.pedido.desc} </p>
 
 
                     </div>
-                   
+                
+                
                 </div>
-            
-         
+        </section>
     </>
     );
 }
