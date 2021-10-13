@@ -1,5 +1,4 @@
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import foto from '../components/img/furadeira.jpg'
@@ -64,42 +63,46 @@ function LinhaProduto(props) {
     }, [status, dispatch]);  
     return (<>
         <div>{msg}</div>
-
-                <div style={
-                        {
-                            backgroundColor:"white",
-                            padding:"40px"
-                        }
-                    }>
-                    
-                    <div className="row resultado-busca" style={{
+        <section className="container first-element">
+        <div className="row resultado-busca" style={{
                     backgroundColor:"dodgerblue",
                     padding:"40px",
                     color:"white",
                     fontFamily:"inherit",
-                    borderRadius:"10px"
+                    borderRadius:"10px",
+                    textAlign:"Right",
+                    widht:"540px"
                 }}>
-                       <div className="col-4">
+                
+
+                <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
-                    <div className="col text-center">
-                        <h5 style={{
-                            fontSize:"40px"
+                    <div className="col text">
+                    <h5  style={{
+                            textAlign:"Center",
+                            fontSize:"60px"
                         }}><strong>{props.produto.name}</strong></h5>
                         <br/>
-                        <p>Valor: {props.produto.preco} Reais</p>
                         <br/>
-                        <p>Descrição: {props.produto.desc}</p>
+                        <div style={{fontSize:"20px"}}>
+                          <p><strong>Valor:</strong> {props.produto.preco} Reais</p>
+                        <br/>
+                        <p>Descrição: {props.produto.desc}</p>  
+                        <br/>
+                        <p>Número para contato: {props.produto.num}</p>
+                        <br/>
+                        <p>Local: {props.produto.local}</p>
+                        </div>
+                        
 
 
-                    </div> 
                     </div>
                     
-                    
+                
                 </div>
-            
-         
+                </section>
     </>
     );
 }
