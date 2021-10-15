@@ -7,6 +7,7 @@ import { Resultado } from "./listaProduto";
 import { ListaServico } from "./listaServico";
 
 
+
 function Perfil () {
     return (
 
@@ -23,6 +24,8 @@ function Perfil () {
                             <span className="perfil-info"><strong>Nome: </strong>José das Couves</span>
                             <span className="perfil-info"><strong>Email: </strong>jocouves@gmail.com</span>
                             <span className="perfil-info"><strong>Cel: </strong>(21)99999-9999</span>
+                            
+
                         </div>
                     </div>
                 </div>

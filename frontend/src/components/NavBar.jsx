@@ -66,7 +66,8 @@ function NavBar() {
             </Link>
           </li>
           <li className="reset-link nav-link">Configurações</li>
-          <li className="reset-link nav-link">Logoff</li>
+          <li className="reset-link nav-link">
+            Logoff</li>
         </div>
       </Collapse>
     </section>

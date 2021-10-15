@@ -9,23 +9,22 @@ const initialState = servicosAdapter.getInitialState({
     status: 'not_loaded',
     error: null
 });
-
 export const fetchServicos = createAsyncThunk('servicos/fetchServicos', async (_, {getState}) => {
     console.log(getState());
-    return await httpGet(`${baseUrl}/servicos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpGet(`${baseUrl}/servicos`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const deleteServicoServer = createAsyncThunk('servicos/deleteServicoServer', async (idServico, {getState}) => {
-    await httpDelete(`${baseUrl}/servicos/${idServico}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    await httpDelete(`${baseUrl}/servicos/${idServico}`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
     return idServico;
 });
 
 export const addServicoServer = createAsyncThunk('servicos/addServicoServer', async (servico, {getState}) => {
-    return await httpPost(`${baseUrl}/servicos`, servico, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPost(`${baseUrl}/servicos`, servico, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const updateServicoServer = createAsyncThunk('servicos/updateServicoServer', async (servico, {getState}) => {
-    return await httpPut(`${baseUrl}/servicos/${servico.id}`, servico, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPut(`${baseUrl}/servicos/${servico.id}`, servico, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const servicosSlice = createSlice({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,6 +21,7 @@ import LoginForm from '../paginas/LoginForm';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
 
+import { useSelector, useDispatch } from 'react-redux'
 import UserRegister  from '../paginas/signupForm';
 import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
@@ -28,6 +29,16 @@ import Pedidos from '../paginas/ListPedido'
 
 
 function App() {
+  const token = useSelector(state => state.logins.currentToken)
+  useEffect(() => {
+    
+    
+    if (token) {
+      console.log("token: "+token);
+      localStorage.setItem('token', token);
+      //{headers: {Authorization: 'Bearer ' + token}}
+    }
+  });
 
   return (
     <Router>

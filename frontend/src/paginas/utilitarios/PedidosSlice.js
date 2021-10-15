@@ -12,20 +12,20 @@ const initialState = pedidosAdapter.getInitialState({
 
 export const fetchPedidos = createAsyncThunk('pedidos/fetchPedidos', async (_, {getState}) => {
     console.log(getState());
-    return await httpGet(`${baseUrl}/pedidos`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpGet(`${baseUrl}/pedidos`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const deletePedidoServer = createAsyncThunk('pedidos/deletePedidoServer', async (idPedido, {getState}) => {
-    await httpDelete(`${baseUrl}/pedidos/${idPedido}`, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    await httpDelete(`${baseUrl}/pedidos/${idPedido}`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
     return idPedido;
 });
 
 export const addPedidoServer = createAsyncThunk('pedidos/addPedidoServer', async (pedido, {getState}) => {
-    return await httpPost(`${baseUrl}/pedidos`, pedido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPost(`${baseUrl}/pedidos`, pedido, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const updatePedidoServer = createAsyncThunk('pedidos/updatePedidoServer', async (pedido, {getState}) => {
-    return await httpPut(`${baseUrl}/pedidos/${pedido.id}`, pedido, {headers: {Authorization: 'Bearer ' + getState().logins.currentToken}});
+    return await httpPut(`${baseUrl}/pedidos/${pedido.id}`, pedido, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const pedidosSlice = createSlice({

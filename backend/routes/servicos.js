@@ -44,7 +44,7 @@ router.route('/:id')
   res.setHeader('Content-Type', 'application/json');
   try{
     //populate preenche o array de usuario com os documentos do collection actividades.
-    const servicos = await Servicos.findById(req.params.id).populate('usuario');
+    const servicos = await Servicos.findById(req.params.id);
     if(servicos != null){
       res.statusCode = 200;
       res.json(servicos);

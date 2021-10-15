@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const Produtos = require('../models/produtos');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
-const multer = require('multer')
-const multerConfig = require('../middlewares/multer')
 
 router.use(bodyParser.json());
 
@@ -46,7 +44,7 @@ router.route('/:id')
   res.setHeader('Content-Type', 'application/json');
   try{
     //populate preenche o array de usuario com os documentos do collection actividades.
-    const produtos = await Produtos.findById(req.params.id).populate('usuario');
+    const produtos = await Produtos.find({});
     if(produtos != null){
       res.statusCode = 200;
       res.json(produtos);

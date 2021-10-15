@@ -12,7 +12,6 @@ export default function LoginForm(props){
     const history = useHistory();
     const dispatch = useDispatch()
     const status = useSelector(state => state.logins.status);
-    
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     function onSubmit(login){

@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolkit'
-import {httpPost} from '../../utils'
+import {httpGet, httpPost} from '../../utils'
 import {baseUrl} from '../../baseUrl'
 
 const loginAdapter = createEntityAdapter();
@@ -16,12 +16,19 @@ export const loginServer = createAsyncThunk('users/loginServer', async (login) =
     return await httpPost(`${baseUrl}/users/login`, login);
 });
 
+export const logoutServer = createAsyncThunk('users/logoutServer', async () => {
+    return await httpGet(`${baseUrl}/users/logout`);
+});
+
 export const loginSlice = createSlice({
     name: 'logins',
     initialState: initialState,
     extraReducers: {
        [loginServer.pending]: (state, action) => {state.status = 'trying_login'},
        [loginServer.fulfilled]: (state, action) => {state.status = 'logged_in'; loginAdapter.addOne(state, action.payload); state.currentToken = action.payload.token },
+       [logoutServer.pending]: (state, action) => {state.status = 'trying_logout'},
+       [logoutServer.fulfilled]: (state, action) => {state.status = 'logged_out'; loginAdapter.addOne(state, action.payload); state.currentToken = undefined },
+ 
     },
 })
 
