@@ -1,8 +1,8 @@
 {
-  "name": "pragmapm",
+  "name": "emprestaai",
   "version": "0.0.1",
   "private": true,
-  "author": "Diogo S. Mendonça",
+  "author": "Radhanama, Gabriel, Nicole",
   "license": "LGPL-3.0-or-later",
   "description": "Um software para o gestor de produtos pragmático",
   "dependencies": {
