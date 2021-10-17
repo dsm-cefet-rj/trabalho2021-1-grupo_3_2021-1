@@ -91,8 +91,8 @@ function LinhaPedido(props) {
 
 
                     </div>
-                    <Link to={`/pedido/${props.pedido.id}`}>
-                    <button type="button" className="btn btn-primary">Pedido</button>
+                    <Link to={`/pedidos/${props.pedido.id}`}>
+                    <button type="button" className="btn btn-primary">Alterar</button>
                     </Link>
                     
                     <br/>

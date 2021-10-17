@@ -89,8 +89,8 @@ function LinhaServico(props) {
 
 
                     </div>
-                    <Link to={`/servico/${props.servico.id}`}>
-                    <button type="button" className="btn btn-primary">Serviço</button>
+                    <Link to={`/servicos/${props.servico.id}`}>
+                    <button type="button" className="btn btn-primary">Alterar</button>
                     </Link>
 
                     <br/>

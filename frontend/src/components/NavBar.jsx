@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../app/App";
+import { useParams, useHistory } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
 import emp from "../components/img/Empresta.png"
 import { Collapse } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {logoutServer} from '../paginas/utilitarios/LoginSlice';
+
 
 function NavBar() {
+  const dispatch = useDispatch()
+  const status = useSelector(state => state.logins.status);
   const [open, setOpen] = useState(false);
+
+  function test(){
+    dispatch(logoutServer());
+    localStorage.removeItem('token');
+    
+  }
 
   return (
     <section className="nav-menu" >
@@ -66,8 +78,17 @@ function NavBar() {
             </Link>
           </li>
           <li className="reset-link nav-link">Configurações</li>
-          <li className="reset-link nav-link">
-            Logoff</li>
+          <Link to="/Home" className=" ">
+          <button
+            className="navbar-toggler"
+            onClick={() => test()}
+            aria-controls="example-collapse-text"
+            aria-expanded={open}
+          >logout
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          </Link>
+         
         </div>
       </Collapse>
     </section>

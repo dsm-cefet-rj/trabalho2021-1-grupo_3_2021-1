@@ -89,8 +89,8 @@ function LinhaProduto(props) {
 
 
                     </div>
-                    <Link to={`/produto/${props.produto.id}`}>
-                    <button type="button" className="btn btn-primary">Produto</button>
+                    <Link to={`/produtos/${props.produto.id}`}>
+                    <button type="button" className="btn btn-primary">Alterar</button>
                     </Link>
 
                     <br/>
@@ -106,7 +106,7 @@ function LinhaProduto(props) {
     );
 }
 
-function Resultado(props) {
+function ListaProduto(props) {
 
 
     return (
@@ -127,5 +127,5 @@ function Resultado(props) {
     );
 }
 
-export { Resultado };
+export  { ListaProduto };
 

@@ -30,7 +30,7 @@ export default function UserRegister() {
       })
     );
     alert("Cadastrado com sucesso!");
-    history.push("/login");
+    history.push("/perfil");
   }
 
   function cancelButton(e) {

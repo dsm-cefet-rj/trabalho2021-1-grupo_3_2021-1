@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import imgPerfil from '../components/img/img-perfil.jpg'
 import { ListaPedido } from "./listaPedido";
-import { Resultado } from "./listaProduto";
+import { ListaProduto } from "./listaProduto";
 import { ListaServico } from "./listaServico";
 
 
@@ -47,7 +47,7 @@ function Perfil () {
             <ListaPedido/>
             <ListaServico/>
             
-            <Resultado/>
+            <ListaProduto/>
             </div>
             
         </section>

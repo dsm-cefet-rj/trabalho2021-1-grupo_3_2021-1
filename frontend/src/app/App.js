@@ -10,7 +10,7 @@ import Home from '../paginas/Home';
 import Perfil from '../paginas/Perfil'
 import Procure from '../paginas/Procure';
 import Escolha from '../paginas/Escolha';
-import { Resultado } from '../paginas/listaProduto';
+import { ListaProduto } from '../paginas/listaProduto';
 import { ListaPedido } from '../paginas/listaPedido';
 import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
@@ -27,16 +27,16 @@ import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
 import Pedidos from '../paginas/ListPedido'
 
+import { TabelaProdutos } from '../paginas/TabelaProduto';
+
 
 function App() {
   const token = useSelector(state => state.logins.currentToken)
   useEffect(() => {
     
-    
     if (token) {
       console.log("token: "+token);
       localStorage.setItem('token', token);
-      //{headers: {Authorization: 'Bearer ' + token}}
     }
   });
 
@@ -104,7 +104,7 @@ function App() {
         </Route>
 
         <Route path="/produtos">
-          <Resultado />
+          <ListaProduto />
         </Route>
 
         <Route path="/escolha">
