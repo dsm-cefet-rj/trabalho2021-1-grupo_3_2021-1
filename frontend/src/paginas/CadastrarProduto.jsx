@@ -31,6 +31,7 @@ function CadProduto(props) {
 
   function onSubmit(produto) {
     if (actionType === 'produtos/addProdutoServer') {
+      produto.idUser = localStorage.getItem('id');
       dispatch(addProdutoServer(produto));
     } else if (actionType === 'produtos/updateProdutoServer') {
       dispatch(updateProdutoServer({ ...produto, id: produtoFound.id }))
@@ -39,6 +40,7 @@ function CadProduto(props) {
   }
   useEffect(() => {
     if (status === 'saved') {
+      
       history.push('/produtos');
     }
   }, [history, status]);

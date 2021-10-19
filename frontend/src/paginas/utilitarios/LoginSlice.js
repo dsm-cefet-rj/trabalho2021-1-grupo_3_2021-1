@@ -7,7 +7,8 @@ const loginAdapter = createEntityAdapter();
 const initialState = loginAdapter.getInitialState({
     status: 'not_loaded',
     error: null,
-    currentToken: null
+    currentToken: null,
+    id:null
     /* o array user foi removido do state inicial, será criado pelo adapter */
 });
 
@@ -25,9 +26,9 @@ export const loginSlice = createSlice({
     initialState: initialState,
     extraReducers: {
        [loginServer.pending]: (state, action) => {state.status = 'trying_login'},
-       [loginServer.fulfilled]: (state, action) => {state.status = 'logged_in'; loginAdapter.addOne(state, action.payload); state.currentToken = action.payload.token },
+       [loginServer.fulfilled]: (state, action) => {state.status = 'logged_in'; loginAdapter.addOne(state, action.payload); state.currentToken = action.payload.token; state.id = action.payload.id},
        [logoutServer.pending]: (state, action) => {state.status = 'trying_logout'},
-       [logoutServer.fulfilled]: (state, action) => {state.status = 'logged_out'; loginAdapter.addOne(state, action.payload); state.currentToken = undefined },
+       [logoutServer.fulfilled]: (state, action) => {state.status = 'logged_out'; loginAdapter.addOne(state, action.payload); state.currentToken = undefined;  state.id = undefined},
  
     },
 })

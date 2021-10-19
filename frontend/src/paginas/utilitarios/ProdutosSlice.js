@@ -2,52 +2,53 @@ import {createSlice, createAsyncThunk, createEntityAdapter} from '@reduxjs/toolk
 import {httpDelete, httpGet, httpPut, httpPost} from '../../utils'
 import {baseUrl} from '../../baseUrl'
 
-
 const produtosAdapter = createEntityAdapter();
 
 const initialState = produtosAdapter.getInitialState({
     status: 'not_loaded',
     error: null
+    /* o array produtos foi removido do state inicial, será criado pelo adapter */
 });
 
-export const fetchProdutos = createAsyncThunk('produtos/fetchProdutos', async (_, {getState}) => {
-    console.log(getState());
+export const fetchProdutos = createAsyncThunk('produtos/fetchProdutos', async (_) => {
     return await httpGet(`${baseUrl}/produtos`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
-export const deleteProdutoServer = createAsyncThunk('produtos/deleteProdutoServer', async (idProduto, {getState}) => {
+export const fetchProduto = createAsyncThunk('produtos/fetchProduto', async (idUser) => {
+    return await httpGet(`${baseUrl}/produtos/${idUser}`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
+});
+
+export const deleteProdutoServer = createAsyncThunk('produtos/deleteProdutoServer', async (idProduto, {}) => {
     await httpDelete(`${baseUrl}/produtos/${idProduto}`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
     return idProduto;
 });
 
-export const addProdutoServer = createAsyncThunk('produtos/addProdutoServer', async (produto, {getState}) => {
+export const addProdutoServer = createAsyncThunk('produtos/addProdutoServer', async (produto, {}) => {
     return await httpPost(`${baseUrl}/produtos`, produto, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
-export const updateProdutoServer = createAsyncThunk('produtos/updateProdutoServer', async (produto, {getState}) => {
+export const updateProdutoServer = createAsyncThunk('produtos/updateProdutoServer', async (produto, {}) => {
     return await httpPut(`${baseUrl}/produtos/${produto.id}`, produto, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const produtosSlice = createSlice({
     name: 'produtos',
     initialState: initialState,
-    reducers: {
-        setStatus: (state, action) => {state.status = action.payload}
-    },
     extraReducers: {
-        [fetchProdutos.pending]: (state, action) => {state.status = 'loading'},
-        [fetchProdutos.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},
-        [fetchProdutos.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao buscar produtos: ' + action.error.message},        
-        [deleteProdutoServer.fulfilled]: (state, action) => {state.status = 'deleted'; produtosAdapter.removeOne(state, action.payload);},
-        [deleteProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao excluir produto: ' + action.error.message},
-        [addProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.addOne(state, action.payload);},
-        [addProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao adicionar produto: ' + action.error.message},        
-        [updateProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.upsertOne(state, action.payload);},
-        [updateProdutoServer.rejected]: (state, action) => {state.status = 'failed'; state.error = 'Falha ao atualizar produto: ' + action.error.message},
-    }
+        [fetchProduto.pending]: (state, action) => {state.status = 'loading'},
+        [fetchProduto.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},
+        [fetchProduto.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
+       [fetchProdutos.pending]: (state, action) => {state.status = 'loading'},
+       [fetchProdutos.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},
+       [fetchProdutos.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
+       [deleteProdutoServer.pending]: (state, action) => {state.status = 'loading'},
+       [deleteProdutoServer.fulfilled]: (state, action) => {state.status = 'deleted'; produtosAdapter.removeOne(state, action.payload);},
+       [addProdutoServer.pending]: (state, action) => {state.status = 'loading'},
+       [addProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.addOne(state, action.payload);},
+       [updateProdutoServer.pending]: (state, action) => {state.status = 'loading'},
+       [updateProdutoServer.fulfilled]: (state, action) => {state.status = 'saved'; produtosAdapter.upsertOne(state, action.payload);},
+    },
 })
-
-export const { setStatus } = produtosSlice.actions
 
 export default produtosSlice.reducer
 
@@ -56,4 +57,3 @@ export const {
     selectById: selectProdutosById,
     selectIds: selectProdutosIds
 } = produtosAdapter.getSelectors(state => state.produtos)
-    
