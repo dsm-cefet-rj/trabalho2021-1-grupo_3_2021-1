@@ -15,7 +15,7 @@ export const fetchProdutos = createAsyncThunk('produtos/fetchProdutos', async (_
 });
 
 export const fetchProduto = createAsyncThunk('produtos/fetchProduto', async (idUser) => {
-    return await httpGet(`${baseUrl}/produtos/${idUser}`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
+    return await httpGet(`${baseUrl}/produto`, {headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}});
 });
 
 export const deleteProdutoServer = createAsyncThunk('produtos/deleteProdutoServer', async (idProduto, {}) => {
@@ -36,7 +36,7 @@ export const produtosSlice = createSlice({
     initialState: initialState,
     extraReducers: {
         [fetchProduto.pending]: (state, action) => {state.status = 'loading'},
-        [fetchProduto.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},
+        [fetchProduto.fulfilled]: (state, action) => {state.status = 'loadedt'; produtosAdapter.setAll(state, action.payload);},
         [fetchProduto.rejected]: (state, action) => {state.status = 'failed'; state.error = action.error.message},
        [fetchProdutos.pending]: (state, action) => {state.status = 'loading'},
        [fetchProdutos.fulfilled]: (state, action) => {state.status = 'loaded'; produtosAdapter.setAll(state, action.payload);},

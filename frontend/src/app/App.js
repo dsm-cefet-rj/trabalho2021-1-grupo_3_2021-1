@@ -16,14 +16,14 @@ import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
 import Servico from '../paginas/Servico';
 import Pedido from '../paginas/Pedido';
-//import Item from '../paginas/item';
+import Item from '../paginas/item';
 import LoginForm from '../paginas/LoginForm';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
 
 import { useSelector, useDispatch } from 'react-redux'
 import UserRegister  from '../paginas/signupForm';
-//import Items from '../paginas/listProduto';
+import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
 import Pedidos from '../paginas/ListPedido'
 
@@ -61,7 +61,7 @@ function App() {
           <Procure />
         </Route>
         <Route path="/procureProd">
-         
+         <Items/>
         </Route>
         <Route path="/procurePed">
           <Pedidos />
@@ -88,7 +88,7 @@ function App() {
           <Pedido />
         </Route>
         <Route path="/produto/:id">
-         
+         <Item/>
         </Route>
         <Route path="/servicos">
           <ListaServico />

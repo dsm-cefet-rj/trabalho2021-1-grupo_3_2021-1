@@ -7,7 +7,7 @@ import { useParams} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { produtoSchema } from './utilitarios/ProdutoSchema';
 
-import { fetchProdutos, setStatus, selectProdutosById } from './utilitarios/ProdutosSlice';
+import { fetchProdutos, selectProdutosById } from './utilitarios/ProdutosSlice';
 
 function TabelaProdutos(props) {
     const status = useSelector(state => state.produtos.status)
@@ -51,16 +51,7 @@ function LinhaProduto(props) {
     const status = useSelector(state => state.produtos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
-
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Produto salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Produto excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+ 
     return (<>
         <div>{msg}</div>
         <section className="container first-element">

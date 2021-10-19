@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import foto from '../components/img/secador.jpeg'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchProdutos, deleteProdutoServer, setStatus, selectAllProdutos} from './utilitarios/ProdutosSlice'
+import {fetchProduto, deleteProdutoServer,selectAllProdutos} from './utilitarios/ProdutosSlice'
 
 
 function TabelaProdutos(props) {
@@ -21,12 +21,12 @@ function TabelaProdutos(props) {
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchProdutos())
+            dispatch(fetchProduto())
         }
     }, [status, dispatch])
 
     switch (status) {
-        case 'loaded': case 'saved':
+        case 'loadedt': case 'saved':
             return (
                 <section className="text-center">
        <br></br><br></br>
@@ -50,16 +50,7 @@ function LinhaProduto(props) {
     const status = useSelector(state => state.produtos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
-
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Produto salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Produto excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+ 
     return (<>
         <div>{msg}</div>
 

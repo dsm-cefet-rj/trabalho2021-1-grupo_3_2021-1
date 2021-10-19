@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { servicoSchema } from './utilitarios/ServicoSchema';
 
-import { fetchServicos, setStatus, selectServicosById } from './utilitarios/ServicosSlice';
+import { fetchServicos, selectServicosById } from './utilitarios/ServicosSlice';
 
 
 
@@ -59,15 +59,7 @@ function LinhaServico(props) {
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Servico salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Servico excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+
     return (<>
         <div>{msg}</div>
         <section className="container first-element">

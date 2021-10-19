@@ -31,6 +31,7 @@ function CadPedido(props) {
 
   function onSubmit(pedido) {
     if (actionType === 'pedidos/addPedidoServer') {
+      pedido.idUser = localStorage.getItem('id');
       dispatch(addPedidoServer(pedido));
     } else if (actionType === 'pedidos/updatePedidoServer') {
       dispatch(updatePedidoServer({ ...pedido, id: pedidoFound.id }))

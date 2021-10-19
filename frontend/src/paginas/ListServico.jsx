@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import foto from '../components/img/bicicleta.jpg'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchServicos, deleteServicoServer, setStatus, selectAllServicos} from './utilitarios/ServicosSlice'
+import {fetchServicos, deleteServicoServer, selectAllServicos} from './utilitarios/ServicosSlice'
 
 
 function TabelaServicos(props) {
@@ -24,7 +24,7 @@ function TabelaServicos(props) {
     }, [status, dispatch])
 
     switch (status) {
-        case 'loaded': case 'saved':
+        case 'loadedt': case 'saved':
             return (
                 <section className="text-center">
           <br></br><br></br>
@@ -48,16 +48,7 @@ function LinhaServico(props) {
     const status = useSelector(state => state.servicos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
-
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Servico salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Servico excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+ 
     return (<>
         <div>{msg}</div>
 
