@@ -27,6 +27,10 @@ const produtoSchema = new Schema({
     categoria: {
         type: String,
         required: true,
+    },
+    idUser: {
+        type: String,
+        required: false,
     }
 
 

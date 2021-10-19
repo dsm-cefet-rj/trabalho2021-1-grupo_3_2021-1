@@ -39,12 +39,12 @@ router.route('/')
 
 router.route('/:id')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, async (res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
     //populate preenche o array de usuario com os documentos do collection actividades.
-    const produtos = await Produtos.find({});
+    const produtos = await Produtos.findById({});
     if(produtos != null){
       res.statusCode = 200;
       res.json(produtos);

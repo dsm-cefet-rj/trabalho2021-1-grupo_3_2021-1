@@ -10,33 +10,36 @@ import Home from '../paginas/Home';
 import Perfil from '../paginas/Perfil'
 import Procure from '../paginas/Procure';
 import Escolha from '../paginas/Escolha';
-import { ListaProduto } from '../paginas/listaProduto';
+//import { ListaProduto } from '../paginas/listaProduto';
 import { ListaPedido } from '../paginas/listaPedido';
 import { CadProduto } from '../paginas/CadastrarProduto';
 import { CadPedido } from '../paginas/CadastrarPedido';
 import Servico from '../paginas/Servico';
 import Pedido from '../paginas/Pedido';
-import Item from '../paginas/item';
+//import Item from '../paginas/item';
 import LoginForm from '../paginas/LoginForm';
 import { ListaServico } from '../paginas/listaServico';
 import { CadServico } from '../paginas/CadastrarServico';
 
 import { useSelector, useDispatch } from 'react-redux'
 import UserRegister  from '../paginas/signupForm';
-import Items from '../paginas/listProduto';
+//import Items from '../paginas/listProduto';
 import Servicos from '../paginas/ListServico'
 import Pedidos from '../paginas/ListPedido'
 
-import { TabelaProdutos } from '../paginas/TabelaProduto';
+import { ListagemProduto } from '../paginas/TabelaProduto';
 
 
 function App() {
   const token = useSelector(state => state.logins.currentToken)
+  const id = useSelector(state => state.logins.id)
   useEffect(() => {
     
     if (token) {
       console.log("token: "+token);
+      console.log("id: "+id);
       localStorage.setItem('token', token);
+      localStorage.setItem('id', id);
     }
   });
 
@@ -58,7 +61,7 @@ function App() {
           <Procure />
         </Route>
         <Route path="/procureProd">
-          <Items />
+         
         </Route>
         <Route path="/procurePed">
           <Pedidos />
@@ -85,7 +88,7 @@ function App() {
           <Pedido />
         </Route>
         <Route path="/produto/:id">
-          <Item />
+         
         </Route>
         <Route path="/servicos">
           <ListaServico />
@@ -104,7 +107,7 @@ function App() {
         </Route>
 
         <Route path="/produtos">
-          <ListaProduto />
+          <ListagemProduto />
         </Route>
 
         <Route path="/escolha">

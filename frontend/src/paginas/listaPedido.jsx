@@ -1,132 +1,129 @@
-
-
+import React, {useEffect} from 'react';
+import {Link } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux';
+import {deletePedidoServer, fetchPedidos, selectAllPedidos} from './utilitarios/PedidosSlice'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../app/App.css';
-import { useSelector, useDispatch } from 'react-redux'
-import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './utilitarios/PedidosSlice'
-import foto from '../components/img/bicicleta.jpg'
+import foto from '../components/img/secador.jpeg'
 
 
+function LinhaPedido(props){
+      if(props != null && props.pedido != null && props.pedido.id != null){
+          return(
+                    <div className="row resultado-busca" style={{
+              backgroundColor:"dodgerblue",
+              padding:"40px",
+              color:"white",
+              fontFamily:"inherit",
+              borderRadius:"10px",
+              textAlign:"Right",
+              widht:"540px"
+          }}>
+          
+
+          <div className="col-4">
+                  <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
+              </div>
+
+              <div className="col text">
+              <h5  style={{
+                      textAlign:"Center",
+                      fontSize:"60px"
+                  }}><strong>{props.pedido.name}</strong></h5>
+                  <br/>
+                  <br/>
+                  <div style={{fontSize:"20px"}}>
+                    <p><strong>Valor:</strong> {props.pedido.preco} Reais</p>
+                  <br/>
+                  <p>Descrição: {props.pedido.desc}</p>  
+                  </div>
+                  
 
 
-function TabelaPedidos(props) {
-    const pedidos = useSelector(selectAllPedidos)
-    const status = useSelector(state => state.pedidos.status)
-    const error = useSelector(state => state.pedidos.error)
-    const dispatch = useDispatch()
+              </div>
+              <Link to={`/pedidos/${props.pedido.id}`}>
+              <button type="button" className="btn btn-primary">Alterar</button>
+              </Link>
 
-    function handleClickExcluirPedido(id) {
-        dispatch(deletePedidoServer(id))
-    }
+              <br/>
+              <p style={{textAlign:"center",
+                          fontSize:"20px"
+              }}><strong>Deletar Pedido?</strong></p>
+              <br/>
+              
+              <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirPedido(props.pedido.id)}>X</button>
+          
+          </div>
+            
+          );
+      }else{
+          return(<tr><td colSpan={3}>Não foi possível exibir o pedido.</td></tr>)
+      }
+  }
 
-    useEffect(() => {
-        if (status === 'not_loaded') {
-            dispatch(fetchPedidos())
-        }
-    }, [status, dispatch])
-
-    switch (status) {
-        case 'loaded': case 'saved':
-            return (
-                <section className="pb-2">
-                    {pedidos.map((pedido) => <LinhaPedido key={pedido.id} pedido={pedido} onClickExcluirPedido={handleClickExcluirPedido} />)}
+function TabelaPedidos(props){
+    if(props != null && props.pedidos != null && props.pedidos.length > 0){
+      return(
+              <section className="pb-2">
+              {props.pedidos.map((pedido) => <LinhaPedido key={pedido.id} pedido={pedido} 
+                onClickExcluirPedido={props.onClickExcluirPedido} />)}
                 </section>
-
-            );
-        case 'loading':
-            return (<div>Carregando...</div>);
-        case 'failed':
-        default:
-            return (<div>{error}</div>)
+      );
+    }else{
+      return(<div id="pedidos">Não existem pedidos a serem exibidos.</div>)
     }
 }
 
-function LinhaPedido(props) {
-    const status = useSelector(state => state.pedidos.status)
-    const dispatch = useDispatch()
-    var [msg, setMsg] = useState('');
+  
+  
+ 
+  function ListaPedido(props){
+    
+    const pedidos = useSelector(selectAllPedidos)
+    const status = useSelector(state => state.pedidos.status);
+    const error = useSelector(state => state.pedidos.error);
+  
+    const dispatch = useDispatch();
+  
+  
+    function handleClickExcluirPedido(id){
+          dispatch(deletePedidoServer(id));
+    }
+  
+     useEffect(() => {
+          if (status === 'not_loaded' ) {
+              dispatch(fetchPedidos())
+          }else if(status === 'failed'){
+              //setTimeout(()=>dispatch(fetchPedidos()), 5000);
+          }
+      }, [status, dispatch])
+      
+    
+    let tabelaPedidos;
+    if(status === 'loaded' || status === 'saved' || status === 'deleted'){
+      tabelaPedidos = <TabelaPedidos pedidos={pedidos} onClickExcluirPedido={handleClickExcluirPedido} />;
+    }else if(status === 'loading'){
+      tabelaPedidos = <div id="pedidos">Carregando os pedidos...</div>;
+    }else if(status === 'not_loaded'){
+      tabelaPedidos = '';
+    }else{
+      //status === 'failed' or any other
+      tabelaPedidos = <div id="pedidos">Error: {error}</div>;
+    }
+  
+    return (
+              
+                            <main className="text-center container first-element">
+                <h2 className="my-3">Meus pedidos</h2>
 
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
-    return (<>
-        <div>{msg}</div>
-
-        <div className="row resultado-busca" style={{
-                    backgroundColor:"dodgerblue",
-                    padding:"40px",
-                    color:"white",
-                    fontFamily:"inherit",
-                    borderRadius:"10px",
-                    textAlign:"Right",
-                    widht:"540px"
-                }}>
-                
-
-                <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
-                    </div>
-
-                    <div className="col text">
-                    <h5  style={{
-                            textAlign:"Center",
-                            fontSize:"60px"
-                        }}><strong>{props.pedido.name}</strong></h5>
-                        <br/>
-                        <br/>
-                        <div style={{fontSize:"20px"}}>
-                          
-                        <br/>
-                        <p>Descrição: {props.pedido.desc}</p>  
-                        </div>
-                        
-
-
-                    </div>
-                    <Link to={`/pedidos/${props.pedido.id}`}>
-                    <button type="button" className="btn btn-primary">Alterar</button>
-                    </Link>
-                    
-                    <br/>
-                    <p style={{textAlign:"center",
-                                fontSize:"20px"
-                    }}><strong>Deletar Produto?</strong></p>
-                    <br/>
-
-                    <button button type="button" className="btn btn-primary" onClick={() => props.onClickExcluirPedido(props.pedido.id)}>X</button>
-                
-                </div>
-    </>
-    );
-}
-
-function ListaPedido(props) {
-
-
-    return (
-        <>
-            <main className="text-center container first-element">
-                <h2 className="my-3">Meus Pedidos</h2>
-
-                <TabelaPedidos />
-                <p className="mb-2">Está precisando de algo?</p>
+                {tabelaPedidos}
+                <p className="mb-2">deseja algo?</p>
                 <Link to='/CadPedido'>
-                    <button type="button" className="btn btn-primary">Solicite</button>
+                    <button type="button" className="btn btn-primary">solicite</button>
                 </Link>
 
             </main>
-
-
-        </>
-    );
-}
-
-export { ListaPedido };
+          );
+  }
+  
+  export { ListaPedido};
+  
