@@ -93,7 +93,7 @@ function TabelaProdutos(props){
     }
   
      useEffect(() => {
-          if (status === 'not_loaded' ) {
+          if (status === 'not_loaded' || status === 'loadedt' ) {
           console.log(id + "id")
               dispatch(fetchProdutos())
           }else if(status === 'failed'){

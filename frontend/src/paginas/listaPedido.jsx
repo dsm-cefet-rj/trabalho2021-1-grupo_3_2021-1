@@ -90,7 +90,7 @@ function TabelaPedidos(props){
     }
   
      useEffect(() => {
-          if (status === 'not_loaded' ) {
+          if (status === 'not_loaded' || status === 'loadedt' ) {
               dispatch(fetchPedidos())
           }else if(status === 'failed'){
               //setTimeout(()=>dispatch(fetchPedidos()), 5000);
@@ -103,7 +103,7 @@ function TabelaPedidos(props){
       tabelaPedidos = <TabelaPedidos pedidos={pedidos} onClickExcluirPedido={handleClickExcluirPedido} />;
     }else if(status === 'loading'){
       tabelaPedidos = <div id="pedidos">Carregando os pedidos...</div>;
-    }else if(status === 'not_loaded'){
+    }else if(status === 'not_loaded' ){
       tabelaPedidos = '';
     }else{
       //status === 'failed' or any other

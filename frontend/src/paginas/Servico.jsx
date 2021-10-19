@@ -28,7 +28,7 @@ function TabelaServicos(props) {
     id ? servicoFound ?? servicoSchema.cast({}) : servicoSchema.cast({}));
 
     useEffect(() => {
-        if (status === 'not_loaded') {
+        if (status === 'not_loaded' || status === 'loadedt') {
             dispatch(fetchServicos())
         }
     }, [status, dispatch])

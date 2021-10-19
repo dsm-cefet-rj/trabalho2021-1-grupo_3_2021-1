@@ -18,7 +18,7 @@ function TabelaPedidos(props) {
     }
 
     useEffect(() => {
-        if (status === 'not_loaded') {
+        if (status === 'not_loaded' || status === 'loaded') {
             dispatch(fetchPedido())
         }
     }, [status, dispatch])

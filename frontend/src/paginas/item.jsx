@@ -21,7 +21,7 @@ function TabelaProdutos(props) {
     id ? produtoFound ?? produtoSchema.cast({}) : produtoSchema.cast({}));
 
     useEffect(() => {
-        if (status === 'not_loaded') {
+        if (status === 'not_loaded' || status === 'loadedt') {
             dispatch(fetchProdutos())
         }
     }, [status, dispatch])

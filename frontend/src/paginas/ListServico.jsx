@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
 import { Link } from 'react-router-dom' 
-import foto from '../components/img/bicicleta.jpg'
+import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchServicos, deleteServicoServer, selectAllServicos} from './utilitarios/ServicosSlice'
+import {fetchServico, deleteServicoServer,  selectAllServicos} from './utilitarios/ServicosSlice'
 
 
 function TabelaServicos(props) {
@@ -18,8 +18,8 @@ function TabelaServicos(props) {
     }
 
     useEffect(() => {
-        if (status === 'not_loaded') {
-            dispatch(fetchServicos())
+        if (status === 'not_loaded' || status === 'loaded') {
+            dispatch(fetchServico())
         }
     }, [status, dispatch])
 
@@ -27,7 +27,7 @@ function TabelaServicos(props) {
         case 'loadedt': case 'saved':
             return (
                 <section className="text-center">
-          <br></br><br></br>
+         <br></br><br></br>
             <div className="d-flex flex-wrap justify-content-evenly mb-3">
 
             
@@ -44,18 +44,20 @@ function TabelaServicos(props) {
     }
 }
 
+
 function LinhaServico(props) {
     const status = useSelector(state => state.servicos.status)
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
- 
+
+    
     return (<>
         <div>{msg}</div>
 
-            
+    
             
                 <div className="row resultado-busca" style={{
-                    backgroundColor:"dogerblue",
+                    backgroundColor:"dodgerblue",
                     padding:"40px",
                     color:"white",
                     fontFamily:"inherit",
@@ -64,7 +66,8 @@ function LinhaServico(props) {
                     widht:"540px"
                 }}>
                 
-                    <div className="col-4">
+
+                <div className="col-4">
                         <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
@@ -98,16 +101,15 @@ function Servico () {
     return (
         <>
            <TabelaServicos/>
-           <p style={
-               {textAlign:"center",
-                fontSize:"20px"
-        }
-           }>Cadastre um servico?
-           <br/>
-                <Link to='/CadServico'>
-                    <button type="button" className="btn btn-primary">Cadastre</button>
-                </Link>
-</p>
+           <div style={{textAlign:"center",
+                fontSize:"20px"}}>
+              <p className="mb-2">Comprtilhe algo?</p>
+                <Link to='/CadProduto'>
+                    <button type="button" className="btn btn-primary">Compartilhe</button>
+                </Link> 
+           </div>
+           
+
         </>
     );
 }

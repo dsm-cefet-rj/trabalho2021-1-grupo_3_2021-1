@@ -21,7 +21,7 @@ function TabelaPedidos(props) {
     id ? pedidoFound ?? pedidoSchema.cast({}) : pedidoSchema.cast({}));
 
     useEffect(() => {
-        if (status === 'not_loaded') {
+        if (status === 'not_loaded' || status === 'loadedt') {
             dispatch(fetchPedidos())
         }
     }, [status, dispatch])

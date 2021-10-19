@@ -41,7 +41,9 @@ export default function LoginForm(props){
         if (status === 'logged_in' ) {
             
             history.push('/perfil');
-            
+            dispatch(fetchProdutos());
+            dispatch(fetchPedidos());
+            dispatch(fetchServicos());
 
         }
     }, [status])
