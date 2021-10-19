@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../app/App";
-import { useParams, useHistory } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import emp from "../components/img/Empresta.png"
 import { Collapse } from "react-bootstrap";
@@ -17,6 +16,8 @@ function NavBar() {
   function test(){
     dispatch(logoutServer());
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    
     
   }
 
@@ -78,7 +79,7 @@ function NavBar() {
             </Link>
           </li>
           <li className="reset-link nav-link">Configurações</li>
-          <Link to="/Home" className=" ">
+          <Link to="/" className=" ">
           <button
             className="navbar-toggler"
             onClick={() => test()}

@@ -20,6 +20,10 @@ const pedidoSchema = new Schema({
     num: {
         type: String,
         required: true,
+    },
+    idUser: {
+        type: String,
+        required: false,
     }
 
 

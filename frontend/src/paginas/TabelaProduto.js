@@ -94,7 +94,7 @@ function TabelaProdutos(props){
   
      useEffect(() => {
           if (status === 'not_loaded' ) {
-          console.log(id + "iddd")
+          console.log(id + "id")
               dispatch(fetchProdutos())
           }else if(status === 'failed'){
               //setTimeout(()=>dispatch(fetchProdutos()), 5000);

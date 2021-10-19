@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import foto from '../components/img/furadeira.jpg'
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchPedidos, deletePedidoServer, setStatus, selectAllPedidos} from './utilitarios/PedidosSlice'
+import {fetchPedido, deletePedidoServer,  selectAllPedidos} from './utilitarios/PedidosSlice'
 
 
 function TabelaPedidos(props) {
@@ -19,12 +19,12 @@ function TabelaPedidos(props) {
 
     useEffect(() => {
         if (status === 'not_loaded') {
-            dispatch(fetchPedidos())
+            dispatch(fetchPedido())
         }
     }, [status, dispatch])
 
     switch (status) {
-        case 'loaded': case 'saved':
+        case 'loadedt': case 'saved':
             return (
                 <section className="text-center">
          <br></br><br></br>
@@ -50,15 +50,7 @@ function LinhaPedido(props) {
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+    
     return (<>
         <div>{msg}</div>
 

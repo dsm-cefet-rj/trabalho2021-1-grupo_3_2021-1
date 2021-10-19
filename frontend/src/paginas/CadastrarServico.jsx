@@ -31,6 +31,7 @@ function CadServico(props) {
 
   function onSubmit(servico) {
     if (actionType === 'servicos/addServicoServer') {
+      servico.idUser = localStorage.getItem('id');
       dispatch(addServicoServer(servico));
     } else if (actionType === 'servicos/updateServicoServer') {
       dispatch(updateServicoServer({ ...servico, id: servicoFound.id }))

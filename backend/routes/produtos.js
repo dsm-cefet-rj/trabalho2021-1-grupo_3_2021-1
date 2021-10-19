@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const Produtos = require('../models/produtos');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
-
 router.use(bodyParser.json());
 
 
@@ -12,8 +11,9 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   console.log(req.user);
+  const id = req.user._id;
   try{
-    const produtosBanco = await Produtos.find({});
+    const produtosBanco = await Produtos.find({idUser:id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(produtosBanco);
@@ -43,7 +43,6 @@ router.route('/:id')
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
-    //populate preenche o array de usuario com os documentos do collection actividades.
     const produtos = await Produtos.findById({});
     if(produtos != null){
       res.statusCode = 200;
@@ -86,6 +85,5 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-
 
 module.exports = router;

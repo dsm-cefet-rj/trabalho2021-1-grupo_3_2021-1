@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../app/App.css';
-import React, {useState, useEffect} from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect} from 'react';
+import { useHistory } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import { useForm } from "react-hook-form";
+import { fetchServicos, fetchServico } from "../paginas/utilitarios/ServicosSlice";
+import { fetchPedidos, fetchPedido } from '../paginas/utilitarios/PedidosSlice'
+import { fetchProdutos, fetchProduto } from '../paginas/utilitarios/ProdutosSlice'
 import {loginServer} from './utilitarios/LoginSlice';
 import { Link } from "react-router-dom";
 
@@ -17,12 +20,29 @@ export default function LoginForm(props){
     function onSubmit(login){
         console.log(login);
         dispatch(loginServer(login));
+        dispatch(fetchProduto());
+        dispatch(fetchPedido());
+        dispatch(fetchServico());
+        test();
+        
+    }
+    const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+    async function test(){
+        await delay(2);
+        dispatch(fetchProdutos());
+        dispatch(fetchPedidos());
+        dispatch(fetchServicos());
+       
+    
     }
 
 
     useEffect(() => {
         if (status === 'logged_in' ) {
+            
             history.push('/perfil');
+            
+
         }
     }, [status])
 

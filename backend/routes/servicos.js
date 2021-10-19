@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const Servicos = require('../models/servicos');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
-
 router.use(bodyParser.json());
 
 
@@ -12,8 +11,9 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   console.log(req.user);
+  const id = req.user._id;
   try{
-    const servicosBanco = await Servicos.find({});
+    const servicosBanco = await Servicos.find({idUser:id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(servicosBanco);
@@ -39,12 +39,11 @@ router.route('/')
 
 router.route('/:id')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, async (res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
-    //populate preenche o array de usuario com os documentos do collection actividades.
-    const servicos = await Servicos.findById(req.params.id);
+    const servicos = await Servicos.findById({});
     if(servicos != null){
       res.statusCode = 200;
       res.json(servicos);
@@ -86,6 +85,5 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-
 
 module.exports = router;

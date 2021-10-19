@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { pedidoSchema } from './utilitarios/PedidoSchema';
 
-import { fetchPedidos, setStatus, selectPedidosById } from './utilitarios/PedidosSlice';
+import { fetchPedidos, selectPedidosById } from './utilitarios/PedidosSlice';
 
 function TabelaPedidos(props) {
     const status = useSelector(state => state.pedidos.status)
@@ -52,15 +52,7 @@ function LinhaPedido(props) {
     const dispatch = useDispatch()
     var [msg, setMsg] = useState('');
 
-    useEffect(() => {
-        if (status === 'saved') {
-            setMsg('Pedido salvo com sucesso');
-            dispatch(setStatus('loaded'));
-        } else if (status === 'deleted') {
-            setMsg('Pedido excluído com sucesso');
-            dispatch(setStatus('loaded'));
-        }
-    }, [status, dispatch]);  
+     
     return (<>
         <div>{msg}</div>
         <section className="container first-element">

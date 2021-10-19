@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const Pedidos = require('../models/pedidos');
 var authenticate = require('../authenticate');
 const cors = require('./cors');
-
 router.use(bodyParser.json());
 
 
@@ -12,8 +11,9 @@ router.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
   console.log(req.user);
+  const id = req.user._id;
   try{
-    const pedidosBanco = await Pedidos.find({});
+    const pedidosBanco = await Pedidos.find({idUser:id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(pedidosBanco);
@@ -39,12 +39,11 @@ router.route('/')
 
 router.route('/:id')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+.get(cors.corsWithOptions, authenticate.verifyUser, async (res, next) => {
   let err;
   res.setHeader('Content-Type', 'application/json');
   try{
-    //populate preenche o array de usuario com os documentos do collection actividades.
-    const pedidos = await Pedidos.findById(req.params.id).populate('usuario');
+    const pedidos = await Pedidos.findById({});
     if(pedidos != null){
       res.statusCode = 200;
       res.json(pedidos);
@@ -86,6 +85,5 @@ router.route('/:id')
   .catch((err) => next(err));
 
 })
-
 
 module.exports = router;

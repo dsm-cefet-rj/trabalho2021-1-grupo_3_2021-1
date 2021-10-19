@@ -11,6 +11,9 @@ var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var config = require('./config');
+var tprodutoRouter = require('./troutes/produto');
+var tservicoRouter = require('./troutes/servico');
+var tpedidoRouter = require('./troutes/pedido');
 var produtosRouter = require('./routes/produtos');
 var pedidosRouter = require('./routes/pedidos');
 var servicosRouter = require('./routes/servicos');
@@ -46,8 +49,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/produtos', produtosRouter);
+app.use('/produto', tprodutoRouter);
 app.use('/pedidos', pedidosRouter);
 app.use('/servicos', servicosRouter);
+app.use('/pedido', tpedidoRouter);
+app.use('/servico', tservicoRouter);
 
 
 module.exports = app;

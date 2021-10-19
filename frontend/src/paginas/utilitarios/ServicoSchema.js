@@ -6,6 +6,7 @@ setLocale(ptForm)
 export let servicoSchema = object().shape(
     {
         id: string(),
+        idUser: string(),
         name: string().required(),
         desc: string().required(),
         local: string().required(),
