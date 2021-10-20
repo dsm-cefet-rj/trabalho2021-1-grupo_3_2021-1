@@ -90,7 +90,7 @@ function TabelaServicos(props){
     }
   
      useEffect(() => {
-          if (status === 'not_loaded' || status === 'loadedt' ) {
+          if (status === 'not_loaded' || status === 'loadedt' || status === 'saved' ) {
               dispatch(fetchServicos())
           }else if(status === 'failed'){
               //setTimeout(()=>dispatch(fetchServicos()), 5000);

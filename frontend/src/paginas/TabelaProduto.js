@@ -21,7 +21,7 @@ function LinhaProduto(props){
           
 
           <div className="col-4">
-                  <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
+                  <img className="img-fluid" src={props.produto.img} alt="" style={{borderRadius:"10px"}}/>
               </div>
 
               <div className="col text">
@@ -93,8 +93,8 @@ function TabelaProdutos(props){
     }
   
      useEffect(() => {
-          if (status === 'not_loaded' || status === 'loadedt' ) {
-          console.log(id + "id")
+          if (status === 'not_loaded' || status === 'loadedt' || status === 'saved' ) {
+         
               dispatch(fetchProdutos())
           }else if(status === 'failed'){
               //setTimeout(()=>dispatch(fetchProdutos()), 5000);

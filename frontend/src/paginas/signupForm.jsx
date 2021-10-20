@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { userRegisterSchema } from "./utilitarios/SingupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { fetchServicos } from "../paginas/utilitarios/ServicosSlice";
+import { fetchPedidos } from '../paginas/utilitarios/PedidosSlice'
+import { fetchProdutos } from '../paginas/utilitarios/ProdutosSlice'
 import { addUserServer } from "./utilitarios/UsersSlice";
 
 
@@ -19,6 +22,16 @@ export default function UserRegister() {
     resolver: yupResolver(userRegisterSchema),
   });
 
+  const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+    async function test(){
+        await delay(2);
+        dispatch(fetchProdutos());
+        dispatch(fetchPedidos());
+        dispatch(fetchServicos());
+       
+    
+    }
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -29,8 +42,10 @@ export default function UserRegister() {
         password: user.password,
       })
     );
+   
     alert("Cadastrado com sucesso!");
-    history.push("/perfil");
+    test();
+    history.push("/");
   }
 
   function cancelButton(e) {

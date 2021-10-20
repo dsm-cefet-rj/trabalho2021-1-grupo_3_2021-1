@@ -90,7 +90,7 @@ function TabelaPedidos(props){
     }
   
      useEffect(() => {
-          if (status === 'not_loaded' || status === 'loadedt' ) {
+          if (status === 'not_loaded' || status === 'loadedt'|| status === 'saved'  ) {
               dispatch(fetchPedidos())
           }else if(status === 'failed'){
               //setTimeout(()=>dispatch(fetchPedidos()), 5000);

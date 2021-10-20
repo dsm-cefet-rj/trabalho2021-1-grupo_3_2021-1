@@ -13,6 +13,7 @@ export let produtoSchema = object().shape(
         local: string().required(),
         preco: number().required(),
         num: number().required(),
+        img: string().max(200).required(),
      
     }
 )
