@@ -20,7 +20,7 @@ function TabelaProdutos(props) {
     }
 
     useEffect(() => {
-        if (status === 'not_loaded' || status === 'loaded') {
+        if (status === 'not_loaded' || status === 'loaded'  || status === 'saved'){
             dispatch(fetchProduto())
         }
     }, [status, dispatch])
@@ -68,7 +68,7 @@ function LinhaProduto(props) {
                 
 
                 <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
+                        <img className="img-fluid" src={props.produto.img} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
                     <div className="col text">
