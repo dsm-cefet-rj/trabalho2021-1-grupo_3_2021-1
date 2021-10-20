@@ -10,6 +10,7 @@ function Procure () {
         <div className="row resultado-busca">
         
         <Link to="/procureProd">
+        <br/><br/><br/>
             <h3 className="link-title">Produto</h3>
         </Link>
         <Link  to="/procurePed">
