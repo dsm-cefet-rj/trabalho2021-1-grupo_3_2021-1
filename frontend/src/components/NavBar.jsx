@@ -6,6 +6,9 @@ import emp from "../components/img/Empresta.png"
 import { Collapse } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {logoutServer} from '../paginas/utilitarios/LoginSlice';
+import { fetchServicos } from "../paginas/utilitarios/ServicosSlice";
+import { fetchPedidos } from '../paginas/utilitarios/PedidosSlice'
+import { fetchProdutos } from '../paginas/utilitarios/ProdutosSlice'
 
 
 function NavBar() {
@@ -17,6 +20,9 @@ function NavBar() {
     dispatch(logoutServer());
     localStorage.removeItem('token');
     localStorage.removeItem('id');
+    dispatch(fetchProdutos());
+        dispatch(fetchPedidos());
+        dispatch(fetchServicos());
     
     
   }
