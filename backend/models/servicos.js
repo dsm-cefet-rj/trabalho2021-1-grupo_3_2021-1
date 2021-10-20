@@ -27,6 +27,10 @@ const servicoSchema = new Schema({
     idUser: {
         type: String,
         required: false,
+    },
+    img: {
+        type: String,
+        required: true,
     }
 
 
