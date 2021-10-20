@@ -124,18 +124,18 @@ function CadPedido(props) {
 
 
         <div className="mb-3">
-          <label htmlFor="item-img" className="form-label">
-            Imagem ilustrativa:&nbsp;
-          </label>
-          <input
-            className="form-control form-control-sm"
-            type="file"
-            id="item-img"
-            aria-describedby="imageHelp"
-          />
-          <div id="imageHelp" className="form-text">
-            A imagem será usada apenas como referência para os outros usuários
-          </div>
+        <label for="validationTooltip01">
+              <b>URL da imagem</b>
+            </label>
+        <input
+                type="text"
+                class="form-control"
+                placeholder="URL"
+                name="img"
+                defaultValue={pedidoOnLoad.img}
+            {...register("img")}
+              ></input>
+              <div style={{ color: "red" }}>{errors.img?.message}</div>
         </div>
 
         <div className="mb-3">
@@ -167,4 +167,5 @@ function CadPedido(props) {
 }
 
 export { CadPedido };
+
 
