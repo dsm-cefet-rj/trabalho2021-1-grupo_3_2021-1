@@ -11,6 +11,7 @@ export let pedidoSchema = object().shape(
         desc: string().required(),
         local: string().required(),
         num: number().required(),
+        img: string(200).required(),
      
     }
 )
