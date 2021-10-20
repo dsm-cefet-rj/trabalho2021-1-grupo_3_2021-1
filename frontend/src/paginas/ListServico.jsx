@@ -55,7 +55,7 @@ function LinhaServico(props) {
         <div>{msg}</div>
 
     
-            
+        <section className="container first-element">
                 <div className="row resultado-busca" style={{
                     backgroundColor:"dodgerblue",
                     padding:"40px",
@@ -68,7 +68,7 @@ function LinhaServico(props) {
                 
 
                 <div className="col-4">
-                        <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
+                        <img className="img-fluid" src={props.servico.img} alt="" style={{borderRadius:"10px"}}/>
                     </div>
 
                     <div className="col text">
@@ -92,7 +92,7 @@ function LinhaServico(props) {
                     </Link>
                 </div>
             
-         
+         </section>
     </>
     );
 }
