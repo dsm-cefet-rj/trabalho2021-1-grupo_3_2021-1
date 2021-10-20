@@ -12,6 +12,7 @@ export let servicoSchema = object().shape(
         local: string().required(),
         preco: number().required(),
         num: number().required(),
+        img: string(200).required(),
      
     }
 )
