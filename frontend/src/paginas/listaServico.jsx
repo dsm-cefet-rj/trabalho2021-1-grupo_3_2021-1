@@ -21,7 +21,7 @@ function LinhaServico(props){
           
 
           <div className="col-4">
-                  <img className="img-fluid" src={foto} alt="" style={{borderRadius:"10px"}}/>
+                  <img className="img-fluid" src={props.servico.img} alt="" style={{borderRadius:"10px"}}/>
               </div>
 
               <div className="col text">
